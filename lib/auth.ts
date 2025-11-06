@@ -1,21 +1,20 @@
 import { cookies } from "next/headers"
 import { SignJWT, jwtVerify } from "jose"
 import type { JWTPayload } from "jose"
-
 const secret = new TextEncoder().encode(process.env.JWT_SECRET || "secret-change-in-production")
 
 
 export interface SessionData extends JWTPayload {
-  adminId: string
+  userId: string
   email: string
-  hostelOwnerId: string
+  phone: string
   hostelId: string | null
 }
  
 export async function getSession(): Promise<SessionData | null> {
   try {
     const cookieStore = await cookies()
-    const token = cookieStore.get("token")?.value
+    const token = cookieStore.get("token")?.value  
     if (!token) return null
 
     const { payload } = await jwtVerify(token, secret)
@@ -24,6 +23,7 @@ export async function getSession(): Promise<SessionData | null> {
     return null
   }
 }
+
 
 export async function destroySession() {
   const cookieStore = await cookies()

@@ -6,6 +6,7 @@ import "./globals.css"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { ThemeProvider } from "next-themes"
+import { getSession } from "@/lib/auth"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -20,15 +21,19 @@ export const metadata: Metadata = {
     generator: 'v0.app'
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+
+  const session : any = await getSession();
+  
+  
   return (
     <html>
       <body className={`font-sans antialiased`}>
-        <Header/>
+        <Header session={session}/>
         {children}
         <Analytics />
         <Footer/>

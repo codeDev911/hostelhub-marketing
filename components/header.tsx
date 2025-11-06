@@ -3,17 +3,23 @@
 import type React from "react"
 
 import Link from "next/link"
-import { Menu, X, Search, MoonIcon, SunIcon } from "lucide-react"
-import { useState } from "react"
+import { Menu, X, Search, MoonIcon, SunIcon, UserIcon } from "lucide-react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "./ui/button"
 import { useTheme } from "next-themes"
-
-function Header() {
+import { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from "./ui/popover"
+import { PopoverPortal } from "@radix-ui/react-popover"
+import { Separator } from "./ui/separator"
+import { destroySession } from "@/lib/client-auth"
+ 
+function Header({session}:any) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const {theme,setTheme} = useTheme();
   const [searchQuery, setSearchQuery] = useState("")
   const router = useRouter()
+
+    
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -23,6 +29,9 @@ function Header() {
       setMobileMenuOpen(false)
     }
   }
+
+
+  
 
   return (
     <header className="sticky top-0 z-50 bg-primary-foreground border-b border-border">
@@ -62,18 +71,6 @@ function Header() {
               >
                 <Search className="w-4 h-4" />
               </Button>
-
-          <div className="hidden md:flex items-center gap-2 shrink-0">
-            {/* <Link href="/student/login">
-              <button className="px-4 py-2 text-foreground hover:text-accent transition-colors font-medium border border-border rounded-sm hover:bg-secondary">
-                Login
-              </button>
-            </Link>
-            <Link href="/student/register">
-              <button className="px-4 py-2 bg-accent text-accent-foreground hover:bg-accent/90 transition-colors font-medium rounded-sm">
-                Sign Up
-              </button>
-            </Link> */}
             {
               theme === "light"?
             <Button onClick={()=>setTheme("dark")} variant={"outline"}>
@@ -84,7 +81,40 @@ function Header() {
               <SunIcon className="w-5 h-5"/>
             </Button>
             }
-          </div>
+
+          {session && session?.userId?
+          <Popover>
+            <PopoverTrigger>
+              <Button type="submit"  className=""  variant={"secondary"}>
+                <UserIcon className="w-5 h-5"/>
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="max-w-[180px] p-3 ">
+              
+
+              <h2 className="mb-1 text-sm font-bold text-primary ">User</h2>
+              <p className="text-xs text-muted-foreground">{session?.email}</p>
+              <p className="text-xs mb-1 text-muted-foreground">{session?.phone}</p>
+              <Separator/>
+
+              <h2 className="my-1 text-sm font-bold text-primary">Quick Actions</h2>
+              <div className="text-sm mt-1 w-full flex flex-col ">
+                <Link href={"/me"} className="p-2 flex-1 rounded-md hover:bg-secondary ">View profile</Link>  
+                <Link href={"#"} onClick={()=>destroySession()} className="p-2 flex-1 text-destructive rounded-md hover:bg-secondary ">Logout</Link>  
+              </div>
+            </PopoverContent>
+          </Popover>:<div className="hidden md:flex items-center gap-2 shrink-0">
+            <Link href="/student/login">
+              <button className="px-4 py-2 text-foreground hover:text-accent transition-colors font-medium border border-border rounded-sm hover:bg-secondary">
+                Login
+              </button>
+            </Link>
+            <Link href="/student/register">
+              <button className="px-4 py-2 bg-accent text-accent-foreground hover:bg-accent/90 transition-colors font-medium rounded-sm">
+                Sign Up
+              </button>
+            </Link>
+          </div>}
 
           {/* Mobile Menu Button */}
           <button
@@ -151,8 +181,7 @@ function Header() {
             >
               For Owners
             </Link>
-
-            {/* <div className="border-t border-border pt-4 mt-4 space-y-2">
+            <div className="border-t border-border pt-4 mt-4 ">
               <Link href="/student/login" onClick={() => setMobileMenuOpen(false)}>
                 <button className="w-full px-4 py-2 text-foreground hover:bg-secondary transition-colors font-medium border border-border rounded-sm">
                   Login
@@ -163,7 +192,7 @@ function Header() {
                   Sign Up
                 </button>
               </Link>
-            </div> */}
+            </div>
           </nav>
         )}
       </div>

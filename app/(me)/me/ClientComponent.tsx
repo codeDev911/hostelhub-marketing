@@ -30,6 +30,7 @@ import {
 import React, { useEffect, useState } from "react";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -51,7 +52,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { fetchApi } from "@/lib/api";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 
 export default function ClientComponent({ token }: any) {
@@ -59,23 +64,39 @@ export default function ClientComponent({ token }: any) {
   const [feedbackType, setFeedbackType] = useState("review");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isComplaintBoxOpen, setIsComplaintBoxOpen] = useState(false);
- const [form, setForm] = React.useState({
-    firstName:  "",
-    lastName:  "",
-    phone:  "",
-    cnnic:  "",
-    dateOfBirth:  "",
-    bloodGroup:  "",
-    address:  "",
-    city:  "",
-    state:  "",
-    postalCode:  0,
-    fatherName:  "",
-    fatherPhone:  "",
-    fatherOccupation:  "",
+  const [form, setForm] = React.useState({
+    firstName: "",
+    lastName: "",
+    phone: "",
+    cnnic: "",
+    dateOfBirth: "",
+    bloodGroup: "",
+    address: "",
+    city: "",
+    state: "",
+    postalCode: 0,
+    fatherName: "",
+    fatherPhone: "",
+    fatherOccupation: "",
   });
   const [loadingFetchingMe, setLoadingFetchingMe] = useState(true);
-  const [savingPersonalInfoLoading,setSavingPersonalInfoLoading]=useState(false)
+  const [savingPersonalInfoLoading, setSavingPersonalInfoLoading] =
+    useState(false);
+  const [feedbackSubmitLoading, setFeedbackSubmitLoading] = useState(false);
+  const [seeFeedbackBox, setSeeFeedbackBox] = useState(false);
+
+  const [feedBack, setFeedBack] = useState({
+    type: "",
+    text: "",
+    priority: "",
+    roomDetails: {
+      id: "",
+      roomNumber: "",
+      floor: "",
+      roomType: "",
+    },
+  });
+
   useEffect(() => {
     const fetchMe = async () => {
       try {
@@ -91,7 +112,16 @@ export default function ClientComponent({ token }: any) {
 
         let data = await res.json();
         setUser(data);
-       
+        // set room details for
+        setFeedBack({
+          ...feedBack,
+          roomDetails: {
+            id: data?.room?.id || "",
+            floor: data?.room?.floor || "",
+            roomNumber: data?.room?.roomNumber || "",
+            roomType: data?.room?.roomType || "",
+          },
+        });
       } catch (error) {
         console.log(error);
       } finally {
@@ -100,8 +130,6 @@ export default function ClientComponent({ token }: any) {
     };
     fetchMe();
   }, []);
-
- 
 
   if (loadingFetchingMe) {
     return (
@@ -156,28 +184,55 @@ export default function ClientComponent({ token }: any) {
     );
   }
 
-  const handleUpdatePersonalInfo = async() =>{
+  const handleUpdatePersonalInfo = async () => {
     try {
-        setSavingPersonalInfoLoading(true)
-        const res = await fetchApi({
-            url:"/api/students/me",
-            body:JSON.stringify(form),
-            method:"PUT",
-            headers:{
-                Authorization: `Bearer ${token}`,
-            }
-        })
+      setSavingPersonalInfoLoading(true);
+      const res = await fetchApi({
+        url: "/api/students/me",
+        body: JSON.stringify(form),
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-        if(res.ok){
-            location.reload()
-        }
+      if (res.ok) {
+        location.reload();
+      }
     } catch (error) {
-        
+    } finally {
+      setSavingPersonalInfoLoading(false);
     }
-    finally{
-        setSavingPersonalInfoLoading(false)
+  };
+
+  const handleSubmitFeedback = async () => {
+    try {
+
+      if(feedBack.priority && feedBack.text && feedBack.type){
+
+      setFeedbackSubmitLoading(true);
+      let res = await fetchApi({
+        url: `/api/students/feedback?hostelId=${user.hostelId}`,
+        method: "POST",
+        body: JSON.stringify(feedBack),
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (res.ok) {
+        location.reload();
+      }
+      }
+      else{
+        alert("Please enter the details")
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setFeedbackSubmitLoading(false);
     }
-  }
+  };
 
   return (
     <div className=" py-10 px-4 space-y-6">
@@ -247,9 +302,7 @@ export default function ClientComponent({ token }: any) {
               </div>
               <div className="col-span-2">
                 <strong>Address</strong>
-                <div className="text-muted-foreground">
-                  {user.address}
-                </div>
+                <div className="text-muted-foreground">{user.address}</div>
               </div>
             </div>
 
@@ -274,54 +327,62 @@ export default function ClientComponent({ token }: any) {
                     <DialogTitle>Edit Profile</DialogTitle>
                   </DialogHeader>
                   <div className="grid gap-4 py-4 max-h-[70vh] overflow-y-auto">
-                  {Object.keys(form).map((key) => (
-  <div className="grid gap-2" key={key}>
-    <Label className="capitalize" htmlFor={key}>
-      {key}
-    </Label>
+                    {Object.keys(form).map((key) => (
+                      <div className="grid gap-2" key={key}>
+                        <Label className="capitalize" htmlFor={key}>
+                          {key}
+                        </Label>
 
-    {key === "dateOfBirth" ? (
-      // ✅ Shadcn DatePicker for DOB
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            className="w-full justify-start text-left font-normal"
-          >
-            {form.dateOfBirth
-              ? new Date(form.dateOfBirth).toLocaleDateString()
-              : "Pick a date"}
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-0">
-          <Calendar
-            mode="single"
-            selected={form.dateOfBirth ? new Date(form.dateOfBirth) : undefined}
-            onSelect={(date:any) => {
-              if (date) {
-                handleChange({
-                  target: { name: "dateOfBirth", value: date.toISOString() },
-                });
-              }
-            }}
-            disabled={(locked as any)[key]}
-          />
-        </PopoverContent>
-      </Popover>
-    ) : (
-      // ✅ Default Input
-      <Input
-        id={key}
-        name={key}
-        required
-        value={(form as any)[key] ?? ""}
-        onChange={handleChange}
-        disabled={(locked as any)[key]}
-      />
-    )}
-  </div>
-))}
-
+                        {key === "dateOfBirth" ? (
+                          // ✅ Shadcn DatePicker for DOB
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <Button
+                                variant="outline"
+                                className="w-full justify-start text-left font-normal"
+                              >
+                                {form.dateOfBirth
+                                  ? new Date(
+                                      form.dateOfBirth
+                                    ).toLocaleDateString()
+                                  : "Pick a date"}
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0">
+                              <Calendar
+                                mode="single"
+                                selected={
+                                  form.dateOfBirth
+                                    ? new Date(form.dateOfBirth)
+                                    : undefined
+                                }
+                                onSelect={(date: any) => {
+                                  if (date) {
+                                    handleChange({
+                                      target: {
+                                        name: "dateOfBirth",
+                                        value: date.toISOString(),
+                                      },
+                                    });
+                                  }
+                                }}
+                                disabled={(locked as any)[key]}
+                              />
+                            </PopoverContent>
+                          </Popover>
+                        ) : (
+                          // ✅ Default Input
+                          <Input
+                            id={key}
+                            name={key}
+                            required
+                            value={(form as any)[key] ?? ""}
+                            onChange={handleChange}
+                            disabled={(locked as any)[key]}
+                          />
+                        )}
+                      </div>
+                    ))}
                   </div>
                   <DialogFooter>
                     <Button
@@ -330,32 +391,35 @@ export default function ClientComponent({ token }: any) {
                     >
                       Cancel
                     </Button>
-                    {savingPersonalInfoLoading ?
-                    <Button >Saving...</Button>
-                    :<Button onClick={handleUpdatePersonalInfo}>Save</Button>
-                    }
+                    {savingPersonalInfoLoading ? (
+                      <Button>Saving...</Button>
+                    ) : (
+                      <Button onClick={handleUpdatePersonalInfo}>Save</Button>
+                    )}
                   </DialogFooter>
                 </DialogContent>
               </Dialog>
-              <Button className="flex-1" onClick={() =>{
-                 setForm({
-                    firstName: user?.firstName||"" ,
-                    lastName: user?.lastName ,
-                    phone: user?.phone ,
-                    dateOfBirth: user?.dateOfBirth ,
-                    bloodGroup: user?.bloodGroup ,
-                    address: user?.address ,
-                    cnnic:user?.cnnic,
-                    city: user?.city ,
-                    state: user?.state ,
-                    postalCode: user?.postalCode ,
-                    fatherName: user?.fatherName ,
-                    fatherPhone: user?.fatherPhone ,
-                    fatherOccupation: user?.fatherOccupation 
-                })
-                 setIsDialogOpen(true)
-
-              }}>
+              <Button
+                className="flex-1"
+                onClick={() => {
+                  setForm({
+                    firstName: user?.firstName || "",
+                    lastName: user?.lastName,
+                    phone: user?.phone,
+                    dateOfBirth: user?.dateOfBirth,
+                    bloodGroup: user?.bloodGroup,
+                    address: user?.address,
+                    cnnic: user?.cnnic,
+                    city: user?.city,
+                    state: user?.state,
+                    postalCode: user?.postalCode,
+                    fatherName: user?.fatherName,
+                    fatherPhone: user?.fatherPhone,
+                    fatherOccupation: user?.fatherOccupation,
+                  });
+                  setIsDialogOpen(true);
+                }}
+              >
                 Edit Profile
               </Button>
             </div>
@@ -364,249 +428,388 @@ export default function ClientComponent({ token }: any) {
 
         {/* Hostel & Room Card */}
         <div>
-            <Card>
-          <CardHeader>
-            <CardTitle>Hostel & Room</CardTitle>
-            <CardDescription>Assigned hostel and room details</CardDescription>
-          </CardHeader>
-         {
-            user.hostel ?
-             <CardContent className="space-y-3 text-sm">
-            <div className="flex items-start gap-3">
-              <MapPin className="w-5 h-5 mt-1" />
-              <div>
-                <div className="font-medium">{user.hostel.name}</div>
-                <div className="text-muted-foreground">
-                  {user.hostel.address}, {user.hostel.city}, {user.hostel.state}
-                </div>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <Phone className="w-5 h-5 mt-1" />
-              <div>
-                <div className="text-muted-foreground">{user.hostel.phone}</div>
-                <div className="text-muted-foreground">{user.hostel.email}</div>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-sm text-muted-foreground">Room</div>
-                <div className="font-medium">
-                  Room {user.room.roomNumber} Floor {user.room.floor} • {user.room.roomType}
-                </div>
-              </div>
-              <div className="text-right">
-                <div className="text-sm text-muted-foreground">Check-in</div>
-                <div className="font-medium">
-                  {new Date(user.checkInDate).toLocaleDateString()}
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <div className="text-sm text-muted-foreground">Stay duration</div>
-              <div className="flex items-center gap-3 mt-2">
-                <Progress value={stayProgress} className="h-3 flex-1" />
-                <div className="w-20 text-right text-sm">{stayDays} days</div>
-              </div>
-            </div>
-            <div>
-              <div className="text-sm text-primary font-medium">Roomates</div>
-              <div className="space-y-2 mt-2 flex flex-wrap items-center">
-                {user.room?.students?.map((stud: any, index: any) => (
-                  <div key={index} className=" flex items-center px-1">
-                    <div>
-                      <p className="text-sm font-medium">{stud.id === user.id ? "You ":stud.firstName+ " " +stud.lastName}</p>
+          <Card>
+            <CardHeader>
+              <CardTitle>Hostel & Room</CardTitle>
+              <CardDescription>
+                Assigned hostel and room details
+              </CardDescription>
+            </CardHeader>
+            {user.hostel ? (
+              <CardContent className="space-y-3 text-sm">
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 mt-1" />
+                  <div>
+                    <div className="font-medium">{user.hostel.name}</div>
+                    <div className="text-muted-foreground">
+                      {user.hostel.address}, {user.hostel.city},{" "}
+                      {user.hostel.state}
                     </div>
-                    <Dot />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="w-full">
-              <Button
-                variant="outline"
-                onClick={() => setIsComplaintBoxOpen(true)}
-                className="w-full"
-              >
-                Create complaint / review
-              </Button>
-            </div>
-            <Dialog open={isComplaintBoxOpen}>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Feedback</DialogTitle>
-                  <DialogDescription>
-                    Create a complaint or review about a hostel / apparment.
-                  </DialogDescription>
-                  <Alert>
-                    <AlertTitle>
-                      <h3 className="text-sm font-bold">Note</h3>
-                    </AlertTitle>
-                    <AlertDescription>
-                      <ul className="text-primary">
-                        <li>
-                          <strong>Complaint</strong> will goes to the hostel
-                          staff privately.
-                        </li>
-                        <li>
-                          <strong>Review</strong> will publish publicaly about
-                          hostel.
-                        </li>
-                      </ul>
-                    </AlertDescription>
-                  </Alert>
-                </DialogHeader>
-                <div className="space-y-2 w-full grid gap-4 grid-cols-2">
-                  <div className="space-y-2 w-full">
-                    <Label htmlFor="type">Select Type *</Label>
-                    <Select required onValueChange={(e) => setFeedbackType(e)}>
-                      <SelectTrigger className="w-full">
-                        <SelectValue
-                          className="text-muted"
-                          defaultValue={"3"}
-                          placeholder="Select feedback type"
-                        />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectLabel>Feedback types</SelectLabel>
-                          <SelectItem value="review">Review</SelectItem>
-                          <SelectItem value="complaint">Complaint</SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-2 w-full">
-                    <Label htmlFor="type">Priority /ratings *</Label>
-                    <Select required>
-                      <SelectTrigger className="w-full">
-                        <SelectValue
-                          className="text-muted"
-                          defaultValue={"medium"}
-                          placeholder="Rate / priority"
-                        />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {feedbackType == "review" ? (
-                          <SelectGroup>
-                            <SelectLabel>Rate this</SelectLabel>
-                            {[1, 2, 3, 4, 5].map((rating) => (
-                              <SelectItem
-                                key={rating}
-                                className="w-full"
-                                value={String(rating)}
-                              >
-                                <div className="flex justify-between items-center space-x-1">
-                                  <RatingStars rating={rating} />
-                                  <span>{rating}</span>
-                                </div>
-                              </SelectItem>
-                            ))}
-                          </SelectGroup>
-                        ) : (
-                          <SelectGroup>
-                            <SelectLabel>Complaint priority</SelectLabel>
-                            <SelectItem value="high" className="flex space-x-1">
-                              <FlagTriangleRightIcon className="text-yellow-500" />
-                              <p>High</p>
-                            </SelectItem>
-                            <SelectItem
-                              value="urgent"
-                              className="flex space-x-1"
-                            >
-                              <FlagTriangleRightIcon className="text-red-500" />
-                              <p>Urgent</p>
-                            </SelectItem>
-                            <SelectItem
-                              value="medium"
-                              className="flex space-x-1"
-                            >
-                              <FlagTriangleRightIcon className="text-blue-500" />
-                              <p>Medium</p>
-                            </SelectItem>
-                          </SelectGroup>
-                        )}
-                      </SelectContent>
-                    </Select>
                   </div>
                 </div>
-                <Label htmlFor="type">Text message</Label>
-                <Textarea
-                  className="min-h-[100px] max-h-[400px]"
-                  placeholder="(e.g) Ac is not working since yesterday. Please fix this"
-                ></Textarea>
-                <DialogFooter>
+                <div className="flex items-start gap-3">
+                  <Phone className="w-5 h-5 mt-1" />
+                  <div>
+                    <div className="text-muted-foreground">
+                      {user.hostel.phone}
+                    </div>
+                    <div className="text-muted-foreground">
+                      {user.hostel.email}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-sm text-muted-foreground">Room</div>
+                    <div className="font-medium">
+                      Room {user.room.roomNumber} Floor {user.room.floor} •{" "}
+                      {user.room.roomType}
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-sm text-muted-foreground">
+                      Check-in
+                    </div>
+                    <div className="font-medium">
+                      {new Date(user.checkInDate).toLocaleDateString()}
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="text-sm text-muted-foreground">
+                    Stay duration
+                  </div>
+                  <div className="flex items-center gap-3 mt-2">
+                    <Progress value={stayProgress} className="h-3 flex-1" />
+                    <div className="w-20 text-right text-sm">
+                      {stayDays} days
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div className="text-sm text-primary font-medium">
+                    Roomates
+                  </div>
+                  <div className="space-y-2 mt-2 flex flex-wrap items-center">
+                    {user.room?.students?.map((stud: any, index: any) => (
+                      <div key={index} className=" flex items-center px-1">
+                        <div>
+                          <p className="text-sm font-medium">
+                            {stud.id === user.id
+                              ? "You "
+                              : stud.firstName + " " + stud.lastName}
+                          </p>
+                        </div>
+                        <Dot />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="w-full space-y-2">
                   <Button
-                    onClick={() => setIsComplaintBoxOpen(false)}
-                    variant={"outline"}
-                    className="text-red-500 "
+                    variant="outline"
+                    onClick={() => setIsComplaintBoxOpen(true)}
+                    className="w-full"
                   >
-                    Close
+                    Create complaint / review
                   </Button>
-                  <Button>Submit complaint</Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          </CardContent>
-          :
-          <h2 className="font-bold text-center">Not admitted in any hostel</h2>
-         }
-        </Card>
+                  <Button
+                    onClick={() => setSeeFeedbackBox(true)}
+                    className="w-full"
+                  >
+                    See your Feedbacks
+                  </Button>
+                </div>
+
+                <Dialog open={seeFeedbackBox}>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Your feedbacks</DialogTitle>
+                      <DialogDescription>
+                        View complaints / reviews you've submitted all time.
+                      </DialogDescription>
+                    </DialogHeader>
+                    {user?.feedback?.length > 0 ? (
+                      <div className="space-y-2">
+                        {user?.feedback?.map((feedback: any, index: any) => (
+                          <Alert key={index}>
+                            <AlertTitle>
+                              {feedback.type.toUpperCase()}{" "}
+                            </AlertTitle>
+                            <AlertDescription>
+                              <div className="flex items-center text-xs ">
+                                {feedback.type == "complaint" ? (
+                                  <>
+                                    <p
+                                      className={`${
+                                        feedback.status == "pending"
+                                          ? " text-yellow-500 "
+                                          : feedback.status == "rejected"
+                                          ? "text-red-500"
+                                          : feedback.status == "resolve"
+                                          ? "text-green-500"
+                                          : feedback.status == "reviewed"
+                                          ? "text-blue-500"
+                                          : ""
+                                      }`}
+                                    >
+                                      {feedback.status.toUpperCase()}
+                                    </p>
+                                    <Dot className="w-4" />
+                                    <p>{feedback.priority}</p>
+
+                                  </>
+                                ) : (
+                                  <div className="flex items-center space-x-0.5">
+                                    {[
+                                      ...Array(
+                                        Number.parseInt(feedback.priority || 0)
+                                      ),
+                                    ].map((_, i) => (
+                                      <StarIcon
+                                        key={i}
+                                        className="text-accent w-3"
+                                      />
+                                    ))}
+                                  </div>
+                                )}
+                                <Dot className="w-4" />
+                                <p className="text-muted-foreground ">
+                                  {new Date().toLocaleString("en-US", {
+                                    day: "2-digit",
+                                    year: "numeric",
+                                    month: "short",
+                                  })}
+                                </p>
+                              </div>
+
+                              {feedback.text}
+                            </AlertDescription>
+                          </Alert>
+                        ))}
+                      </div>
+                    ) : (
+                      "No Feedback founded!"
+                    )}
+                    <DialogFooter>
+                      <Button
+                        onClick={() => setSeeFeedbackBox(false)}
+                        variant={"outline"}
+                      >
+                        Close
+                      </Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+
+                <Dialog open={isComplaintBoxOpen}>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Feedback</DialogTitle>
+                      <DialogDescription>
+                        Create a complaint or review about a hostel / apparment.
+                      </DialogDescription>
+                      <Alert>
+                        <AlertTitle>
+                          <h3 className="text-sm font-bold">Note</h3>
+                        </AlertTitle>
+                        <AlertDescription>
+                          <ul className="text-primary">
+                            <li>
+                              <strong>Complaint</strong> will goes to the hostel
+                              staff privately.
+                            </li>
+                            <li>
+                              <strong>Review</strong> will publish publicaly
+                              about hostel.
+                            </li>
+                          </ul>
+                        </AlertDescription>
+                      </Alert>
+                    </DialogHeader>
+                    <div className="space-y-2 w-full grid gap-4 grid-cols-2">
+                      <div className="space-y-2 w-full">
+                        <Label htmlFor="type">Select Type *</Label>
+                        <Select
+                          required
+                          onValueChange={(e) =>
+                            setFeedBack({ ...feedBack, type: e })
+                          }
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue
+                              className="text-muted"
+                              defaultValue={"3"}
+                              placeholder="Select feedback type"
+                            />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup>
+                              <SelectLabel>Feedback types</SelectLabel>
+                              <SelectItem value="review">Review</SelectItem>
+                              <SelectItem value="complaint">
+                                Complaint
+                              </SelectItem>
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2 w-full">
+                        <Label htmlFor="type">Priority /ratings *</Label>
+                        <Select
+                          required
+                          onValueChange={(value) =>
+                            setFeedBack({ ...feedBack, priority: value })
+                          }
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue
+                              className="text-muted"
+                              defaultValue={"medium"}
+                              placeholder="Rate / priority"
+                            />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {feedBack.type == "review" ? (
+                              <SelectGroup>
+                                <SelectLabel>Rate this</SelectLabel>
+                                {[1, 2, 3, 4, 5].map((rating) => (
+                                  <SelectItem
+                                    key={rating}
+                                    className="w-full"
+                                    value={String(rating)}
+                                  >
+                                    <div className="flex justify-between items-center space-x-1">
+                                      <RatingStars rating={rating} />
+                                      <span>{rating}</span>
+                                    </div>
+                                  </SelectItem>
+                                ))}
+                              </SelectGroup>
+                            ) : (
+                              <SelectGroup>
+                                <SelectLabel>Complaint priority</SelectLabel>
+                                <SelectItem
+                                  value="high"
+                                  className="flex space-x-1"
+                                >
+                                  <FlagTriangleRightIcon className="text-yellow-500" />
+                                  <p>High</p>
+                                </SelectItem>
+                                <SelectItem
+                                  value="urgent"
+                                  className="flex space-x-1"
+                                >
+                                  <FlagTriangleRightIcon className="text-red-500" />
+                                  <p>Urgent</p>
+                                </SelectItem>
+                                <SelectItem
+                                  value="medium"
+                                  className="flex space-x-1"
+                                >
+                                  <FlagTriangleRightIcon className="text-blue-500" />
+                                  <p>Medium</p>
+                                </SelectItem>
+                              </SelectGroup>
+                            )}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                    <Label htmlFor="type">Text message</Label>
+                    <Textarea
+                      className="min-h-[100px] max-h-[400px]"
+                      placeholder="(e.g) Ac is not working since yesterday. Please fix this"
+                      required
+                      onChange={(e) =>
+                        setFeedBack({ ...feedBack, text: e.target.value })
+                      }
+                    ></Textarea>
+                    <DialogFooter>
+                      <Button
+                        onClick={() => setIsComplaintBoxOpen(false)}
+                        variant={"outline"}
+                        className="text-red-500 "
+                      >
+                        Close
+                      </Button>
+                      {feedbackSubmitLoading ? (
+                        <Button variant={"outline"} disabled>
+                          Submitting {feedBack.type}...
+                        </Button>
+                      ) : (
+                        <Button onClick={() => handleSubmitFeedback()}>
+                          Submit {feedBack.type}
+                        </Button>
+                      )}
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+              </CardContent>
+            ) : (
+              <h2 className="font-bold text-center">
+                Not admitted in any hostel
+              </h2>
+            )}
+          </Card>
         </div>
 
         {/* Financial Card */}
         <div>
-            <Card>
-          <CardHeader>
-            <CardTitle>Financial Summary</CardTitle>
-            <CardDescription>
-              A quick look at invoices & payments
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-3 text-sm">
-            <div className="grid grid-cols-3 gap-3">
-              <div className="p-3 bg-muted rounded text-center">
-                <div className="text-xs">Total Invoices</div>
-                <div className="font-semibold">
-                  PKR {totalInvoices?.toLocaleString()}
+          <Card>
+            <CardHeader>
+              <CardTitle>Financial Summary</CardTitle>
+              <CardDescription>
+                A quick look at invoices & payments
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3 text-sm">
+              <div className="grid grid-cols-3 gap-3">
+                <div className="p-3 bg-muted rounded text-center">
+                  <div className="text-xs">Total Invoices</div>
+                  <div className="font-semibold">
+                    PKR {totalInvoices?.toLocaleString()}
+                  </div>
+                </div>
+                <div className="p-3 bg-muted rounded text-center">
+                  <div className="text-xs">Total Paid</div>
+                  <div className="font-semibold">
+                    PKR {totalPaid?.toLocaleString()}
+                  </div>
+                </div>
+                <div className="p-3 bg-muted rounded text-center">
+                  <div className="text-xs">Pending</div>
+                  <div className="font-semibold text-red-600">
+                    PKR {totalDue?.toLocaleString()}
+                  </div>
                 </div>
               </div>
-              <div className="p-3 bg-muted rounded text-center">
-                <div className="text-xs">Total Paid</div>
-                <div className="font-semibold">
-                  PKR {totalPaid?.toLocaleString()}
-                </div>
-              </div>
-              <div className="p-3 bg-muted rounded text-center">
-                <div className="text-xs">Pending</div>
-                <div className="font-semibold text-red-600">
-                  PKR {totalDue?.toLocaleString()}
-                </div>
-              </div>
-            </div>
 
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <div className="text-sm text-muted-foreground">Next Due</div>
-                <div className="font-medium">
-                  {user?.invoices?.find((i: any) => i.status !== "paid")
-                    ?.dueDate ?? "All clear"}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="text-sm text-muted-foreground">Next Due</div>
+                  <div className="font-medium">
+                    {user?.invoices?.find((i: any) => i.status !== "paid")
+                      ?.dueDate ?? "All clear"}
+                  </div>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="text-sm text-muted-foreground">
+                    Last Payment
+                  </div>
+                  <div className="font-medium">
+                    {user.payments &&
+                    user?.payments[user?.payments?.length - 1]?.date
+                      ? "-"
+                      : ""}
+                  </div>
                 </div>
               </div>
-              <div className="flex items-center justify-between">
-                <div className="text-sm text-muted-foreground">
-                  Last Payment
-                </div>
-                <div className="font-medium">
-                  {user.payments && user?.payments[user?.payments?.length - 1]?.date ? "-":""}
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
         </div>
       </div>
 
