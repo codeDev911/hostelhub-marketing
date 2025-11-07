@@ -7,6 +7,7 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { ThemeProvider } from "next-themes"
 import { getSession } from "@/lib/auth"
+import { Toaster } from "sonner"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -35,6 +36,7 @@ export default async function RootLayout({
       <body className={`font-sans antialiased`}>
         <Header session={session}/>
         {children}
+        <Toaster  position="top-center" closeButton/>
         <Analytics />
         <Footer/>
       </body>

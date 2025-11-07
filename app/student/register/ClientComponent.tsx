@@ -5,10 +5,11 @@ import type React from "react"
 import { useEffect, useState } from "react"
 import Link from "next/link" 
 import { Button } from "@/components/ui/button"
-import { User, Mail, Phone, MapPin, AlertCircle } from "lucide-react"
+import { User, Mail, Phone, MapPin, AlertCircle, IdCard } from "lucide-react"
 import { useSearchParams } from "next/navigation"
 import { decryptData } from "@/lib/encrypted"
 import { fetchApi } from "@/lib/api"
+import { toast } from "sonner"
 
 export default function ClientComponent() {
   const searchParams = useSearchParams()
@@ -19,6 +20,10 @@ export default function ClientComponent() {
     email: "",
     phone: "",
     gender: "",
+    cnnic: "",
+    fatherName:"",
+    fatherPhone:"",
+    address:"",
     password: "",
     confirmPassword: "",
   })
@@ -41,9 +46,13 @@ export default function ClientComponent() {
     if (
       !formData.name ||
       !formData.email ||
+      !formData.address ||
+      !formData.cnnic ||
       !formData.phone ||
+      !formData.fatherName || 
       !formData.gender ||
-      !formData.password
+      !formData.password||
+      !formData.confirmPassword 
     ) {
       setError("Please fill in all fields")
       return
@@ -67,11 +76,16 @@ export default function ClientComponent() {
         body:JSON.stringify(formData)
       })
       
+         if(res.status == 403){
+         toast("User is already registered with the given email or phone")}
       if(res.ok){
-        location.assign("/student/login")
+        
+          location.assign("/student/login")
       }
+    
     } catch (error) {
-      setError("Unknown erroroccured")
+      console.log(error);
+      setError("Unknown error occured"+error)
     }
     finally{
       setLoading(false)
@@ -116,7 +130,7 @@ export default function ClientComponent() {
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">Full Name</label>
+                  <label className="block text-sm font-medium text-foreground mb-2">Full Name *</label>
                   <div className="relative">
                     <User className="absolute left-3 top-3.5 w-5 h-5 text-foreground/40" />
                     <input
@@ -132,7 +146,7 @@ export default function ClientComponent() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">Email Address</label>
+                  <label className="block text-sm font-medium text-foreground mb-2">Email Address *</label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3.5 w-5 h-5 text-foreground/40" />
                     <input
@@ -148,12 +162,13 @@ export default function ClientComponent() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">Phone Number</label>
+                  <label className="block text-sm font-medium text-foreground mb-2">Phone Number *</label>
                   <div className="relative">
                     <Phone className="absolute left-3 top-3.5 w-5 h-5 text-foreground/40" />
                     <input
                       type="tel"
                       name="phone"
+                      
                       value={formData.phone}
                       onChange={(e)=>isFromBooking ? null : handleChange(e)}
                       disabled={isFromBooking}
@@ -162,9 +177,29 @@ export default function ClientComponent() {
                     />
                   </div>
                 </div>
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">Cnic *</label>
+                  <div className="relative">
+                    <IdCard className="absolute left-3 top-3.5 w-5 h-5 text-foreground/40" />
+                    <input
+                      type="number"
+                      name="cnnic" 
+                      min={0}
+                      max={9999999999999}
+                      value={formData.cnnic}
+                      onChange={(e)=>{
+                        if(e.target.value.length !== 14){
+                          isFromBooking ? null : handleChange(e)
+                        }
+                      }}
+                      placeholder="13 Digits of your ID"
+                      className={` w-full  pl-10 pr-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
+                    />
+                  </div>
+                </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">Gender</label>
+                  <label className="block text-sm font-medium text-foreground mb-2">Gender *</label>
                   <select
                     name="gender"
                     value={formData.gender}
@@ -177,13 +212,53 @@ export default function ClientComponent() {
                   </select>
                 </div>
 
+                   <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">Father name *</label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      name="fatherName"
+                      value={formData.fatherName}
+                      onChange={(e)=>isFromBooking ? null : handleChange(e)}
+                      placeholder="Your father name"
+                      className={` w-full  pl-10 pr-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
+                    />
+                  </div>
+                </div>
+                   <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">Father Phone </label>
+                  <div className="relative">
+                    <input
+                      type="tel"
+                      name="fatherPhone"
+                      value={formData.fatherPhone}
+                      onChange={(e)=>isFromBooking ? null : handleChange(e)}
+                      placeholder="03012345678"
+                      className={` w-full  pl-10 pr-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
+                    />
+                  </div>
+                </div>
+                   <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">Parmanent address *</label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      name="address"
+                      value={formData.address}
+                      onChange={(e)=>isFromBooking ? null : handleChange(e)}
+                      placeholder="Your father name"
+                      className={` w-full  pl-10 pr-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
+                    />
+                  </div>
+                </div>
+
 
               </div>
                 <p className="text-sm text-muted-foreground">Setup you're password for HostelHub student account. Please don't share with anyone</p>
 
                 <div className="grid gap-4 md:grid-cols-2">
                   <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">Password</label>
+                  <label className="block text-sm font-medium text-foreground mb-2">Password *</label>
                   <input
                     type="password"
                     name="password"
@@ -195,7 +270,7 @@ export default function ClientComponent() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">Confirm Password</label>
+                  <label className="block text-sm font-medium text-foreground mb-2">Confirm Password *</label>
                   <input
                     type="password"
                     name="confirmPassword"
