@@ -259,7 +259,7 @@ export default function BookHostel({session}:any) {
                       Thank you for your interest. The hostel will contact you soon to confirm your booking.
                     </p>
                    
-                  {!student && !student.id &&  <Alert variant={"default"} className="text-start text-green-500 border-green-500">
+                  {!student && !student?.id &&  <Alert variant={"default"} className="text-start text-green-500 border-green-500">
                       <AlertTitle className="font-bold text-base flex items-center space-x-2">
                         <InfoIcon className="w-4 h-4"/> {" "} <h3>You're just 1 step away! (optional)</h3>
                       </AlertTitle>
@@ -275,7 +275,7 @@ export default function BookHostel({session}:any) {
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <h2 className="text-2xl font-bold text-primary mb-6">Student Information</h2>
                     {/* Personal Information */}
-                    {!student && !student.id?
+                    {!student && !student?.id?
                     <>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
