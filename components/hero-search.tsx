@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { mockCities } from "@/lib/mock-data"
 import { Label } from "./ui/label"
 
-export default function HeroSearch({ onSearch }) {
+export default function HeroSearch() {
   const router = useRouter()
   const [city, setCity] = useState("")
   const [area, setArea] = useState("")
@@ -54,7 +54,7 @@ export default function HeroSearch({ onSearch }) {
         <div className="bg-primary-foreground rounded-lg shadow-2xl p-4 md:p-5 lg:p-7">
           <div className="flex space-x-2">
             <Sparkles className="w-4 text-accent"/>
-            <h2 className="text-black font-bold">Smart Search</h2>
+            <h2 className="text-primary font-bold">Smart Search</h2>
           </div>
           <p className="text-secondray text-sm mb-4">Our smart and intellegnce search to brings best accomodation for you</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
@@ -74,7 +74,7 @@ export default function HeroSearch({ onSearch }) {
                   <MapPin className="w-5 h-5 text-muted-foreground" />
                 </button>
                 {showCityDropdown && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-border rounded-lg shadow-xl z-20 max-h-56 overflow-y-auto">
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-primary-foreground border-2 border-border rounded-lg shadow-xl z-20 max-h-56 overflow-y-auto">
                     {mockCities.map((c) => (
                       <button
                         key={c.name}
@@ -100,7 +100,7 @@ export default function HeroSearch({ onSearch }) {
                 <button
                   onClick={() => setShowAreaDropdown(!showAreaDropdown)}
                   disabled={!city}
-                  className="w-full px-4 py-3 md:py-4 border-2 border-border rounded-lg bg-secondray text-left flex items-center justify-between hover:border-accent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:border-accent"
+                  className="w-full px-4 py-3 md:py-4 border-2 border-border rounded-lg bg-primary-foreground text-left flex items-center justify-between hover:border-accent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:border-accent"
                 >
                   <span
                     className={`text-sm md:text-base ${area ? "text-foreground font-medium" : "text-muted-foreground"}`}
@@ -110,7 +110,7 @@ export default function HeroSearch({ onSearch }) {
                   <MapPin className="w-5 h-5 text-muted-foreground" />
                 </button>
                 {showAreaDropdown && areas.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-border rounded-lg shadow-xl z-20 max-h-56 overflow-y-auto">
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-primary-foreground border-2 border-border rounded-lg shadow-xl z-20 max-h-56 overflow-y-auto">
                     {areas.map((a) => (
                       <button
                         key={a}

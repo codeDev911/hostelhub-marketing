@@ -9,8 +9,8 @@ function Footer() {
           {/* Brand */}
           <div>
             <div  className="flex items-center  gap-2 transition-opacity ">
-              <div className="w-8 h-8 p-1 bg-primary-foreground rounded-sm flex items-center justify-center">
-                <img src="/logo2.png" className="w-full h-full" alt="Logo"/>
+              <div className="w-8 h-8 p-1 bg-white rounded-sm flex items-center justify-center">
+                <img src="/logo.png" className="w-full h-full" alt="Logo"/>
               </div>
               <h4 className="font-bold  text-lg text-primary ">HostelHub</h4>
             </div>
@@ -78,15 +78,16 @@ function Footer() {
           <div>
             <h4 className="font-bold mb-4 text-primary">Connect With Us</h4>
             <div className="flex gap-4 mb-4 text-primary">
-              <Link href="#" className="hover:opacity-80 transition-opacity">
+              <Link href="#" target="_blank"  className="hover:opacity-80 transition-opacity">
                 <Facebook className="w-5 h-5" />
               </Link>
-              <Link href="#" className="hover:opacity-80 transition-opacity">
+              <Link href="https://instagram.com/hostel_hub.pk" target="_blank"  className="hover:opacity-80 transition-opacity">
                 <Instagram className="w-5 h-5" />
               </Link>
-              <Link href="#" className="hover:opacity-80 transition-opacity">
+              <Link href="https://x.com/hostelhub_pk" target="_blank" className="hover:opacity-80 transition-opacity">
                 <Twitter className="w-5 h-5" />
               </Link>
+               
             </div>
             <p className="text-sm text-primary opacity-80">
               <strong>Email:</strong> info@hostelhub.pk

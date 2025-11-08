@@ -39,10 +39,10 @@ function Header({session}:any) {
         <div className="flex items-center justify-between gap-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity flex-shrink-0">
-            <div className="w-6 h-6 bg-accent rounded-sm flex items-center justify-center">
-              <img src="/logo2.png" className="w-full h-full" alt="Logo" />
+            <div className="w-6.5 h-6.5 bg-white  flex rounded-md items-center justify-center">
+              <img src="/logo.png" className="w-full h-full" alt="Logo" />
             </div>
-            <h1 className="text-2xl font-bold text-primary sm:block">HostelHub</h1>
+            <h1 className="text-xl font-bold text-primary sm:block">HostelHub</h1>
           </Link>
 
           {/* Desktop Navigation & Search */}
@@ -64,6 +64,7 @@ function Header({session}:any) {
             </Link>
           </nav>
 
+          <div className="space-x-4">
            <Button
            onClick={()=> router.push("/hostels")}
                 variant={"outline"}
@@ -84,8 +85,8 @@ function Header({session}:any) {
 
           {session && session?.userId?
           <Popover>
-            <PopoverTrigger>
-              <Button type="submit"  className=""  variant={"secondary"}>
+            <PopoverTrigger asChild>
+              <Button type="submit"  className=""   variant={"secondary"}>
                 <UserIcon className="w-5 h-5"/>
               </Button>
             </PopoverTrigger>
@@ -123,6 +124,7 @@ function Header({session}:any) {
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
+        </div>
         </div>
 
         {/* Mobile Navigation & Search */}
@@ -181,7 +183,7 @@ function Header({session}:any) {
             >
               For Owners
             </Link>
-            <div className="border-t border-border pt-4 mt-4 ">
+          {!session && !session.userId &&   <div className="border-t border-border pt-4 mt-4 ">
               <Link href="/student/login" onClick={() => setMobileMenuOpen(false)}>
                 <button className="w-full px-4 py-2 text-foreground hover:bg-secondary transition-colors font-medium border border-border rounded-sm">
                   Login
@@ -192,7 +194,7 @@ function Header({session}:any) {
                   Sign Up
                 </button>
               </Link>
-            </div>
+            </div>}
           </nav>
         )}
       </div>

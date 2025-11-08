@@ -1,408 +1,117 @@
-"use client"
+import { fetchApi } from "@/lib/api";
+import ClientComponent from "./ClientComponent";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-import React, { useEffect, useState } from "react"
-import Link from "next/link"
-import { MapPin, Phone, Users, DoorOpen, Star, Check, Clock, AlertCircle, UtensilsCrossed, Loader2, Hotel, XIcon, InfoIcon } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
-import { mockHostels } from "@/lib/mock-data"
-import { useParams } from "next/navigation"
-import { fetchApi } from "@/lib/api"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
-
-export default function HostelDetailPage() {
-  const params = useParams()
-  const id = params?.id as string
-  const [hostel,setHostel] = useState({}as any)
-  const [selectedRoom, setSelectedRoom] = useState(null)
-  const [selectedDay, setSelectedDay] = useState("Monday")
-  const [loading,setLoading] = useState(true)
-
-  useEffect(()=>{
-    const fetchHostel = async ()=>{
-      try {
-          let res = await fetchApi({
-            method:"GET",
-            url:`/api/hostels/${id}`
-          })
-          setHostel(await res.json())
-          
-      } catch (error) {
-        console.log(error);
-        
-      }
-      finally{
-        setLoading(false)
-      }
-    }
-
-    fetchHostel()
-  },[])
+interface HostelMeta {
+  title: string;
+  description: string;
+  keywords: string;
+  reviews: number;
+  image: string;
+  location: string;
+  phone: string;
+  pricePerMonth: number;
+  city:string
+}
 
 
+type PageProps = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
-  if(loading){
-    return(
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <Loader2 className="w-8 h-8 animate-spin text-accent" />
-      </div>
-    )
+// Server fetch function
+async function getHostelMeta(id: string): Promise<HostelMeta> {
+  const res = await fetchApi({url:`/api/hostels/meta-details?id=${id}`,method:"GET"})
+
+  if (!res.ok) throw new Error("Hostel not found");
+
+  return res.json();
+}
+
+// -----------------------------------
+// Export SEO metadata using Next.js 16+ Metadata type
+// -----------------------------------
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  let hostel: HostelMeta;
+  let {id} = await params
+  
+  try {
+    hostel = await getHostelMeta(id);
+  } catch {
+    return { title: "Best accomodation for you in Pakistan",description:"We are glade you see you here, See our featured and best accomodations across all Over Pakistan.",keywords:"accomodation, travel, pakistan, hostelhub, studenthub, students, mdcat, peshawar, islamabad, karachi, lahore, Afnan Ahad" };
   }
+  
+  // JSON-LD structured data
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    name: hostel.title,
+    description: hostel.description,
+    image: hostel.image,
+    telephone: hostel.phone,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: hostel.location,
+      addressLocality: hostel.city,
+      addressCountry: "PK",
+    },
+    priceRange: `Rs ${hostel.pricePerMonth.toLocaleString()}`,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: hostel.reviews,
+      reviewCount: 1,
+    },
+  };
 
-  if (!hostel && !loading) {
-    return (
-      <main className="min-h-screen bg-background flex flex-col">
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center grow">
-          <p className="text-lg text-muted-foreground">Hostel not found</p>
-          <Link href="/hostels" className="mt-4 inline-block">
-            <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">Back to Hostels</Button>
-          </Link>
-        </div>
-        
-      </main>
-    )
-  }
+  return {
+    title: `${hostel.title} | HostelHub`,
+    description: hostel.description,
+    keywords: hostel.keywords,
+    openGraph: {
+      title: hostel.title,
+      description: hostel.description,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/hostel/${id}`,
+      siteName: "HostelHub",
+      images: [
+        {
+          url: hostel.image,
+          width: 800,
+          height: 600,
+        },
+      ],
+      type: "website",
+      locale: "en_PK",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: hostel.title,
+      description: hostel.description,
+      images: [hostel.image],
+    },
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://hostelhub.pk"),
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/hostel/${id}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    other: {
+      scripts: [
+        `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`,
+      ],
+    },
+  };
+}
 
+// -----------------------------------
+// Page Component
+// -----------------------------------
+export default async function HostelPage({ params }: PageProps) {
 
   return (
-    <main className="min-h-screen bg-background flex flex-col">
-      
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 grow">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2">
-            {/* Image Gallery */}
-            <div className="mb-6 sm:mb-8">
-              <div className="relative h-64 sm:h-96 bg-muted rounded-lg overflow-hidden mb-4">
-                <img
-                  src={hostel.image || "/placeholder.svg"}
-                  alt={hostel.name}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute top-4 right-4 bg-accent text-accent-foreground px-3 sm:px-4 py-2 rounded-lg font-semibold flex items-center gap-1 text-sm sm:text-base">
-                  <Star className="w-4 sm:w-5 h-4 sm:h-5" />
-                  {hostel.rating}
-                </div>
-              </div>
-              <div className="grid grid-cols-4 gap-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="h-16 sm:h-20 bg-muted rounded-lg overflow-hidden">
-                    <img
-                      src={hostel.image || "/placeholder.svg"}
-                      alt={`Gallery ${i}`}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform cursor-pointer"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Hostel Info */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6 mb-6 sm:mb-8">
-              <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-2">{hostel.name}</h2>
-              <div className="flex items-center text-muted-foreground mb-4 text-sm sm:text-base">
-                <MapPin className="w-4 sm:w-5 h-4 sm:h-5 mr-2 shrink-0" />
-                <span>{hostel.address}</span>
-              </div>
-              <div className="flex flex-wrap items-center gap-4 mb-6">
-                <div className="flex items-center gap-1">
-                  <Star className="w-4 sm:w-5 h-4 sm:h-5 text-accent" />
-                  <span className="font-semibold text-foreground">{hostel.rating}</span>
-                  <span className="text-muted-foreground text-sm">({hostel.reviews} reviews)</span>
-                </div>
-              </div>
-              <p className="text-sm sm:text-base text-foreground leading-relaxed">{hostel.description}</p>
-            </div>
-
-            {/* Amenities */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6 mb-6 sm:mb-8">
-              <h3 className="text-xl sm:text-2xl font-bold text-primary mb-4 sm:mb-6">Amenities</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-                {hostel?.amenities?.map((amenity:any, idx:any) => (
-                  <div key={idx} className="flex items-center gap-3 p-3 bg-secondary rounded-lg">
-                    <Check className="w-4 sm:w-5 h-4 sm:h-5 text-accent shrink-0" />
-                    <span className="text-sm sm:text-base text-foreground">{amenity}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6 mb-6 sm:mb-8">
-              <h3 className="text-xl sm:text-2xl font-bold text-primary">Available Rooms</h3>
-                {hostel?.rooms.length <=0 ? <Alert variant={"destructive"} className="border-destructive border">
-                    <AlertTitle>No availabe room right now!</AlertTitle>
-                    <AlertDescription><p>Opps! At the moment there is no room available in <strong>{hostel.name}</strong>.</p></AlertDescription>
-                  </Alert>:<p className="text-sm mb-3 ">There are ({hostel?.rooms?.length}) room(s) availabe </p>}
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                {hostel?.rooms?.map((room:any) => (
-                  <button
-                    key={room.id}
-                    className={`p-3 sm:p-4 border-2 text-start rounded-lg transition-all  ${
-                      selectedRoom === room.id ? "border-accent bg-accent/10" : "border-border hover:border-accent/50"
-                    } ${room.totalSeats - (room.students?.length || 0)   === 0 ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
-                    disabled={room.totalSeats - (room.students?.length || 0)   === 0}
-                  >
-                       <div className="text-xs sm:text-sm font-bold text-primary mb-1">Room #{room.roomNumber}</div>
-                  
-
-                    <div className="text-xs text-muted-foreground mb-1">Floor {room.floor}</div>
-                    <div className="text-xs text-muted-foreground mb-1">Type {room.roomType}</div>
-                    <div className="text-xs font-bold text-muted-foreground mb-1">Availabe seats  {" "} 
-                      {room.totalSeats - (room.students?.length || 0) -  ( room?.bookings?.reduce((prev:any,next:any)=> prev + next.numberOfSeats,0) || 0 ) > 0 ? room.totalSeats - (room.students?.length || 0) -  ( room?.bookings?.reduce((prev:any,next:any)=> prev + next.numberOfSeats,0) || 0 ) : 0}
-                      </div>
-                      {( room?.bookings?.reduce((prev:any,next:any)=> prev + next.numberOfSeats,0) || 0 ) > 0 ?
-                   <div className="flex items-center space-x-1">
-                    <div className="text-xs text-red-500 font-bold mb-1">Pending seats {( room?.bookings?.reduce((prev:any,next:any)=> prev + next.numberOfSeats,0) || 0 )}</div>
-                       <Tooltip>
-                        <TooltipTrigger asChild>
-                            <InfoIcon className="w-3 h-3"/>
-                        </TooltipTrigger>
-                        <TooltipContent className="bg-primary">
-                          <p>{( room?.bookings?.reduce((prev:any,next:any)=> prev + next.numberOfSeats,0) || 0 )} seats are not confirmed yet, you can apply to book.</p>
-                        </TooltipContent>
-                      </Tooltip>
-                   </div>
-                  :""}
-                    <div className="text-xs text-muted-foreground mt-1">Rs {room.pricePerMonth}</div>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* 7-Day Meal Plan - Complimentary */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6 mb-6 sm:mb-8">
-              <h3 className="text-xl sm:text-2xl font-bold text-primary mb-4 sm:mb-6 flex items-center gap-2">
-                <UtensilsCrossed className="w-5 sm:w-6 h-5 sm:h-6 text-accent" />
-                7-Day Meal Plan (Complimentary)
-              </h3>
-
-              <div className="overflow-x-auto">
-                <table className="w-full border-collapse text-sm sm:text-base">
-                  <thead>
-                    <tr className="bg-secondary border-b-2 border-border">
-                      <th className="border border-border px-3 sm:px-4 py-2 sm:py-3 text-left font-bold text-primary">
-                        Day
-                      </th>
-                      <th className="border border-border px-3 sm:px-4 py-2 sm:py-3 text-left font-bold text-primary">
-                        Breakfast
-                      </th>
-                      <th className="border border-border px-3 sm:px-4 py-2 sm:py-3 text-left font-bold text-primary">
-                        Morning
-                      </th>
-                      <th className="border border-border px-3 sm:px-4 py-2 sm:py-3 text-left font-bold text-primary">
-                        Evening
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {hostel?.mealPlan?.map((day:any, idx:any) => (
-                      <tr key={idx} className={idx % 2 === 0 ? "bg-primary-foreground" : "bg-secondary/30"}>
-                        <td className="border border-border px-3 sm:px-4 py-2 sm:py-3 font-semibold text-foreground">
-                          {day.day}
-                        </td>
-                        <td className="border border-border px-3 sm:px-4 py-2 sm:py-3 text-foreground">
-                          {day.meals[0]?.dishes.join(", ")}
-                        </td>
-                        <td className="border border-border px-3 sm:px-4 py-2 sm:py-3 text-foreground">
-                          {day.meals[1]?.dishes.join(", ")}
-                        </td>
-                        <td className="border border-border px-3 sm:px-4 py-2 sm:py-3 text-foreground">
-                          {day.meals[2]?.dishes.join(", ")}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            {/* Check-in/Check-out & Rules */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
-              {/* Check-in/Check-out */}
-              <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6">
-                <h3 className="text-lg sm:text-xl font-bold text-primary mb-4 flex items-center gap-2">
-                  <Clock className="w-5 h-5" />
-                  Check-in & Check-out
-                </h3>
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-sm text-muted-foreground">Check-in Time</p>
-                    <p className="font-semibold text-foreground">{hostel.checkInTime}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Check-out Time</p>
-                    <p className="font-semibold text-foreground">{hostel.checkOutTime}</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Rules */}
-              <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6">
-                <h3 className="text-lg sm:text-xl font-bold text-primary mb-4 flex items-center gap-2">
-                  <AlertCircle className="w-5 h-5" />
-                  House Rules
-                </h3>
-                <ul className="space-y-2">
-                  {hostel?.rules?.slice(0, 3).map((rule:any, idx:any) => (
-                    <li key={idx} className="text-sm text-foreground flex gap-2">
-                      <span className="text-accent font-bold">•</span>
-                      <span>{rule}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            {/* Nearby Places */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6 mb-6 sm:mb-8">
-              <h3 className="text-lg sm:text-xl font-bold text-primary mb-4">Nearby Places</h3>
-              <ul className="space-y-2">
-                {hostel?.nearbyPlaces?.map((place:any, idx:any) => (
-                  <li key={idx} className="text-sm sm:text-base text-foreground flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-accent shrink-0" />
-                    {place}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Google Map */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6 mb-6 sm:mb-8">
-              <h3 className="text-lg sm:text-xl font-bold text-primary mb-4">Location on Map</h3>
-              <div className="w-full h-64 sm:h-96 rounded-lg overflow-hidden">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  frameBorder="0"
-                  src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDxKJUd7wGlMLw2vDjT6qZHPstVHignYkE&q=${hostel.latitude},${hostel.longitude}`}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="w-full h-full"
-                />
-              </div>
-              <p className="text-xs sm:text-sm text-muted-foreground mt-3">
-                {hostel.address}, {hostel.area}, {hostel.city}
-              </p>
-            </div>
-
-            {/* Reviews Section */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6">
-              <h3 className="text-xl sm:text-2xl font-bold text-primary mb-4 sm:mb-6">Reviews</h3>
-              <div className="space-y-4">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="pb-4 border-b border-border last:border-b-0">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
-                      <div>
-                        <p className="font-bold text-foreground text-sm sm:text-base">Student {i}</p>
-                        <div className="flex items-center gap-1">
-                          {[...Array(5)].map((_, j) => (
-                            <Star
-                              key={j}
-                              className={`w-3 sm:w-4 h-3 sm:h-4 ${j < 4 ? "text-accent fill-accent" : "text-border"}`}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                      <p className="text-xs sm:text-sm text-muted-foreground">2 weeks ago</p>
-                    </div>
-                    <p className="text-sm sm:text-base text-foreground">
-                      Great hostel with excellent facilities and friendly staff. Highly recommended for students!
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            {/* Quick Info Card */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6 mb-4 sm:mb-6 lg:sticky lg:top-24">
-              <h3 className="text-lg sm:text-xl font-bold text-primary mb-4 sm:mb-6">Quick Info</h3>
-
-              <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
-                <div className="flex items-center gap-3 pb-3 sm:pb-4 border-b border-border">
-                  <Users className="w-5 h-5 text-accent shrink-0" />
-                  <div>
-                    <p className="text-xs sm:text-sm text-muted-foreground">Total students</p>
-                    <p className="font-bold text-foreground text-sm sm:text-base">
-                      {hostel?.students?.length ||0}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3 pb-3 sm:pb-4 border-b border-border">
-                  <DoorOpen className="w-5 h-5 text-accent shrink-0" />
-                  <div>
-                    <p className="text-xs sm:text-sm text-muted-foreground">Available Rooms</p>
-                    <div className="flex gap-2">
-                      <p className="font-bold text-foreground text-sm sm:text-base">{hostel?.rooms?.length || 0}</p>
-                     {hostel.rooms.length>0? 
-                    <div className="flex items-center gap-2 text-green-700 text-sm ">
-                        <span className="">Rooms Available</span>
-                      </div>
-                      :
-                      <div className="flex items-center gap-2 text-red-700 text-sm ">
-                        <span className="">(No room availabe)</span>
-                      </div>
-                      }
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 text-accent shrink-0" />
-                  <div>
-                    <p className="text-xs sm:text-sm text-muted-foreground">Contact</p>
-                    <p className="font-bold text-foreground text-xs sm:text-sm">{hostel.phone}</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Price Display */}
-              <div className="bg-secondary rounded-lg p-3 sm:p-4 mb-3 sm:mb-4">
-                <p className="text-xs sm:text-sm text-muted-foreground mb-1">Starting from</p>
-                <p className="text-2xl sm:text-3xl font-bold text-accent">Rs {hostel.pricePerMonth}</p>
-                <p className="text-xs text-muted-foreground mt-1">per seat per month</p>
-              </div>
-
-              {/* Booking Button */}
-              {
-                hostel?.rooms?.length>0&& <Link href={`/book/${hostel.id}`}>
-                <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-bold py-2 sm:py-3 rounded-lg mb-2 sm:mb-3 text-sm sm:text-base">
-                  Book Now
-                </Button>
-              </Link>
-              }
-
-              {/* Contact Button */}
-              <Button
-                variant="outline"
-                className="w-full border-border hover:bg-secondary py-2 sm:py-3 rounded-lg bg-transparent text-sm sm:text-base"
-              >
-                Contact Hostel
-              </Button>
- 
-              
-            </div>
-
-            {/* Gender Info */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6">
-              <h3 className="text-lg font-bold text-primary mb-3">Hostel Type</h3>
-              <div className="inline-block bg-accent text-accent-foreground px-3 py-1 rounded-lg text-sm font-semibold capitalize">
-                For {hostel.gender}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      
-    </main>
-  )
+    <ClientComponent/>
+  );
 }

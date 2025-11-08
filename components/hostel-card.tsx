@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { MapPin, Users, DoorOpen } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { getImageUrl } from "@/lib/getImage"
 
 export default function HostelCard({ hostel }:any) {
   return (
@@ -9,7 +10,7 @@ export default function HostelCard({ hostel }:any) {
         {/* Image */}
         <div className="relative h-48 bg-muted overflow-hidden">
           <img
-            src={hostel.image || "/placeholder.svg"}
+            src={getImageUrl(hostel?.images[0])}
             alt={hostel.name}
             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
           />

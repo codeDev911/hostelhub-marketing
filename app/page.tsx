@@ -26,7 +26,7 @@ export default function Home() {
     <main className="min-h-screen bg-background flex flex-col">
 
       {/* Hero Section with Search */}
-      <HeroSearch onSearch={handleSearch} />
+      <HeroSearch  />
  
       {/* Why Choose Us Section */}
       <section className="py-12 sm:py-16 bg-background">
@@ -36,7 +36,7 @@ export default function Home() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8">
-            <div className="bg-white p-6 sm:p-8 border border-border">
+            <div className=" bg-primary-foreground p-6 sm:p-8 border border-border">
               <div className="w-12 h-12 bg-accent rounded-sm flex items-center justify-center mb-4">
                 <MapPin className="w-6 h-6 text-accent-foreground" />
               </div>
@@ -46,7 +46,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-white p-6 sm:p-8 border border-border">
+            <div className=" bg-primary-foreground p-6 sm:p-8 border border-border">
               <div className="w-12 h-12 bg-accent rounded-sm flex items-center justify-center mb-4">
                 <Users className="w-6 h-6 text-accent-foreground" />
               </div>
@@ -56,7 +56,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-white p-6 sm:p-8 border border-border">
+            <div className=" bg-primary-foreground p-6 sm:p-8 border border-border">
               <div className="w-12 h-12 bg-accent rounded-sm flex items-center justify-center mb-4">
                 <Star className="w-6 h-6 text-accent-foreground" />
               </div>
@@ -67,7 +67,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-12 sm:py-16 md:py-20 bg-white border-t border-border">
+      <section className="py-12 sm:py-16 md:py-20 bg-secondray border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div>
@@ -114,7 +114,7 @@ export default function Home() {
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link href="/hostel-owners">
-                  <button className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 py-3 rounded-sm font-bold text-base sm:text-lg transition-all">
+                  <button className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground px-6 sm:px-8 py-3 rounded-sm font-bold text-base sm:text-lg transition-all">
                     Learn More
                   </button>
                 </Link>

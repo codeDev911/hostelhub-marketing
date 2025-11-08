@@ -58,6 +58,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
+import { toast } from "sonner";
+import { Value } from "@radix-ui/react-select";
+import InvoiceCard from "@/components/InvoiceCard";
 
 export default function ClientComponent({ token }: any) {
   const [user, setUser]: any = useState();
@@ -112,6 +115,8 @@ export default function ClientComponent({ token }: any) {
 
         let data = await res.json();
         setUser(data);
+        console.log(data);
+        
         // set room details for
         setFeedBack({
           ...feedBack,
@@ -122,8 +127,13 @@ export default function ClientComponent({ token }: any) {
             roomType: data?.room?.roomType || "",
           },
         });
+
+        if(res.ok){
+        }else{
+          toast(" An error occured while fetching your profile")
+        }
       } catch (error) {
-        console.log(error);
+        toast(" An error occured while fetching your profile")
       } finally {
         setLoadingFetchingMe(false);
       }
@@ -222,13 +232,16 @@ export default function ClientComponent({ token }: any) {
 
       if (res.ok) {
         location.reload();
+      }else{
+        toast.error("An error occured")
       }
       }
       else{
-        alert("Please enter the details")
+        toast("Please enter the details")
       }
     } catch (error) {
       console.log(error);
+      toast.error("An error occured")
     } finally {
       setFeedbackSubmitLoading(false);
     }
@@ -244,14 +257,7 @@ export default function ClientComponent({ token }: any) {
             Student dashboard — quick overview of your stay and payments
           </p>
         </div>
-        <div className="flex items-center gap-3">
-          <Button variant="ghost" className="flex items-center gap-2">
-            <Bell className="w-4 h-4" /> Notifications
-          </Button>
-          <Button variant="secondary" className="flex items-center gap-2">
-            <Download className="w-4 h-4" /> Export
-          </Button>
-        </div>
+       
       </div>
 
       {/* Top row: Profile + Summary Cards */}
@@ -335,41 +341,26 @@ export default function ClientComponent({ token }: any) {
 
                         {key === "dateOfBirth" ? (
                           // ✅ Shadcn DatePicker for DOB
-                          <Popover>
-                            <PopoverTrigger asChild>
-                              <Button
-                                variant="outline"
-                                className="w-full justify-start text-left font-normal"
-                              >
-                                {form.dateOfBirth
-                                  ? new Date(
-                                      form.dateOfBirth
-                                    ).toLocaleDateString()
-                                  : "Pick a date"}
-                              </Button>
-                            </PopoverTrigger>
-                            <PopoverContent className="w-auto p-0">
-                              <Calendar
-                                mode="single"
-                                selected={
-                                  form.dateOfBirth
-                                    ? new Date(form.dateOfBirth)
-                                    : undefined
-                                }
-                                onSelect={(date: any) => {
+                        
+                              <input
+                                type="date"
+                                className="rounded-md border border-border p-2"
+                                value={new Date(form.dateOfBirth).toLocaleDateString('en-US',{
+                                  formatMatcher:"basic"
+                                })}                                  
+                                onChange={(date: any) => {
                                   if (date) {
                                     handleChange({
                                       target: {
                                         name: "dateOfBirth",
-                                        value: date.toISOString(),
+                                        value: new Date(date.target.value).toISOString(),
                                       },
                                     });
                                   }
                                 }}
                                 disabled={(locked as any)[key]}
                               />
-                            </PopoverContent>
-                          </Popover>
+                           
                         ) : (
                           // ✅ Default Input
                           <Input
@@ -794,6 +785,7 @@ export default function ClientComponent({ token }: any) {
                   <div className="font-medium">
                     {user?.invoices?.find((i: any) => i.status !== "paid")
                       ?.dueDate ?? "All clear"}
+                      
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
@@ -801,10 +793,10 @@ export default function ClientComponent({ token }: any) {
                     Last Payment
                   </div>
                   <div className="font-medium">
-                    {user.payments &&
-                    user?.payments[user?.payments?.length - 1]?.date
-                      ? "-"
-                      : ""}
+                   {user.payments &&
+                    new Date(user?.payments[user?.payments?.length - 1]?.paymentDate).toLocaleString("en-US",{
+                      day:"numeric",year:"numeric",month:"short"
+                    })}
                   </div>
                 </div>
               </div>
@@ -831,7 +823,11 @@ export default function ClientComponent({ token }: any) {
                 <div>
                   <div className="font-medium">Invoice {inv.id}</div>
                   <div className="text-muted-foreground text-xs">
-                    Due: {inv.dueDate} • Status: {inv.status}
+                    Due: {new Date(inv?.dueDate).toLocaleString("en-US",{
+                      month:"short",
+                      day:"numeric",
+                      year:"numeric"
+                    })} • Status: {inv.status}
                   </div>
                 </div>
                 <div className="text-right">
@@ -839,9 +835,20 @@ export default function ClientComponent({ token }: any) {
                     PKR {inv.amount.toLocaleString()}
                   </div>
                   <div className="text-xs mt-1">
-                    <Button variant="ghost" size="sm">
-                      View
-                    </Button>
+                     <Dialog>
+                      <DialogTrigger asChild>
+                      <Button variant={"ghost"} size={"sm"}>View</Button>
+                      </DialogTrigger>
+                      <DialogContent className="overflow-auto max-h-full bg-primary-foreground">
+
+                      <DialogHeader>
+                        <DialogTitle>Invoice</DialogTitle>
+                        <DialogDescription>Invoice details</DialogDescription>
+                      </DialogHeader>
+                      <InvoiceCard invoice={inv}/>
+                      </DialogContent>
+                      
+                     </Dialog>
                   </div>
                 </div>
               </div>
@@ -861,9 +868,13 @@ export default function ClientComponent({ token }: any) {
                 className="flex items-center justify-between p-3 bg-background rounded"
               >
                 <div>
-                  <div className="font-medium">Payment {p.id}</div>
+                  <div className="font-medium">Payment {p.status}</div>
                   <div className="text-muted-foreground text-xs">
-                    Method: {p.method} • Date: {p.date}
+                    Method: {p.paymentMethod} • Date: {new Date(p?.paymentDate).toLocaleString("en-US",{
+                      "day":"2-digit",
+                      month:"short",
+                      year:"numeric"
+                    })}
                   </div>
                 </div>
                 <div className="text-right font-medium">

@@ -17,9 +17,8 @@ export const metadata: Metadata = {
   description:
     "Book affordable hostels for students across Pakistan. Find the best accommodation near your university.",
    icons: {
-      icon:"/logo2.png",
+      icon:"/logo.png",
   },
-    generator: 'v0.app'
 }
 
 export default async function RootLayout({
@@ -32,13 +31,16 @@ export default async function RootLayout({
   
   
   return (
-    <html>
-      <body className={`font-sans antialiased`}>
+    <html> 
+        <body className={`font-sans antialiased`}>
+
+      {/* <ThemeProvider attribute={"class"}> */}
         <Header session={session}/>
         {children}
         <Toaster  position="top-center" closeButton/>
         <Analytics />
         <Footer/>
+      {/* </ThemeProvider> */}
       </body>
     </html>
   )
