@@ -64,7 +64,7 @@ function Header({session}:any) {
             </Link>
           </nav>
 
-          <div className="space-x-4">
+          <div className="space-x-4 flex items-center">
            <Button
            onClick={()=> router.push("/hostels")}
                 variant={"outline"}
@@ -183,7 +183,7 @@ function Header({session}:any) {
             >
               For Owners
             </Link>
-          {!session && !session.userId &&   <div className="border-t border-border pt-4 mt-4 ">
+          {session && session?.userId ?"":   <div className="border-t space-y-3 border-border pt-4 mt-4 ">
               <Link href="/student/login" onClick={() => setMobileMenuOpen(false)}>
                 <button className="w-full px-4 py-2 text-foreground hover:bg-secondary transition-colors font-medium border border-border rounded-sm">
                   Login
