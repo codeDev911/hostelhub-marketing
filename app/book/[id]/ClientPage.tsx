@@ -34,6 +34,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { getImageUrl } from "@/lib/getImage";
 
 interface Room {
   id: string;
@@ -264,7 +265,7 @@ export default function BookHostel({ session }: any) {
               <div className="bg-primary-foreground border border-border rounded-lg p-6 md:p-8 mb-8">
                 <div className="flex flex-col sm:flex-row gap-6 mb-6">
                   <img
-                    src={hostel.image || "/placeholder.svg"}
+                    src={getImageUrl(hostel.images[0]) || "/placeholder.svg"}
                     alt={hostel.name}
                     className="w-full sm:w-32 h-32 object-cover rounded-lg"
                   />
@@ -284,15 +285,17 @@ export default function BookHostel({ session }: any) {
                         <Phone className="w-4 h-4 text-accent" />
                         {hostel.phone}
                       </div>
-                      <div className="flex items-center gap-2">
+                    </div>
+                     <div className="grid md:grid-cols-3 grid-cols-2 gap-4 mt-3">
+                       <div className="flex items-center gap-2">
                         <Users2 className="w-4 h-4 text-accent" />
-                        {hostel?.students?.length || 0}
+                        Students : <strong>{hostel?.students?.length || 0}</strong>
                       </div>
                       <div className="flex items-center gap-2">
                         <DoorOpen className="w-4 h-4 text-accent" />
-                        {hostel?.rooms?.length || 0}
+                        Rooms : <strong>{hostel?.rooms?.length || 0}</strong>
                       </div>
-                    </div>
+                     </div>
                   </div>
                 </div>
 
@@ -500,12 +503,12 @@ export default function BookHostel({ session }: any) {
                               array: Room[]
                             ): JSX.Element[] => {
                               // Start a new slide every 6 items (3 cols × 2 rows)
-                              if (index % 6 === 0) {
+                              if (index % 4 === 0) {
                                 acc.push(
                                   <CarouselItem key={index}>
-                                    <div className="grid grid-cols-2 grid-rows-2 gap-2">
+                                    <div className="grid md:grid-cols-2 grid-cols-1 grid-rows-2 gap-2">
                                       {array
-                                        .slice(index, index + 6)
+                                        .slice(index, index + 4)
                                         .map((room: Room, subIndex: number) => (
                                           <button
                                             key={room.id}
@@ -607,7 +610,7 @@ export default function BookHostel({ session }: any) {
                                         ))}
                                     </div>
                                     <div className="w-full p-2 text-center text-sm  mt-2">
-                                      {(index/6) + 1} / {Math.floor(Number.parseInt(hostel?.rooms?.length) / 6 )+1}
+                                      {((index/4) + 1).toFixed(0)} / {Math.floor(Number.parseInt(hostel?.rooms?.length) / 4 )}
                                     </div>
                                   </CarouselItem>
                                 );
@@ -617,8 +620,8 @@ export default function BookHostel({ session }: any) {
                             []
                           )}
                         </CarouselContent>
-                        <CarouselPrevious className="max-md:hidden" type="button" />
-                        <CarouselNext className="max-md:hidden" type="button" />
+                        <CarouselPrevious className="mr-8 ml-8" type="button" />
+                        <CarouselNext className="mr-8 ml-8" type="button" />
                       </Carousel>
                       <br />
 

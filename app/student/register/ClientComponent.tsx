@@ -76,15 +76,15 @@ export default function ClientComponent() {
         body:JSON.stringify(formData)
       })
       
-         if(res.status == 403){
-         toast("User is already registered with the given email or phone")}
+        if(res.status == 403){
+        toast.error("User is already registered with the given email or phone")}
       if(res.ok){
-        
+          toast.success("Account created success!")
           location.assign("/student/login")
       }
     
     } catch (error) {
-      console.log(error);
+      toast.error("An error occured")
       setError("Unknown error occured"+error)
     }
     finally{

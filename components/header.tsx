@@ -72,16 +72,7 @@ function Header({session}:any) {
               >
                 <Search className="w-4 h-4" />
               </Button>
-            {
-              theme === "light"?
-            <Button onClick={()=>setTheme("dark")} variant={"outline"}>
-              <MoonIcon className="w-5 h-5"/>
-            </Button>
-              :
-            <Button onClick={()=>setTheme("light")} variant={"outline"}>
-              <SunIcon className="w-5 h-5"/>
-            </Button>
-            }
+             
 
           {session && session?.userId?
           <Popover>
@@ -189,7 +180,7 @@ function Header({session}:any) {
                   Login
                 </button>
               </Link>
-              <Link href="/student/register" onClick={() => setMobileMenuOpen(false)}>
+              <Link href="/student/register" className="mt-4" onClick={() => setMobileMenuOpen(false)}>
                 <button className="w-full px-4 py-2 bg-accent text-accent-foreground hover:bg-accent/90 transition-colors font-medium rounded-sm">
                   Sign Up
                 </button>

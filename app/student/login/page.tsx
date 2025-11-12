@@ -8,6 +8,7 @@ import Cookies from "js-cookie"
 import { Button } from "@/components/ui/button"
 import { Mail, Lock, AlertCircle } from "lucide-react"
 import { fetchApi } from "@/lib/api"
+import { toast } from "sonner"
 
 export default function StudentLogin() {
   const [email, setEmail] = useState("")
@@ -27,15 +28,20 @@ export default function StudentLogin() {
       body:JSON.stringify({email,password})
       })
 
+
+
       if(res.ok)
       {
         let data=await res.json()
         Cookies.set("token",data.token)
+        toast.success("Logged in success!")
         location.assign("/me")
-        
+      }else if(res.status == 401){
+         toast.error("Invalid credentials")
       }
     } catch (error) {
-        console.log(error);
+        toast.error("An error occured.")
+
         setError("Error occured")
     }finally{
       setLoading(false)

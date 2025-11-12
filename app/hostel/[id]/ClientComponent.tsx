@@ -253,7 +253,7 @@ export default function HostelDetailPage() {
                       if (index % 6 === 0) {
                         acc.push(
                           <CarouselItem key={index}>
-                            <div className="grid grid-cols-3 grid-rows-2 gap-2">
+                            <div className="grid md:grid-cols-3 grid-cols-2 grid-rows-2 gap-2">
                               {array
                                 .slice(index, index + 6)
                                 .map((room: Room, subIndex: number) => (
@@ -356,8 +356,8 @@ export default function HostelDetailPage() {
                     []
                   )}
                 </CarouselContent>
-                <CarouselPrevious className="max-md:hidden" />
-                <CarouselNext className="max-md:hidden" />
+                <CarouselPrevious className="mr-8 ml-8" />
+                <CarouselNext className="mr-8 ml-8" />
               </Carousel>
               </div>
 <br />
