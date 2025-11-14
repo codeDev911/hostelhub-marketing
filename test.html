@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partnership Agreement - HostelHub.pk</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 20px;
+    line-height: 1.6;
+    color: #000;
+    background-color: #fff;
+  }
+
+  #partnerSelect, #printButton {
+    margin-bottom: 30px;
+    padding: 6px;
+    font-size: 16px;
+  }
+
+  .agreement {
+    position: relative;
+    z-index: 1;
+    padding: 40px;
+    background-color: #fff;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+
+  /* Header: Logo + Title + Description */
+  .agreement-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  .agreement-header img {
+    max-width: 60px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+  }
+
+  .header-text {
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+  }
+
+  .header-text h1 {
+    font-size: 24px;
+    margin: 0;
+  }
+
+  .header-text h2 {
+    font-size: 16px;
+    margin: 5px 0 0 0;
+    font-weight: normal;
+  }
+
+  /* Watermark inside agreement */
+  .agreement::before {
+    content: "";
+    background-image: url('./public/logo.png'); /* replace with your logo */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 250px auto;
+    opacity: 0.05;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    z-index: 0;
+  }
+
+  .agreement * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .terms {
+    margin-top: 20px;
+  }
+
+  .terms li {
+    margin-bottom: 12px;
+  }
+
+  .signature-box {
+    margin-top: 35px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .signature {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .signature-line {
+    margin-top: 60px;
+    border-top: 1px solid #000;
+    width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .date-section, .witness-section {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+
+  .note {
+    margin-top: 20px;
+    font-size: 12px;
+  }
+
+  /* Print styles */
+  @media print {
+    body {
+      margin: 0;
+    }
+    #partnerSelect, #printButton {
+      display: none;
+    }
+    .agreement {
+      padding: 50px;
+      min-height: auto;
+    }
+  }
+</style>
+</head>
+<body>
+
+<select id="partnerSelect">
+  <option value="">-- Select Partner --</option>
+</select>
+
+<div class="agreement" id="agreementContent" style="display:none;">
+  <div class="agreement-header">
+    <img src="./public/logo.png" alt="HostelHub Logo"> <!-- Logo top-left -->
+    <div class="header-text">
+      <h1>Partnership Agreement</h1>
+      <h2>HostelHub.pk</h2>
+    </div>
+  </div>
+
+  <p>
+    This Partnership Agreement (“Agreement”) is made and entered into as of <span id="agreementDate"></span> by and between <i>hostelhub.pk</i>, hereinafter referred to as the “Company,” and the undersigned, hereinafter referred to as the “Partner.”
+  </p>
+
+    <p>
+    I, <strong id="partnerName"></strong>, holding the position of <strong id="partnerRole"></strong>, hereby agree to participate as a partner in <i>hostelhub.pk</i>. I acknowledge and accept the terms and conditions described below
+  </p>
+
+  <p class="section-title">Terms and Conditions:</p>
+  <ol class="terms">
+    <li><strong>Partnership Participation:</strong> The Partner agrees to contribute their skills, expertise, and efforts to the growth and development of <i>hostelhub.pk</i>.</li>
+    <li><strong>Revenue Distribution:</strong> No financial compensation shall be provided until <i>hostelhub.pk</i> begins generating revenue. After revenue generation, all operational expenses—including, but not limited to, database, domain, hosting, cloud services, and security—shall be deducted from the gross revenue.</li>
+    <li><strong>Profit Sharing:</strong> The remaining revenue after expenses will be shared among partners based on percentages determined at a later date by the CEO and mutually agreed upon by the partners.</li>
+    <li><strong>Decision Making:</strong> The Partner agrees to follow the strategic and operational decisions made by the CEO, ensuring smooth management and growth of the Company.</li>
+    <li><strong>Confidentiality:</strong> The Partner shall maintain the confidentiality of all company operations, data, and financial information.</li>
+    <li><strong>Termination:</strong> This Agreement remains valid until terminated by mutual written consent of the CEO and the Partner.</li>
+    <li><strong>Acceptance of Terms:</strong> By signing this Agreement, the Partner acknowledges that they have read, understood, and accepted all terms described herein.</li>
+  </ol>
+
+  <div class="signature-box">
+    <div class="signature">
+      <div class="signature-line"></div>
+      <p id="partnerSignature"></p>
+    </div>
+    <div class="signature">
+      <div class="signature-line"></div>
+      <p>Afnan Ahad (CEO)</p>
+    </div>
+  </div>
+
+  <div class="date-section">
+    Date: <span id="agreementDatePrint"></span>
+  </div>
+ 
+</div>
+
+<button id="printButton" onclick="window.print()">Print Agreement</button>
+
+<script>
+  const partners = [
+    { "role":"Founder & CEO", "name":"Afnan Ahad" },
+    { "role":"Sales Manager", "name":"Saifullah Khan" },
+    { "role":"Marketing Influencer", "name":"Umer Khan" },
+    { "role":"Hiring Manager", "name":"Yaseen Khan" }
+  ];
+
+  const select = document.getElementById('partnerSelect');
+  const agreementDiv = document.getElementById('agreementContent');
+
+  // Set current date
+  const today = new Date();
+  const formattedDate = today.toLocaleDateString();
+  document.getElementById('agreementDate').textContent = formattedDate;
+  document.getElementById('agreementDatePrint').textContent = formattedDate;
+
+  partners.forEach((p, index) => {
+    const option = document.createElement('option');
+    option.value = index;
+    option.textContent = p.name + " - " + p.role;
+    select.appendChild(option);
+  });
+
+  select.addEventListener('change', () => {
+    const index = select.value;
+    if(index !== "") {
+      const partner = partners[index];
+      document.getElementById('partnerName').textContent = partner.name;
+      document.getElementById('partnerRole').textContent = partner.role;
+      document.getElementById('partnerSignature').textContent = partner.name+` (${partner.role})`;
+      agreementDiv.style.display = 'block';
+    } else {
+      agreementDiv.style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>

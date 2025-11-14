@@ -1,9 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { BarChart3, Users, Building2, TrendingUp, Shield, Zap } from "lucide-react"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
+import { BarChart3, Users, Building2, TrendingUp, Shield, Zap } from 'lucide-react' 
+import Image from "next/image"
 
 export default function HostelOwnersPage() {
   return (
@@ -17,6 +16,10 @@ export default function HostelOwnersPage() {
           <p className="text-lg sm:text-xl text-white/90 mb-8">
             Connect with thousands of students online. Manage your hostel effortlessly.
           </p>
+          <div className="relative md:h-[90vh]  h-[47vh]">
+            <Image src={"/dashboard.png"} width={60} height={60} className="absolute w-[70%] border-2 border-border  flex cover shadow-xl rounded-2xl"  alt="img"/>
+            <Image src={"/payments.png"} width={60} height={60} className="absolute md:left-70 left-35 border-2 border-border top-20 w-[70%]  flex cover shadow-xl rounded-2xl"  alt="img"/>
+          </div>
           <Link href="/hostel-registration">
             <button className="bg-accent hover:bg-accent/90 text-accent-foreground px-6 sm:px-8 py-3 rounded-sm font-bold text-base sm:text-lg transition-all">
               Register Your Hostel
@@ -74,15 +77,7 @@ export default function HostelOwnersPage() {
               </p>
             </div>
 
-            {/* Feature 5 */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-6 sm:p-8 hover:shadow-lg transition-shadow">
-              <Shield className="w-12 h-12 text-accent mb-4" />
-              <h3 className="text-xl sm:text-2xl font-bold text-primary mb-3">Secure Payment Processing</h3>
-              <p className="text-foreground text-sm sm:text-base leading-relaxed">
-                Securely process payments, track payment status, generate invoices, and manage financial records.
-                Built-in payment security ensures both you and your students have a safe transaction experience.
-              </p>
-            </div>
+             
 
             {/* Feature 6 */}
             <div className="bg-primary-foreground border border-border rounded-lg p-6 sm:p-8 hover:shadow-lg transition-shadow">
@@ -92,6 +87,275 @@ export default function HostelOwnersPage() {
                 Get your hostel online in minutes with our simple registration process. No technical knowledge required
                 - just fill in your hostel details and start receiving bookings right away.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 sm:py-16 md:py-20 bg-secondary">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 text-center">
+            See HostelHub in Action
+          </h2>
+          <p className="text-center text-foreground mb-12 sm:mb-16 max-w-2xl mx-auto">
+            Explore how our powerful features make hostel management simple, efficient, and profitable.
+          </p>
+
+          {/* Mockup 1: Dashboard */}
+          <div className="mb-16 sm:mb-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div>
+                <h3 className="text-2xl sm:text-3xl font-bold text-primary mb-4">Central Dashboard Overview</h3>
+                <p className="text-foreground mb-4 leading-relaxed">
+                  Get a complete overview of your hostel at a glance. Monitor total students, available seats, room
+                  occupancy, and revenue in real-time. Our smart dashboard highlights key metrics and provides
+                  actionable insights to help you make quick business decisions.
+                </p>
+                <ul className="space-y-2 text-foreground">
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Real-time occupancy tracking</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Revenue analytics at a glance</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Recent bookings and activity feed</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="rounded-lg overflow-hidden shadow-lg border border-border">
+                <Image
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dashboard.PNG-ZGNMOviiRQLz6KLf4eaAt2QU9soH03.png"
+                  alt="Dashboard Overview"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Mockup 2: Student Management */}
+          <div className="mb-16 sm:mb-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div className="rounded-lg overflow-hidden shadow-lg border border-border order-2 lg:order-1">
+                <Image
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/students.PNG-6Lz4jQyNcJRWRCXTKdUaGOQNk6tYF3.png"
+                  alt="Student Management"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto"
+                />
+              </div>
+              <div className="order-1 lg:order-2">
+                <h3 className="text-2xl sm:text-3xl font-bold text-primary mb-4">Complete Student Management</h3>
+                <p className="text-foreground mb-4 leading-relaxed">
+                  Manage all your students efficiently with our comprehensive student management system. View complete
+                  student profiles, track payment status, filter by gender and payment status, and maintain organized
+                  records of all your residents.
+                </p>
+                <ul className="space-y-2 text-foreground">
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Advanced search and filtering</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Track payment status instantly</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Detailed student contact information</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Mockup 3: Room Management */}
+          <div className="mb-16 sm:mb-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div>
+                <h3 className="text-2xl sm:text-3xl font-bold text-primary mb-4">Smart Room Management</h3>
+                <p className="text-foreground mb-4 leading-relaxed">
+                  Control all your rooms with intelligent search and filtering options. Find rooms by number, type,
+                  floor, and available seats. Set dynamic pricing, view real-time availability, and manage room
+                  occupancy effortlessly with our intuitive interface.
+                </p>
+                <ul className="space-y-2 text-foreground">
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Smart search with advanced filters</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Real-time availability tracking</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Dynamic pricing per room</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="rounded-lg overflow-hidden shadow-lg border border-border">
+                <Image
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/room%20managnment.PNG-o9tRGQVkZD4ORMUqF032Ms748V8adP.png"
+                  alt="Room Management"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Mockup 4: Payments & Invoices */}
+          <div className="mb-16 sm:mb-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div className="rounded-lg overflow-hidden shadow-lg border border-border order-2 lg:order-1">
+                <Image
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/payments.PNG-XaqgseQhBYjG7XgvfGq8IEieLbs7hw.png"
+                  alt="Payments and Invoices"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto"
+                />
+              </div>
+              <div className="order-1 lg:order-2">
+                <h3 className="text-2xl sm:text-3xl font-bold text-primary mb-4">Payments & Automated Invoicing</h3>
+                <p className="text-foreground mb-4 leading-relaxed">
+                  Streamline your payment collection with automated monthly invoicing. Track paid, pending, and overdue
+                  payments instantly. Export payment data for accounting and maintain complete financial records without
+                  manual effort.
+                </p>
+                <ul className="space-y-2 text-foreground">
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Automated monthly invoicing</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Payment status tracking</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Export payments for accounting</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Mockup 5: Feedback & Complaints */}
+          <div className="mb-16 sm:mb-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div>
+                <h3 className="text-2xl sm:text-3xl font-bold text-primary mb-4">Feedback & Complaint Management</h3>
+                <p className="text-foreground mb-4 leading-relaxed">
+                  Track and resolve student complaints efficiently. Categorize issues by priority and status, view
+                  detailed complaint history linked to specific rooms and students, and get AI-powered insights to
+                  improve your service quality.
+                </p>
+                <ul className="space-y-2 text-foreground">
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Priority-based complaint tracking</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Resolution status monitoring</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>AI-powered improvement suggestions</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="rounded-lg overflow-hidden shadow-lg border border-border">
+                <Image
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/feedbacks-complaint.PNG-B90h4k0XTooQowT5p0KkfCRz5zxudS.png"
+                  alt="Complaint Management"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Mockup 6: Feedback Analytics */}
+          <div className="mb-16 sm:mb-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div className="rounded-lg overflow-hidden shadow-lg border border-border order-2 lg:order-1">
+                <Image
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/feedbacks.PNG-PxJMH2RZc6TksZnKHJtoIueWTN5PNg.png"
+                  alt="Feedback Analytics"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto"
+                />
+              </div>
+              <div className="order-1 lg:order-2">
+                <h3 className="text-2xl sm:text-3xl font-bold text-primary mb-4">Feedback Analytics & Insights</h3>
+                <p className="text-foreground mb-4 leading-relaxed">
+                  Understand your customer satisfaction with comprehensive feedback analytics. Track average ratings,
+                  customer happiness percentage, complaint breakdown by priority, and get AI-powered recommendations to
+                  enhance service quality.
+                </p>
+                <ul className="space-y-2 text-foreground">
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Customer satisfaction metrics</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Priority breakdown analysis</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Smart recommendations</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Mockup 7: Invoice Details */}
+          <div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div>
+                <h3 className="text-2xl sm:text-3xl font-bold text-primary mb-4">Invoice Generation & Management</h3>
+                <p className="text-foreground mb-4 leading-relaxed">
+                  Generate professional invoices automatically for each student. View complete billing details, payment
+                  receipts, and transaction history. Download and print invoices for your records with a single click.
+                </p>
+                <ul className="space-y-2 text-foreground">
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Professional invoice generation</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Download and print invoices</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-accent font-bold mr-3">✓</span>
+                    <span>Complete transaction history</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="rounded-lg overflow-hidden shadow-lg border border-border">
+                <Image
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/invoice-details.PNG-q2aHgYhrfemL7AlF8IZ5dLULVJHylp.png"
+                  alt="Invoice Details"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto"
+                />
+              </div>
             </div>
           </div>
         </div>

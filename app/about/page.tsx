@@ -1,5 +1,30 @@
-import Header from "@/components/header"
-import Footer from "@/components/footer"
+
+const team = [
+  {
+    "role":"Founder & CEO",
+    "name":"Afnan Ahad",
+    "bio":"A full stack developer and Comupter engineer.",
+    "image":""
+  },
+  {
+    "role":"Sales Manager",
+    "name":"Saifullah Khan",
+    "bio":"Expert in accountent and finance.",
+    "image":""
+  },
+  {
+    "role":"Marketing Influencer",
+    "name":"Umer khan",
+    "bio":"Marketing since 2018 with massive investment.", 
+    "image":""
+  },
+  {
+    "role":"Hiring Manager",
+    "name":"Yaseen Khan",
+    "bio":"Our hiring process is at top.",
+    "image":""
+  },
+]
 
 export default function About() {
   return (
@@ -58,19 +83,19 @@ export default function About() {
 
           {/* Stats Section */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16">
-            <div className="bg-secondary p-6 sm:p-8 rounded-sm text-center">
+            <div className="bg-primary-foreground border border-border p-6 sm:p-8 rounded-sm text-center">
               <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">500+</div>
               <p className="text-foreground/70 text-sm">Hostels Listed</p>
             </div>
-            <div className="bg-secondary p-6 sm:p-8 rounded-sm text-center">
+            <div className="bg-primary-foreground border border-border p-6 sm:p-8 rounded-sm text-center">
               <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">50K+</div>
               <p className="text-foreground/70 text-sm">Happy Students</p>
             </div>
-            <div className="bg-secondary p-6 sm:p-8 rounded-sm text-center">
+            <div className="bg-primary-foreground border border-border p-6 sm:p-8 rounded-sm text-center">
               <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">20+</div>
               <p className="text-foreground/70 text-sm">Cities Covered</p>
             </div>
-            <div className="bg-secondary p-6 sm:p-8 rounded-sm text-center">
+            <div className="bg-primary-foreground border border-border p-6 sm:p-8 rounded-sm text-center">
               <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">4.8★</div>
               <p className="text-foreground/70 text-sm">Average Rating</p>
             </div>
@@ -84,7 +109,19 @@ export default function About() {
               challenges of finding accommodation. We're committed to making your hostel search experience smooth and
               hassle-free.
             </p>
-            <p className="text-foreground/70 leading-relaxed">
+
+            <div className="grid md:grid-cols-4 gap-4">
+              {team.map((member:any)=>(
+              <div className="p-2 bg-accent/10 flex flex-col text-center rounded-md border border-accent/30">
+                  <h3 className="text-base text-primary font-bold">{member.name}</h3>
+                  <p className="text-sm  text-secondray">{member.role}</p>
+                  <p className="text-xs mt-2 text-secondray">{member.bio}</p>
+              </div>
+            ))}
+            </div>
+
+
+            <p className="text-foreground/70 leading-relaxed mt-4">
               Have questions? Feel free to{" "}
               <a href="/contact" className="text-accent font-semibold hover:underline">
                 contact us
