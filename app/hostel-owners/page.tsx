@@ -1,8 +1,18 @@
-"use client"
 
 import Link from "next/link"
 import { BarChart3, Users, Building2, TrendingUp, Shield, Zap } from 'lucide-react' 
 import Image from "next/image"
+
+
+export function generateMetadata(){
+
+  return {
+    title: "Bring your hostel or apartment online with us & grow you business online",
+    description: "Connect with thousands of students online. Manage your hostel effortlessly.",
+    keywords:"pakistan, lahore, islamabad,contact, help hostelhub,hostel registrations, how to register hosel, hostel hub hostel regestration, about hostelhub, registration form, help center, faisalabad, di khan, gh khan, peshawar , multan, karachi, karrak, kohat, cantt, ai, pakistan, hostels, students, apartments"
+  }
+}
+
 
 export default function HostelOwnersPage() {
   return (

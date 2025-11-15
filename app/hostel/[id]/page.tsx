@@ -2,13 +2,14 @@ import { fetchApi } from "@/lib/api";
 import ClientComponent from "./ClientComponent";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getImageUrl } from "@/lib/getImage";
 
 interface HostelMeta {
   title: string;
   description: string;
   keywords: string;
   reviews: number;
-  image: string;
+  images: any;
   location: string;
   phone: string;
   pricePerMonth: number;
@@ -49,7 +50,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     "@type": "LodgingBusiness",
     name: hostel.title,
     description: hostel.description,
-    image: hostel.image,
+    image: getImageUrl(hostel.images[0]),
     telephone: hostel.phone,
     address: {
       "@type": "PostalAddress",
@@ -73,14 +74,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: hostel.title,
       description: hostel.description,
       url: `${process.env.NEXT_PUBLIC_BASE_URL}/hostel/${id}`,
-      siteName: "HostelHub",
-      images: [
-        {
-          url: hostel.image,
+      siteName: "HostelHub", 
+      images:hostel?.images?.filter((i:any)=>{
+       return {
+         url:getImageUrl(i),
           width: 800,
           height: 600,
-        },
-      ],
+       }
+      })
+      ,
       type: "website",
       locale: "en_PK",
     },
@@ -88,11 +90,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: hostel.title,
       description: hostel.description,
-      images: [hostel.image],
+      images: [hostel?.images?.filter((i:any)=>getImageUrl(i))],
     },
     metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://hostelhub.pk"),
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/hostel/${id}`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL||"https://hostelhub.pk"}/hostel/${id}`,
     },
     robots: {
       index: true,

@@ -1,5 +1,13 @@
-import Header from "@/components/header"
-import Footer from "@/components/footer"
+
+
+export function generateMetadata(){
+
+  return {
+    title: "Frequently Asked Questions (FAQs)",
+    description: "Find answers to common questions about HostelHub and our services.",
+    keywords:"pakistan, lahore, islamabad,contact, help hostelhub, faisalabad, di khan, gh khan, peshawar , multan, karachi, karrak, kohat, cantt, ai, pakistan, hostels, students, apartments"
+  }
+}
 
 export default function FAQ() {
   const faqs = [

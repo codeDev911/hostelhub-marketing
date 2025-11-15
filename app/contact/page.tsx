@@ -1,7 +1,13 @@
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import { Mail, Phone, MapPin } from "lucide-react"
 
+export function generateMetadata(){
+
+  return {
+    title: "Contact us",
+    description: "Have questions or feedback? We'd love to hear from you. Get in touch with our team.",
+    keywords:"pakistan, lahore, islamabad,contact, help hostelhub, faisalabad, di khan, gh khan, peshawar , multan, karachi, karrak, kohat, cantt, ai, pakistan, hostels, students, apartments"
+  }
+}
 export default function Contact() {
   return (
     <>

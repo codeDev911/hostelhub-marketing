@@ -4,9 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, Loader2 } from "lucide-react"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
+import { ArrowLeft, Loader2 } from "lucide-react" 
 import { toast } from "sonner"
 import { fetchApi } from "@/lib/api"
 
@@ -140,8 +138,8 @@ export default function HostelRegistrationPage() {
                   className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:border-accent transition-colors"
                 >
                   <option value="hostel">Hostel</option>
-                  <option value="shared">Shared Housing</option>
-                  <option value="apartment">Apartment</option>
+                  {/* <option value="shared">Shared Housing</option>
+                  <option value="apartment">Apartment</option> */}
                 </select>
               </div>
 

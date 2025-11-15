@@ -1,5 +1,13 @@
-import Header from "@/components/header"
-import Footer from "@/components/footer"
+
+
+export function generateMetadata(){
+
+  return {
+    title: "Privacy polices | Hostelhub",
+    description: "Privacy polices hostelhubs",
+    keywords:"pakistan, lahore, islamabad,contact, help hostelhub, faisalabad, di khan, gh khan, peshawar , multan, karachi, karrak, kohat, cantt, ai, pakistan, hostels, students, appartments"
+  }
+}
 
 export default function Privacy() {
   return (

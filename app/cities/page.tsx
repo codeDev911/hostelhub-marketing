@@ -1,6 +1,15 @@
 import Link from "next/link"
 import Image from "next/image"
 
+export function generateMetadata(){
+
+  return {
+    title: "Hostels by cities",
+    description: "Explore student hostels across major cities in Pakistan.",
+    keywords:"pakistan, lahore, islamabad, faisalabad, di khan, gh khan, peshawar , multan, karachi, karrak, kohat, cantt, ai, pakistan, hostels, students, apartments"
+  }
+}
+
 export default function Cities() {
   const cities = [ 
     { name: "Peshawar", image:"https://res.cloudinary.com/www-travelpakistani-com/image/upload/v1680266483/bala_hisar_fort.jpg", hostels: 38, description: "Northern city with unique cultural experience" }, 

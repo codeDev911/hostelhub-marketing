@@ -1,4 +1,15 @@
 
+
+export function generateMetadata(){
+
+  return {
+    title: "About hostelhub",
+    description: "HostelHub is dedicated to making hostel accommodation accessible and affordable for every student in Pakistan. We believe that finding a safe place to stay shouldn't be complicated or stressful.",
+    keywords:"about, hostelhub, pakistan, hostels, students, study, about hosetlhub, ai",
+    author:"Hostelhub"
+  }
+}
+
 const team = [
   {
     "role":"Founder & CEO",

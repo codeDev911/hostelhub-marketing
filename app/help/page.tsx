@@ -1,5 +1,12 @@
-import Header from "@/components/header"
-import Footer from "@/components/footer"
+
+export function generateMetadata(){
+
+  return {
+    title: "Help center",
+    description: "Get help with common issues and learn how to use HostelHub..",
+    keywords:"pakistan, lahore, islamabad,contact, help hostelhub, help center, faisalabad, di khan, gh khan, peshawar , multan, karachi, karrak, kohat, cantt, ai, pakistan, hostels, students, appartments"
+  }
+}
 
 export default function Help() {
   return (
