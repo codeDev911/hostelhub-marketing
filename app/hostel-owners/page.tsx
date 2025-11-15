@@ -10,15 +10,15 @@ export default function HostelOwnersPage() {
       
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary to-primary/80 text-white py-12 sm:py-16 md:py-20">
+      <section className="bg-linear-to-r from-primary to-primary/80 text-white py-12 sm:py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Grow Your Hostel Business</h1>
           <p className="text-lg sm:text-xl text-white/90 mb-8">
             Connect with thousands of students online. Manage your hostel effortlessly.
           </p>
           <div className="relative md:h-[90vh]  h-[47vh]">
-            <Image src={"/dashboard.png"} width={60} height={60} className="absolute w-[70%] border-2 border-border  flex cover shadow-xl rounded-2xl"  alt="img"/>
-            <Image src={"/payments.png"} width={60} height={60} className="absolute md:left-70 left-35 border-2 border-border top-20 w-[70%]  flex cover shadow-xl rounded-2xl"  alt="img"/>
+            <Image src={"dashboard.png"} width={60} height={60} className="absolute w-[70%] border-2 border-border  flex cover shadow-xl rounded-2xl"  alt="img"/>
+            <Image src={"payments.png"} width={60} height={60} className="absolute md:left-70 left-35 border-2 border-border top-20 w-[70%]  flex cover shadow-xl rounded-2xl"  alt="img"/>
           </div>
           <Link href="/hostel-registration">
             <button className="bg-accent hover:bg-accent/90 text-accent-foreground px-6 sm:px-8 py-3 rounded-sm font-bold text-base sm:text-lg transition-all">

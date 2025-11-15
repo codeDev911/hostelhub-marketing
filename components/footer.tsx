@@ -93,7 +93,7 @@ function Footer() {
               <strong>Email:</strong> info@hostelhub.pk
             </p>
             <p className="text-sm text-primary opacity-80">
-              <strong>Phone:</strong> +92-300-1234567
+              <strong>Phone:</strong> +923051767579
             </p>
           </div>
         </div>
@@ -102,7 +102,6 @@ function Footer() {
         <div className="border-t border-primary-foreground/20 pt-8">
           <div className="grid text-primary grid-cols-1 sm:grid-cols-2 gap-4 text-sm opacity-80">
             <p>&copy; 2025 HostelHub. All rights reserved.</p>
-            <p className="text-right">Made with care for Pakistani students</p>
           </div>
         </div>
       </div>

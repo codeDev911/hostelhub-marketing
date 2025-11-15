@@ -147,7 +147,7 @@ export default function HeroSearch() {
               <Button
                 onClick={handleSearch}
                 disabled={!city}
-                className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-bold py-3 md:py-4 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base shadow-lg hover:shadow-xl"
+                className="w-full flex-1 md:h-14 sm:h-11 md:mb-1 bg-accent hover:bg-accent/90 text-accent-foreground font-bold py-3 md:py-4 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base shadow-lg hover:shadow-xl"
               >
                 <Search className="w-5 h-5 mr-2" />
                 Search

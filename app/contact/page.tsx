@@ -75,16 +75,15 @@ export default function Contact() {
                   <Phone className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="font-semibold text-foreground mb-1">Phone</h3>
-                    <p className="text-foreground/70">+92-300-1234567</p>
-                    <p className="text-foreground/70">+92-21-1234567</p>
+                    <p className="text-foreground/70">+923051767579</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
                   <MapPin className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="font-semibold text-foreground mb-1">Office</h3>
-                    <p className="text-foreground/70">HostelHub Headquarters</p>
-                    <p className="text-foreground/70">Lahore, Pakistan</p>
+                    <p className="text-foreground/70">No office</p>
+                    <p className="text-foreground/70">Remote workers</p>
                   </div>
                 </div>
               </div>

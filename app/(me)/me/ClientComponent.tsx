@@ -68,17 +68,12 @@ export default function ClientComponent({ token }: any) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isComplaintBoxOpen, setIsComplaintBoxOpen] = useState(false);
   const [form, setForm] = React.useState({
-    firstName: "",
-    lastName: "",
-    phone: "",
-    cnnic: "",
     dateOfBirth: "",
     bloodGroup: "",
-    address: "",
     city: "",
     state: "",
+    fatherCnic:"",
     postalCode: 0,
-    fatherName: "",
     fatherPhone: "",
     fatherOccupation: "",
   });
@@ -164,7 +159,8 @@ export default function ClientComponent({ token }: any) {
     0
   );
   const totalPaid = user?.payments?.reduce((t: any, p: any) => t + p.amount, 0);
-  const totalDue = totalInvoices - totalPaid;
+  const refunded = user?.payments?.filter((i:any)=>i.status == "refunded")?.reduce((t:any,p:any)=>t + p.amount,0)
+  const totalDue = totalInvoices - totalPaid + refunded;
   const stayDays = Math.max(
     0,
     Math.floor(
@@ -177,12 +173,22 @@ export default function ClientComponent({ token }: any) {
   const handleChange = (e: any) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  const locked = {
-    email: true,
-    cnic: true,
-    fatherCnic: true,
-    gender: true,
+  let locked :any = {}
+
+  if(!user.fatherCnic){
+    locked = {
+      email: true,
+      cnic: true,
+      gender: true,
   };
+  }else{
+    locked = {
+      email: true,
+      cnic: true,
+      fatherCnic: true,
+      gender: true,
+  };
+  }
 
   function RatingStars({ rating }: { rating: number }) {
     return (
@@ -335,11 +341,18 @@ export default function ClientComponent({ token }: any) {
                   <div className="grid gap-4 py-4 max-h-[70vh] overflow-y-auto">
                     {Object.keys(form).map((key) => (
                       <div className="grid gap-2" key={key}>
-                        <Label className="capitalize" htmlFor={key}>
+                        {
+                            key == "fatherCnic" && user.fatherCnic ?"":
+                          <Label className="capitalize" htmlFor={key}>
                           {key}
                         </Label>
 
-                        {key === "dateOfBirth" ? (
+                        }
+
+                        {
+                        
+                        key == "fatherCnic" && user.fatherCnic ?"":
+                        key === "dateOfBirth" ? (
                           // ✅ Shadcn DatePicker for DOB
                         
                               <input
@@ -394,17 +407,12 @@ export default function ClientComponent({ token }: any) {
                 className="flex-1"
                 onClick={() => {
                   setForm({
-                    firstName: user?.firstName || "",
-                    lastName: user?.lastName,
-                    phone: user?.phone,
                     dateOfBirth: user?.dateOfBirth,
                     bloodGroup: user?.bloodGroup,
-                    address: user?.address,
-                    cnnic: user?.cnnic,
+                    fatherCnic: user?.fatherCnic,
                     city: user?.city,
                     state: user?.state,
                     postalCode: user?.postalCode,
-                    fatherName: user?.fatherName,
                     fatherPhone: user?.fatherPhone,
                     fatherOccupation: user?.fatherOccupation,
                   });
@@ -516,7 +524,7 @@ export default function ClientComponent({ token }: any) {
                 </div>
 
                 <Dialog open={seeFeedbackBox}>
-                  <DialogContent>
+                  <DialogContent className="max-h-full overflow-auto">
                     <DialogHeader>
                       <DialogTitle>Your feedbacks</DialogTitle>
                       <DialogDescription>
@@ -783,7 +791,7 @@ export default function ClientComponent({ token }: any) {
                 <div className="flex items-center justify-between">
                   <div className="text-sm text-muted-foreground">Next Due</div>
                   <div className="font-medium">
-                    {user?.invoices?.find((i: any) => i.status !== "paid")
+                    {user?.invoices?.find((i: any) => i.status !== "paid" && i.status !== 'refunded')
                       ?.dueDate ?? "All clear"}
                       
                   </div>

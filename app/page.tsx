@@ -3,25 +3,10 @@
 import { useState } from "react"
 import Link from "next/link"
 import { MapPin, Users, Star, ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import HeroSearch from "@/components/hero-search"
-import HostelCard from "@/components/hostel-card"
-import { mockHostels, mockCities } from "@/lib/mock-data"
+import HeroSearch from "@/components/hero-search" 
 
 export default function Home() {
-  const [searchResults, setSearchResults] = useState(null)
-
-  const handleSearch = (results:any) => {
-    setSearchResults(results)
-  }
-
-  const featuredHostels = mockHostels.slice(0, 6)
-
-  const hostelsByCity = mockCities.map((city) => ({
-    ...city,
-    hostels: mockHostels.filter((hostel) => hostel.city === city.name),
-  }))
-
+ 
   return (
     <main className="min-h-screen bg-background flex flex-col">
 

@@ -73,7 +73,7 @@ export default function Privacy() {
               <p>If you have any questions about this Privacy Policy, please contact us at:</p>
               <div className="mt-4 p-4 bg-secondary rounded-sm">
                 <p className="font-semibold text-foreground">Email: privacy@hostelhub.pk</p>
-                <p className="font-semibold text-foreground">Phone: +92-300-1234567</p>
+                <p className="font-semibold text-foreground">Phone: +923051767579</p>
               </div>
             </section>
           </div>

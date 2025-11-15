@@ -36,9 +36,9 @@ function Header({session}:any) {
   return (
     <header className="sticky top-0 z-50 bg-primary-foreground border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex w-full items-center justify-between gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity flex-shrink-0">
+          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity shrink-0">
             <div className="w-6.5 h-6.5 bg-white  flex rounded-md items-center justify-center">
               <img src="/logo.png" className="w-full h-full" alt="Logo" />
             </div>
@@ -46,7 +46,7 @@ function Header({session}:any) {
           </Link>
 
           {/* Desktop Navigation & Search */}
-          <nav className="hidden md:flex items-center gap-8 grow">
+          <div className="hidden  md:flex items-center gap-8 ">
             <Link href="/" className="text-foreground hover:text-accent transition-colors font-medium">
               Home
             </Link>
@@ -62,7 +62,7 @@ function Header({session}:any) {
             <Link href="/hostel-owners" className="text-foreground hover:text-accent transition-colors font-medium">
               For Owners
             </Link>
-          </nav>
+          </div>
 
           <div className="space-x-4 flex items-center">
            <Button

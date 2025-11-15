@@ -14,9 +14,9 @@ export default function HostelCard({ hostel }:any) {
             alt={hostel.name}
             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
           />
-          <div className="absolute top-3 right-3 bg-accent text-accent-foreground px-3 py-1 rounded-sm text-sm font-semibold">
+          {/* <div className="absolute top-3 right-3 bg-accent text-accent-foreground px-3 py-1 rounded-sm text-sm font-semibold">
             {hostel.rating} ★
-          </div>
+          </div> */}
         </div>
 
         {/* Content */}
@@ -37,7 +37,7 @@ export default function HostelCard({ hostel }:any) {
             <div className="flex items-center text-sm">
               <Users className="w-4 h-4 mr-2 text-accent" />
               <span className="text-foreground font-semibold">
-                {hostel?.students?.length} 
+                {hostel?.students?.length} students
               </span>
             </div>
             <div className="flex items-center text-sm">

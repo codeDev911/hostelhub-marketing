@@ -16,9 +16,6 @@ export const metadata: Metadata = {
   title: "Find Your Perfect Hostel in Pakistan - HostelHub",
   description:
     "Book affordable hostels for students across Pakistan. Find the best accommodation near your university.",
-   icons: {
-      icon:"/logo.png",
-  },
 }
 
 export default async function RootLayout({

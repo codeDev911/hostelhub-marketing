@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Filter, Loader2 } from "lucide-react";
+import { Filter, Loader2, SearchIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import HostelCard from "@/components/hostel-card";
 import { fetchApi } from "@/lib/api";
@@ -18,6 +18,7 @@ import { SelectItemIndicator } from "@radix-ui/react-select";
 export default function HostelsPage() {
   const searchParams = useSearchParams();
   const [city,setCity] = useState(searchParams.get("city") || "")
+  const [name,setName] = useState(searchParams.get("name") || "")
   const [area,setArea] = useState(searchParams.get("area") || "")
   const [gender,setGender] = useState(searchParams.get("gender") || "all");
   const [loading, setLoading] = useState(true);
@@ -40,6 +41,15 @@ export default function HostelsPage() {
 
     if (city) {
       results = results.filter((h: any) => h.city === city);
+    }
+
+    if (name) {
+      const queryWords = name.toLowerCase().split(" ");
+
+      results = results.filter((h:any) => {
+        const hostelName = h.name.toLowerCase();
+        return queryWords.every(word => hostelName.includes(word));
+      });
     }
 
     if (area) {
@@ -192,7 +202,15 @@ export default function HostelsPage() {
                 <CardContent className="grid md:grid-cols-5 gap-4">
                      <div className="space-y-2 w-full md:col-span-3">
                       <Label htmlFor="search">Search  </Label>
-                      <Input type="text"  placeholder="Search hostels by name"/>
+                   <form onSubmit={(e)=>{
+                    e.preventDefault()
+                    location.assign(`/hostels?city=${city||""}&area${area||""}&name=${name||""}`)
+                   }} className="flex space-x-1">
+                       <Input required value={name} onChange={(e)=>{
+                        setName(e.currentTarget.value)
+                      }} type="text"  placeholder="Search hostels by name"/>
+                      <Button type="submit" className="bg-accent hover:bg-accent/80 cursor-pointer"><SearchIcon className="w-5"/></Button>
+                   </form>
                      </div>
                      <div className="flex space-x-4">
                       <div className="space-y-2 w-full">
