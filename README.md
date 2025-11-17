@@ -7,4 +7,5 @@
 ### changes a bit
 ### made some cnages
 ### remove mock informatons
+### added seo data
 
