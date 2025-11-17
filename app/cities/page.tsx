@@ -6,7 +6,7 @@ export function generateMetadata(){
   return {
     title: "Hostels by cities",
     description: "Explore student hostels across major cities in Pakistan.",
-    keywords:"pakistan, lahore, islamabad, faisalabad, di khan, gh khan, peshawar , multan, karachi, karrak, kohat, cantt, ai, pakistan, hostels, students, apartments"
+    keywords:"pakistan, lahore, islamabad, faisalabad, di khan, gh khan, peshawar , multan, karachi, karrak, kohat, cantt, ai, pakistan, hostels, students, apartments, hyderabad, faisalabad"
   }
 }
 
@@ -18,6 +18,10 @@ export default function Cities() {
     { name: "Islamabad",image:"https://t3.ftcdn.net/jpg/02/74/50/28/360_F_274502877_n3BQGoAGPRqsjgKIU4lB6wns0mBuPTL3.jpg", hostels: 0, description: "Capital city with modern amenities and safe neighborhoods" },
     { name: "Rawalpindi",image:"https://content.r9cdn.net/rimg/dimg/a5/0b/89f2d368-city-35540-1717715c0e3.jpg?width=1366&height=768&xhint=1321&yhint=1758&crop=true", hostels: 0, description: "Sister city of Islamabad with affordable options" },
     { name: "Multan",image:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/1c/c7/08/multan-ghanta-ghar.jpg?w=1200&h=1200&s=1", hostels: 0, description: "Historic city with budget-friendly hostels" },
+    { name: "Quetta",image:"https://porterpakistan.com/uploads/2020/01/Mariabad.jpg", hostels: 0, description: "Best hostels in Quetta are listed" },
+    { name: "Sialkot",image:"https://i.pinimg.com/originals/8e/b6/67/8eb6677b45c2a0e1c7a986fea9b8ec28.jpg", hostels: 0, description: "Pakistan's most attractive city " },
+    { name: "Hyderabad",image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4Z67haHSz-ZQfqiDQO_DNVpAQtZ7bdTZ94w&s", hostels: 0, description: "Historic city with budget-friendly hostels" },
+    { name: "Faisalabad",image:"https://i.pinimg.com/originals/64/6f/52/646f52b084f90599794f122a3f475d20.jpg", hostels: 0, description: "Explore best hostels in a beautiful city (Faisalabad)" },
 
   ]
 

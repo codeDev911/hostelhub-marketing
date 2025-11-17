@@ -39,11 +39,7 @@ function Footer() {
                   FAQ
                 </Link>
               </li>
-              <li>
-                <Link href="/blog" className="hover:opacity-100 hover:text-foreground hover:underline transition-opacity">
-                  Blog
-                </Link>
-              </li>
+            
             </ul>
           </div>
 

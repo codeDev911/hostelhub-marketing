@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     "@type": "LodgingBusiness",
     name: hostel.title,
     description: hostel.description,
-    image: getImageUrl(hostel.images[0]),
+    image: getImageUrl(hostel?.images[0]),
     telephone: hostel.phone,
     address: {
       "@type": "PostalAddress",

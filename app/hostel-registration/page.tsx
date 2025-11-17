@@ -7,6 +7,7 @@ import Link from "next/link"
 import { ArrowLeft, Loader2 } from "lucide-react" 
 import { toast } from "sonner"
 import { fetchApi } from "@/lib/api"
+import { mockCities } from "@/lib/mock-data"
 
 export default function HostelRegistrationPage() {
   const [formData, setFormData] = useState({
@@ -15,7 +16,9 @@ export default function HostelRegistrationPage() {
     phone: "",
     businessName: "",
     businessType: "hostel",
+    gender:"All",
     address: "",
+    area:"",
     city: "",
     state: "",
     postalCode: "",
@@ -68,7 +71,7 @@ export default function HostelRegistrationPage() {
     }
   }
 
-  const cities = ["Lahore", "Karachi", "Islamabad", "Rawalpindi", "Peshawar", "Multan", "Faisalabad", "Quetta"]
+  const cities = mockCities
 
   if (submitted) {
     return (
@@ -92,16 +95,16 @@ export default function HostelRegistrationPage() {
   }
 
   return (
-    <main className="min-h-screen bg-background flex flex-col">
+    <main className="min-h-screen w-full bg-background flex flex-col">
       
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 grow">
-        <Link href="/hostel-owners" className="flex items-center gap-2 text-accent hover:text-accent/80 mb-6 sm:mb-8">
+      <div className="  mx-auto p-4 md:p-6  w-full md:w-[70%]">
+        <Link href="/hostel-owners" className="flex items-center gap-2 text-accent hover:text-accent/80 mb-3">
           <ArrowLeft className="w-4 h-4" />
           Back to Hostel Owners
         </Link>
 
-        <div className="mb-8 sm:mb-12">
+        <div className="mb-8">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-2">Register Your Hostel</h1>
           <p className="text-muted-foreground text-sm sm:text-base">
             Fill out the form below to register your hostel on HostelHub
@@ -129,7 +132,8 @@ export default function HostelRegistrationPage() {
                 />
               </div>
 
-              <div>
+              <div className="grid grid-cols-2 gap-5">
+                <div>
                 <label className="block text-sm font-semibold text-foreground mb-2">Business Type *</label>
                 <select
                   name="businessType"
@@ -141,6 +145,20 @@ export default function HostelRegistrationPage() {
                   {/* <option value="shared">Shared Housing</option>
                   <option value="apartment">Apartment</option> */}
                 </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-foreground mb-2">Gender * </label>
+                <select
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:border-accent transition-colors"
+                >
+                  <option value="boys">Boys</option>
+                  <option value="grils">Girls</option>
+                  <option value="all">All</option>
+                </select>
+              </div>
               </div>
 
               <div className="md:col-span-2">
@@ -229,10 +247,29 @@ export default function HostelRegistrationPage() {
                 >
                   <option value="">Select City</option>
                   {cities.map((city) => (
-                    <option key={city} value={city}>
-                      {city}
+                    <option key={city.name} value={city.name}>
+                      {city.name}
                     </option>
                   ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-foreground mb-2">Area *</label>
+                <select
+                  name="area"
+                  value={formData.area}
+                  onChange={handleChange}
+                  required
+                  disabled={formData.city == ""}
+                  className="w-full px-4 py-2 border disabled:text-primary/50 disabled:bg-primary/10 border-border rounded-sm focus:outline-none focus:border-accent transition-colors"
+                >
+                  <option value="">Select area</option>
+                  {cities.map((city) => city.name == formData.city && city.areas?.map((area:any)=>(
+                    <option key={area} value={area}>
+                      {area}
+                    </option>
+                  )))}
+                  <option value="other">Other</option>
                 </select>
               </div>
 
@@ -279,20 +316,7 @@ export default function HostelRegistrationPage() {
  
 
           <div className="flex gap-4">
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="flex-1 bg-accent hover:bg-accent/90 text-accent-foreground px-6 py-3 rounded-sm font-bold transition-all disabled:opacity-50 flex items-center justify-center gap-2"
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  Submitting...
-                </>
-              ) : (
-                "Submit Registration"
-              )}
-            </button>
+          
             <Link href="/hostel-owners" className="flex-1">
               <button
                 type="button"
@@ -301,6 +325,20 @@ export default function HostelRegistrationPage() {
                 Cancel
               </button>
             </Link>
+              <button
+              type="submit"
+              disabled={isLoading}
+              className="flex-1 bg-accent cursor-pointer hover:bg-accent/70 text-accent-foreground px-6 py-3 rounded-sm font-bold transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  Submitting...
+                </>
+              ) : (
+                "Submit"
+              )}
+            </button>
           </div>
 
           <p className="text-xs sm:text-sm text-muted-foreground">
