@@ -222,7 +222,7 @@ export const mockCities = [
 ]
 
  
-export const getSeoMeta = (city?: string, area?: string) => {
+export const getSeoMeta = (city?: string, area?: string, gender?:string) => {
 //   if (!city) return null; // No city, can't generate meta
 
   const cityData = mockCities.find(c => c.name.toLowerCase() === city?.toLowerCase());
@@ -235,9 +235,9 @@ export const getSeoMeta = (city?: string, area?: string) => {
       return {
         city: cityData?.name,
         area: matchedArea,
-        title: `Best Hostels in ${matchedArea} ${cityData?.name} with Affordable & Comfortable Stay | Hostelhub`,
+        title: `Best Hostels in ${matchedArea} ${cityData?.name}${gender ? `for ${gender}`:""}`,
         desc: `Find top-rated hostels in ${matchedArea} ${cityData?.name} offering safe, budget-friendly, and comfortable stays. Book easily on Hostelhub.`,
-        keywords: `${matchedArea} ${cityData?.name} hostels, hostels in ${matchedArea}, ${cityData?.name}, affordable hostels ${matchedArea} ${cityData?.name}, Hostelhub ${matchedArea} ${cityData?.name}, ${matchedArea} apartments,pakistan, hostelhub, ai, startup, students, mdcat, entry test, etea test, best university in pakistan, university, UET, KMU, KMC, school, best school in pakistan, best university in pakistan`,
+        keywords: `${matchedArea} ${cityData?.name} hostels, hostels in ${matchedArea}, ${cityData?.name}, affordable hostels ${matchedArea} ${cityData?.name}, Hostelhub ${matchedArea} ${cityData?.name}, ${matchedArea} apartments,pakistan, hostelhub, ai, startup, students, mdcat, entry test, etea test, best university in pakistan, university, UET, KMU, KMC, school, best school in pakistan, best university in pakistan,hostelhub, best hostels in pakitsan`,
       };
     }
   }
@@ -245,9 +245,9 @@ export const getSeoMeta = (city?: string, area?: string) => {
   // Return city-level meta if area not provided or not found
   return {
     city: cityData?.name,
-    title: `Best Hostels in ${cityData?.name} with Affordable & Comfortable Accommodation | Hostelhub`,
+    title: `${cityData?.name ? "Best Hostels in" + cityData?.name : "Find best hostels"} ${gender ? `for ${gender}`:""}`,
     desc: `Explore the best hostels and apartments in ${cityData?.name} with affordable prices, prime locations, and comfortable accommodations. Hostelhub makes booking easy.`,
-    keywords: `hostels in ${cityData?.name}, ${cityData?.name} accommodation, affordable hostels ${cityData?.name}, Hostelhub ${cityData?.name}, best hostels ${cityData?.name}, ${cityData?.name} apartments,pakistan, hostelhub, ai, startup, students, mdcat, entry test, etea test, best university in pakistan, university, UET, KMU, KMC, school, best school in pakistan, best university in pakistan`,
+    keywords: `hostels in ${cityData?.name}, ${cityData?.name} accommodation, affordable hostels ${cityData?.name}, Hostelhub ${cityData?.name}, best hostels ${cityData?.name}, ${cityData?.name} apartments,pakistan, hostelhub, ai, startup, students, mdcat, entry test, etea test, best university in pakistan, university, UET, KMU, KMC, school, best school in pakistan, best university in pakistan,hostelhub, best hostels in pakitsan`,
   };
 };
  

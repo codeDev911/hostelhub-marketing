@@ -24,17 +24,12 @@ const team = [
     "image":""
   },
   {
-    "role":"Marketing Influencer",
-    "name":"Umer khan",
-    "bio":"Marketing since 2018 with massive investment.", 
+    "role":"Designer",
+    "name":"Anwar Iqbal",
+    "bio":"A new era in designing.", 
     "image":""
   },
-  {
-    "role":"Hiring Manager",
-    "name":"Yaseen Khan",
-    "bio":"Our hiring process is at top.",
-    "image":""
-  },
+   
 ]
 
 export default function About() {

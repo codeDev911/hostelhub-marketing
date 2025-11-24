@@ -610,7 +610,7 @@ export default function BookHostel({ session }: any) {
                                         ))}
                                     </div>
                                     <div className="w-full p-2 text-center text-sm  mt-2">
-                                      {((index/4) + 1).toFixed(0)} / {Math.floor(Number.parseInt(hostel?.rooms?.length) / 4 )}
+                                      {((index/4) + 1).toFixed(0)} / {Math.floor(Number.parseInt(hostel?.rooms?.length) / 4 )+1}
                                     </div>
                                   </CarouselItem>
                                 );

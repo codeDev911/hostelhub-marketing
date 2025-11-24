@@ -8,9 +8,10 @@ import HostelsPage from "./HostelPage";
 export async function generateMetadata({ searchParams }:any): Promise<Metadata> {
   const {city} = await searchParams;
   const {area} = await searchParams;
+  const {gender} = await searchParams;
 
-  const meta = getSeoMeta(city, area);
- const canonicalUrl = `https://hostelhub.pk/hostels${city ? `?city=${city}` : ""}${area ? `&area=${area}` : ""}`;
+  const meta = getSeoMeta(city, area,gender);
+ const canonicalUrl = `https://hostelhub.pk/hostels${city ? `?city=${city}` : ""}${area ? `&area=${area}` : ""}${gender ? `&gender=${gender}`:""}`;
 
   return {
     title: meta?.title || "Find best hostels everywhere in Pakistan | Hostelhub",

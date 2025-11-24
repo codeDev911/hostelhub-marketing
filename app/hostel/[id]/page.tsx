@@ -29,11 +29,9 @@ async function getHostelMeta(id: string): Promise<HostelMeta> {
   if (!res.ok) throw new Error("Hostel not found");
 
   return res.json();
-}
+} 
 
-// -----------------------------------
-// Export SEO metadata using Next.js 16+ Metadata type
-// -----------------------------------
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   let hostel: HostelMeta;
   let {id} = await params

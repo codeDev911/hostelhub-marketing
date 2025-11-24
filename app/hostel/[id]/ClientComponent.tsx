@@ -231,7 +231,7 @@ export default function HostelDetailPage() {
                 </Alert>
               ) : (
                 <p className="text-sm mb-3 ">
-                  There are ({hostel?.rooms?.length}) room(s) availabe{" "}
+                  There are {hostel?.rooms?.length} rooms availabe{" "}
                 </p>
               )}
 
@@ -341,7 +341,7 @@ export default function HostelDetailPage() {
                                 ))}
                             </div>
                                     <div className="w-full p-2 text-center text-sm  mt-2">
-                                      {(index/6) + 1} / {Math.floor(Number.parseInt(hostel?.rooms?.length) / 6 )+1}
+                                      {(index/6) + 1} / {Math.floor(Number.parseInt(hostel?.rooms?.length) / 6 )}
                                     </div>
                           </CarouselItem>
                         );
