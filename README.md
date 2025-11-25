@@ -9,3 +9,4 @@
 ### remove mock informatons
 ### added seo data
 ### editesome
+### improved SEO - 24/11/2025
