@@ -10,3 +10,4 @@
 ### added seo data
 ### editesome
 ### improved SEO - 24/11/2025
+### fixes some SEO issues 25/11/2025
