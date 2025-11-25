@@ -11,9 +11,11 @@ interface HostelMeta {
   reviews: number;
   images: any;
   location: string;
+  amenities:any
   phone: string;
   pricePerMonth: number;
   city:string
+  province?:string
 }
 
 
@@ -39,8 +41,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   try {
     hostel = await getHostelMeta(id);
   } catch {
-    return { title: "Best accomodation for you in Pakistan",description:"We are glade you see you here, See our featured and best accomodations across all Over Pakistan.",keywords:"accomodation, travel, pakistan, hostelhub, studenthub, students, mdcat, peshawar, islamabad, karachi, lahore, Afnan Ahad" };
+    return { title: "Best acomodation for you in Pakistan",description:"We are glade you see you here, See our featured and best accomodations across all Over Pakistan.",keywords:"accomodation, travel, pakistan, hostelhub, studenthub, students, mdcat, peshawar, islamabad, karachi, lahore, Afnan Ahad" };
   }
+
+  const aminities : any =[]
+  hostel.amenities && hostel?.amenities?.map((am:any)=>{
+      aminities.push({
+        "@type": "LocationFeatureSpecification", "name": am, "value": true 
+      })
+    })
   
   // JSON-LD structured data
   const jsonLd = {
@@ -54,8 +63,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       "@type": "PostalAddress",
       streetAddress: hostel.location,
       addressLocality: hostel.city,
+      addressRegion: hostel.province,
       addressCountry: "PK",
     },
+     amenityFeature: aminities,
     priceRange: `Rs ${hostel.pricePerMonth.toLocaleString()}`,
     aggregateRating: {
       "@type": "AggregateRating",
@@ -84,15 +95,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: "website",
       locale: "en_PK",
     },
+    
     twitter: {
       card: "summary_large_image",
       title: hostel.title,
       description: hostel.description,
       images: [hostel?.images?.filter((i:any)=>getImageUrl(i))],
     },
-    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://hostelhub.pk"),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://www.hostelhub.pk"),
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL||"https://hostelhub.pk"}/hostel/${id}`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL||"https://www.hostelhub.pk"}/hostel/${id}`,
     },
     robots: {
       index: true,

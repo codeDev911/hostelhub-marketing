@@ -42,7 +42,7 @@ function Header({session}:any) {
             <div className="w-6.5 h-6.5 bg-white  flex rounded-md items-center justify-center">
               <img src="/logo.png" className="w-full h-full" alt="Logo" />
             </div>
-            <h1 className="text-xl font-bold text-primary sm:block">HostelHub</h1>
+            <h3 className="text-xl font-bold text-primary sm:block">HostelHub</h3>
           </Link>
 
           {/* Desktop Navigation & Search */}

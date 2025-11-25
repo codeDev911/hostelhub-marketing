@@ -102,6 +102,7 @@ export default function HostelOwnersPage() {
         </div>
       </section>
 
+{/* HostelHub Panel overview */}
       <section className="py-12 sm:py-16 md:py-20 bg-secondary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 text-center">
@@ -371,6 +372,7 @@ export default function HostelOwnersPage() {
         </div>
       </section>
 
+{/* Why choose hostelhub */}
       <section className="bg-primary text-white py-12 sm:py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-12 sm:mb-16 text-center">

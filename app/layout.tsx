@@ -28,7 +28,7 @@ export default async function RootLayout({
   
   
   return (
-    <html> 
+    <html lang="en"> 
         <body className={`font-sans antialiased`}>
 
       {/* <ThemeProvider attribute={"class"}> */}

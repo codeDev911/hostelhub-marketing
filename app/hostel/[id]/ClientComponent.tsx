@@ -165,9 +165,9 @@ export default function HostelDetailPage() {
 
             {/* Hostel Info */}
             <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6 mb-6 sm:mb-8">
-              <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-2">
+              <h1 className="text-2xl sm:text-3xl font-bold text-primary mb-2">
                 {hostel.name}
-              </h2>
+              </h1>
               <div className="flex items-center text-muted-foreground mb-4 text-sm sm:text-base">
                 <MapPin className="w-4 sm:w-5 h-4 sm:h-5 mr-2 shrink-0" />
                 <span>{hostel.address}</span>
@@ -193,9 +193,9 @@ export default function HostelDetailPage() {
 
             {/* Amenities */}
             <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6 mb-6 sm:mb-8">
-              <h3 className="text-xl sm:text-2xl font-bold text-primary mb-4 sm:mb-6">
+              <h2 className="text-xl sm:text-2xl font-bold text-primary mb-4 sm:mb-6">
                 Facilities
-              </h3>
+              </h2>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
                 {hostel?.amenities?.map((amenity: any, idx: any) => (
                   <div
