@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button"
 import { Mail, Lock, AlertCircle } from "lucide-react"
 import { fetchApi } from "@/lib/api"
 import { toast } from "sonner"
+import { preconnect } from "react-dom"
+import Script from "next/script"
 
 export default function StudentLogin() {
   const [email, setEmail] = useState("")
@@ -20,6 +22,7 @@ export default function StudentLogin() {
     e.preventDefault()
     setError("")
     
+    preconnect('https://challenges.cloudflare.com');
     try {
       setLoading(true)
       const res = await fetchApi({
@@ -50,7 +53,11 @@ export default function StudentLogin() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-
+<Script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+></Script>
       <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md">
           <div className="bg-white rounded-lg shadow-lg p-8">
@@ -92,6 +99,7 @@ export default function StudentLogin() {
                   />
                 </div>
               </div>
+          <div className="cf-turnstile" data-sitekey="0x4AAAAAACHAfcfd1SkCbnim"></div>
 
               <Button
                 type="submit"

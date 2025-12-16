@@ -2,12 +2,14 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import {  useState } from "react"
 import Link from "next/link"
 import { ArrowLeft, Loader2 } from "lucide-react" 
 import { toast } from "sonner"
 import { fetchApi } from "@/lib/api"
 import { mockCities } from "@/lib/mock-data"
+import Script from "next/script"
+import { preconnect } from "react-dom"
 
 export default function HostelRegistrationPage() {
   const [formData, setFormData] = useState({
@@ -35,7 +37,9 @@ export default function HostelRegistrationPage() {
       [name]: value,
     }))
   }
+  preconnect('https://challenges.cloudflare.com');
 
+    
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
@@ -76,7 +80,7 @@ export default function HostelRegistrationPage() {
   if (submitted) {
     return (
       <main className="min-h-screen bg-background flex flex-col">
-        
+      
         <div className="grow flex items-center justify-center px-4">
           <div className="bg-primary-foreground border border-border rounded-lg p-8 text-center max-w-md">
             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -96,7 +100,11 @@ export default function HostelRegistrationPage() {
 
   return (
     <main className="min-h-screen w-full bg-background flex flex-col">
-      
+        <Script
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+          async
+          defer
+        ></Script>
 
       <div className="  mx-auto p-4 md:p-6  w-full md:w-[70%]">
         <Link href="/hostel-owners" className="flex items-center gap-2 text-accent hover:text-accent/80 mb-3">
@@ -312,6 +320,7 @@ export default function HostelRegistrationPage() {
                 />
               </div>
             </div>
+          <div className="cf-turnstile" data-sitekey="0x4AAAAAACHAfcfd1SkCbnim"></div>
           </div>
  
 

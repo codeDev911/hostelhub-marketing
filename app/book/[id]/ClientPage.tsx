@@ -35,6 +35,8 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { getImageUrl } from "@/lib/getImage";
+import Script from "next/script";
+import { preconnect } from "react-dom";
 
 interface Room {
   id: string;
@@ -83,7 +85,8 @@ export default function BookHostel({ session }: any) {
   const [submitLoading, setSubmitLoading] = useState(false);
   const [encryptedData, setEncryptedData] = useState(String as any);
   const [student, setStudent] = useState({} as any);
-
+  
+  preconnect('https://challenges.cloudflare.com');
   useEffect(() => {
     const fetchHostel = async () => {
       try {
@@ -93,6 +96,7 @@ export default function BookHostel({ session }: any) {
           }`,
           method: "GET",
         });
+
 
         let data = await res.json();
         setHostel(data);
@@ -235,6 +239,11 @@ export default function BookHostel({ session }: any) {
 
   return (
     <main className="min-h-screen bg-background flex flex-col">
+      <Script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+></Script>
       {/* Back Button */}
       <div className="bg-secondary border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -740,6 +749,8 @@ export default function BookHostel({ session }: any) {
                         </div>
                       </div>
                     </div>
+          <div className="cf-turnstile" data-sitekey="0x4AAAAAACHAfcfd1SkCbnim"></div>
+
 
                     {submitLoading ? (
                       <Button

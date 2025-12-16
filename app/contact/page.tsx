@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin } from "lucide-react"
+import Script from "next/script"
 
 export function generateMetadata(){
 
@@ -6,11 +7,22 @@ export function generateMetadata(){
     title: "Contact us",
     description: "Have questions or feedback? We'd love to hear from you. Get in touch with our team.",
     keywords:"pakistan, lahore, islamabad,contact, help hostelhub, faisalabad, di khan, gh khan, peshawar , multan, karachi, karrak, kohat, cantt, ai, pakistan, hostels, students, apartments"
+    ,other: {
+    rel: 'preconnect',
+    url: 'https://challenges.cloudflare.com',
+  },
   }
 }
 export default function Contact() {
+
+  
+
   return (
     <>
+        <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        async
+        defer>  
+      </Script>
       
       <main className="min-h-screen bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
@@ -59,6 +71,7 @@ export default function Contact() {
                     className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-accent resize-none"
                   />
                 </div>
+                <div className="cf-turnstile" data-sitekey="0x4AAAAAACHAfcfd1SkCbnim"></div>
                 <button className="w-full bg-accent text-primary font-semibold py-3 rounded-sm hover:bg-accent/90 transition-colors">
                   Send Message
                 </button>

@@ -10,6 +10,8 @@ import { useSearchParams } from "next/navigation"
 import { decryptData } from "@/lib/encrypted"
 import { fetchApi } from "@/lib/api"
 import { toast } from "sonner"
+import Script from "next/script"
+import { preconnect } from "react-dom"
 
 export default function ClientComponent() {
   const searchParams = useSearchParams()
@@ -38,6 +40,8 @@ export default function ClientComponent() {
       [name]: value,
     }))
   }
+
+  preconnect('https://challenges.cloudflare.com');
 
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault()
@@ -113,7 +117,11 @@ export default function ClientComponent() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-
+<Script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+></Script>
       <main className="flex-1 px-4 py-12">
         <div className="max-w-2xl mx-auto">
           <div className="bg-white rounded-lg shadow-lg p-8">
@@ -281,6 +289,7 @@ export default function ClientComponent() {
                   />
                 </div>
                 </div>
+                                <div className="cf-turnstile" data-sitekey="0x4AAAAAACHAfcfd1SkCbnim"></div>
 
               <Button
                 type="submit"
