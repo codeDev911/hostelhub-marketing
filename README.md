@@ -13,3 +13,4 @@
 ### fixes some SEO issues 25/11/2025
 ### implemented Cloudflare checks in-forms 16/12/2025
 ### Update Ux 20/12/2025 (after mids 3rd sem)
+#### added find-roomamte feature (front-end only)
