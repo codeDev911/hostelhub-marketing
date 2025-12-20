@@ -245,7 +245,7 @@ export default function BookHostel({ session }: any) {
   defer
 ></Script>
       {/* Back Button */}
-      <div className="bg-secondary border-b border-border">
+      <div className="">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <button
             onClick={() => router.back()}
@@ -271,7 +271,7 @@ export default function BookHostel({ session }: any) {
             {/* Left Column - Hostel Info & Booking Form */}
             <div className="lg:col-span-2">
               {/* Hostel Summary */}
-              <div className="bg-primary-foreground border border-border rounded-lg p-6 md:p-8 mb-8">
+              <div className="bg-card rounded-2xl p-6 md:p-8 mb-8">
                 <div className="flex flex-col sm:flex-row gap-6 mb-6">
                   <img
                     src={getImageUrl(hostel.images[0]) || "/placeholder.svg"}
@@ -313,7 +313,7 @@ export default function BookHostel({ session }: any) {
                 </p>
               </div>
               {/* Booking Form */}
-              <div className="bg-primary-foreground border border-border rounded-lg p-6 md:p-8">
+              <div className="bg-card rounded-2xl p-6 md:p-8">
                 {submitted ? (
                   <>
                     <div className="  border-green-500 rounded-lg p-8 text-center">
@@ -384,7 +384,7 @@ export default function BookHostel({ session }: any) {
                               value={formData.studentInformation.firstName}
                               onChange={handleInputChange}
                               required
-                              className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-accent transition-colors"
+                              className="w-full px-4 py-3 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                               placeholder="Enter your first name"
                             />
                           </div>
@@ -398,7 +398,7 @@ export default function BookHostel({ session }: any) {
                               value={formData.studentInformation.lastName}
                               onChange={handleInputChange}
                               required
-                              className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-accent transition-colors"
+                              className="w-full px-4 py-3 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                               placeholder="Enter your last name"
                             />
                           </div>
@@ -412,7 +412,7 @@ export default function BookHostel({ session }: any) {
                               value={formData.studentInformation.email}
                               onChange={handleInputChange}
                               required
-                              className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-accent transition-colors"
+                              className="w-full px-4 py-3 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                               placeholder="your.email@example.com"
                             />
                           </div>
@@ -426,7 +426,7 @@ export default function BookHostel({ session }: any) {
                               value={formData.studentInformation.phone}
                               onChange={handleInputChange}
                               required
-                              className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-accent transition-colors"
+                              className="w-full px-4 py-3 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                               placeholder="03012345678"
                             />
                           </div>
@@ -443,7 +443,7 @@ export default function BookHostel({ session }: any) {
                               value={formData.studentInformation.cnnic}
                               onChange={handleInputChange}
                               required
-                              className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-accent transition-colors"
+                              className="w-full px-4 py-3 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                               placeholder="13 digit CNIC number"
                             />
                           </div>
@@ -457,7 +457,7 @@ export default function BookHostel({ session }: any) {
                               value={formData.studentInformation.address}
                               onChange={handleInputChange}
                               required
-                              className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-accent transition-colors"
+                              className="w-full px-4 py-3 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                               placeholder="Your home address "
                             />
                           </div>
@@ -476,7 +476,7 @@ export default function BookHostel({ session }: any) {
                                 bookingNotes: e.target.value,
                               })
                             }
-                            className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-accent transition-colors"
+                            className="w-full px-4 py-3 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                             placeholder="(Optional) Notes or inquiry about booking "
                           />
                         </div>
@@ -688,7 +688,7 @@ export default function BookHostel({ session }: any) {
                             onChange={(e) =>
                               setSeatsToBook(Number.parseInt(e.target.value))
                             }
-                            className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-accent transition-colors"
+                            className="w-full px-4 py-3 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                           >
                             {Array.from(
                               {
@@ -722,7 +722,7 @@ export default function BookHostel({ session }: any) {
                               })
                             }
                             required
-                            className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-accent transition-colors"
+                            className="w-full px-4 py-3 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                           />
                         </div>
                         <div>
@@ -738,7 +738,7 @@ export default function BookHostel({ session }: any) {
                                 duration: Number.parseInt(e.target.value),
                               })
                             }
-                            className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-accent transition-colors"
+                            className="w-full px-4 py-3 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                           >
                             {[1, 2, 3, 4, 5, 6, 9, 12].map((month) => (
                               <option key={month} value={month}>
@@ -755,14 +755,14 @@ export default function BookHostel({ session }: any) {
                     {submitLoading ? (
                       <Button
                         type="button"
-                        className="w-full bg-muted  text-accent-foreground font-bold py-6 rounded-lg transition-all text-lg"
+                        className="w-full bg-muted   text-accent-foreground  py-6 rounded-full transition-all text-lg"
                       >
                         Submitting...
                       </Button>
                     ) : (
                       <Button
                         type="submit"
-                        className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-bold py-6 rounded-lg transition-all text-lg"
+                        className="w-full bg-accent  hover:bg-accent/70 text-accent-foreground  py-6 rounded-full transition-all text-lg"
                       >
                         Submit Booking Request
                       </Button>
@@ -774,7 +774,7 @@ export default function BookHostel({ session }: any) {
 
             {/* Right Column - Pricing Summary */}
             <div className="lg:col-span-1">
-              <div className="bg-primary-foreground border border-border rounded-lg p-6 md:p-8 sticky top-24">
+              <div className="bg-card rounded-2xl p-6 md:p-8 sticky top-24">
                 <h3 className="text-xl font-bold text-primary mb-6">
                   Booking Summary
                 </h3>

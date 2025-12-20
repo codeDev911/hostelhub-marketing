@@ -34,19 +34,19 @@ function Header({session}:any) {
   
 
   return (
-    <header className="sticky top-0 z-50 bg-primary-foreground border-b border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="flex w-full items-center justify-between gap-4">
+    <header className="sticky top-0 z-50  ">
+      <div className="max-w-7xl mx-auto ">
+        <div className="flex w-full items-center p-2 justify-between gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity shrink-0">
-            <div className="w-6.5 h-6.5 bg-white  flex rounded-md items-center justify-center">
+          <Link href="/" className="flex max-sm:w-[70%]  md:px-8 px-6 md:p-4 p-3 shadow- rounded-full bg-card items-center gap-2 hover:opacity-80 transition-opacity shrink-0">
+            <div className="w-6.5 h-6.5  flex rounded-md items-center justify-center">
               <img src="/logo.png" className="w-full h-full" alt="Logo" />
             </div>
             <h3 className="text-xl font-bold text-primary sm:block">HostelHub</h3>
           </Link>
 
           {/* Desktop Navigation & Search */}
-          <div className="hidden  md:flex items-center gap-8 ">
+          <div className="hidden  md:flex bg-card p-4 rounded-full shadow- px-8 items-center gap-8 ">
             <Link href="/" className="text-foreground hover:text-accent transition-colors font-medium">
               Home
             </Link>
@@ -64,13 +64,13 @@ function Header({session}:any) {
             </Link>
           </div>
 
-          <div className="space-x-4 flex items-center">
+          <div className="space-x-4 bg-card rounded-full shadow- md:p-3 p-2 md:px-8 px-6 flex items-center">
            <Button
            onClick={()=> router.push("/hostels")}
                 variant={"outline"}
-                className="max-md:hidden  text-muted-foreground  transition-colors"
+                className="max-md:hidden cursor-pointer rounded-full bg-card text-muted-foreground  transition-colors"
               >
-                <Search className="w-4 h-4" />
+                <Search className="w-4 h-4 " />
               </Button>
              
 
@@ -95,14 +95,14 @@ function Header({session}:any) {
                 <Link href={"#"} onClick={()=>destroySession()} className="p-2 flex-1 text-destructive rounded-md hover:bg-secondary ">Logout</Link>  
               </div>
             </PopoverContent>
-          </Popover>:<div className="hidden md:flex items-center gap-2 shrink-0">
+          </Popover>:<div className="hidden md:flex items-center gap-3 shrink-0">
             <Link href="/student/login">
-              <button className="px-4 py-2 text-foreground hover:text-accent transition-colors font-medium border border-border rounded-sm hover:bg-secondary">
+              <button className="px-4 p-1 cursor-pointer text-foreground hover:text-accent transition-colors font-medium border border-border rounded-full hover:bg-secondary">
                 Login
               </button>
             </Link>
             <Link href="/student/register">
-              <button className="px-4 py-2 bg-accent text-accent-foreground hover:bg-accent/90 transition-colors font-medium rounded-sm">
+              <button className="px-4 p-1 cursor-pointer bg-accent text-accent-foreground hover:bg-accent/90 transition-colors font-medium rounded-full">
                 Sign Up
               </button>
             </Link>
@@ -111,33 +111,18 @@ function Header({session}:any) {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 hover:bg-secondary rounded-sm transition-colors flex-shrink-0"
+            className="md:hidden p-2 hover:bg-secondary rounded-full transition-colors flex-shrink-0"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
         </div>
 
         {/* Mobile Navigation & Search */}
         {mobileMenuOpen && (
-          <nav className="md:hidden mt-4 pb-4 space-y-2 border-t border-border pt-4">
-            <form onSubmit={handleSearch} className="mb-4">
-              <div className="relative">
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search hostels..."
-                  className="w-full px-4 py-2 border-2 border-border rounded-sm focus:outline-none focus:border-accent transition-colors text-sm"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-accent transition-colors"
-                >
-                  <Search className="w-4 h-4" />
-                </button>
-              </div>
-            </form>
+          <>
+           <div onClick={()=>setMobileMenuOpen(false)} className="fixed top-0 w-screen h-screen bg-foreground/20 backdrop-blur-sm left-0 -z-10"></div>
+          <nav className="md:hidden mt-4 pb-4 bg-card space-y-2 shadow-2xl z-30 rounded-2xl m-4 p-4">
 
             <Link
               href="/"
@@ -174,19 +159,37 @@ function Header({session}:any) {
             >
               For Owners
             </Link>
-          {session && session?.userId ?"":   <div className="border-t space-y-3 border-border pt-4 mt-4 ">
+             <form onSubmit={handleSearch} className="mb-4 border-t  border-border pt-4 mt-4">
+              <div className="relative">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search hostels..."
+                  className="w-full px-4 py-3 border border-border rounded-full focus:outline-none focus:border-accent transition-colors text-sm"
+                />
+                <button
+                  type="submit"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-accent transition-colors"
+                >
+                  <Search className="w-5 h-5" />
+                </button>
+              </div>
+            </form>
+          {session && session?.userId ?"":   <div className="flex flex-col ">
               <Link href="/student/login" onClick={() => setMobileMenuOpen(false)}>
-                <button className="w-full px-4 py-2 text-foreground hover:bg-secondary transition-colors font-medium border border-border rounded-sm">
+                <button className="w-full px-4 py-2 text-foreground hover:bg-secondary transition-colors font-medium border border-border rounded-full">
                   Login
                 </button>
               </Link>
               <Link href="/student/register" className="mt-4" onClick={() => setMobileMenuOpen(false)}>
-                <button className="w-full px-4 py-2 bg-accent text-accent-foreground hover:bg-accent/90 transition-colors font-medium rounded-sm">
+                <button className="w-full px-4 py-2 bg-accent text-accent-foreground hover:bg-accent/80 transition-colors font-medium rounded-full">
                   Sign Up
                 </button>
               </Link>
             </div>}
           </nav>
+          </>
         )}
       </div>
     </header>

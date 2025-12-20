@@ -124,12 +124,12 @@ export default function ClientComponent() {
 ></Script>
       <main className="flex-1 px-4 py-12">
         <div className="max-w-2xl mx-auto">
-          <div className="bg-white rounded-lg shadow-lg p-8">
+          <div className="bg-card rounded-2xl  p-8">
             <h1 className="text-3xl font-bold text-primary mb-2">Create Student Account</h1>
             <p className="text-foreground/60 mb-8">Register to book your hostel and manage your stay</p>
 
             {error && (
-              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-full flex items-start gap-3">
                 <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
                 <p className="text-red-700 text-sm">{error}</p>
               </div>
@@ -148,7 +148,7 @@ export default function ClientComponent() {
                       disabled={isFromBooking}
                       placeholder="John Doe"
                       onChange={(e)=>isFromBooking ? null : handleChange(e)}
-                      className={`${isFromBooking?"bg-muted text-muted-foreground":""} w-full  pl-10 pr-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
+                      className={`${isFromBooking?"bg-muted text-muted-foreground":""} w-full  pl-10 pr-4 py-2.5 border border-border rounded-full focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
                     />
                   </div>
                 </div>
@@ -164,7 +164,7 @@ export default function ClientComponent() {
                       disabled={isFromBooking}
                       onChange={(e)=>isFromBooking ? null : handleChange(e)}
                       placeholder="student@example.com"
-                      className={`${isFromBooking?"bg-muted text-muted-foreground":""} w-full  pl-10 pr-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
+                      className={`${isFromBooking?"bg-muted text-muted-foreground":""} w-full  pl-10 pr-4 py-2.5 border border-border rounded-full focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
                     />
                   </div>
                 </div>
@@ -180,8 +180,8 @@ export default function ClientComponent() {
                       value={formData.phone}
                       onChange={(e)=>isFromBooking ? null : handleChange(e)}
                       disabled={isFromBooking}
-                      placeholder="+92-300-1234567"
-                      className={`${isFromBooking?"bg-muted text-muted-foreground":""} w-full  pl-10 pr-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
+                      placeholder="03001234567"
+                      className={`${isFromBooking?"bg-muted text-muted-foreground":""} w-full  pl-10 pr-4 py-2.5 border border-border rounded-full focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
                     />
                   </div>
                 </div>
@@ -201,7 +201,7 @@ export default function ClientComponent() {
                         }
                       }}
                       placeholder="13 Digits of your ID"
-                      className={` w-full  pl-10 pr-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
+                      className={` w-full  pl-10 pr-4 py-2.5 border border-border rounded-full focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
                     />
                   </div>
                 </div>
@@ -212,7 +212,7 @@ export default function ClientComponent() {
                     name="gender"
                     value={formData.gender}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                    className="w-full px-4 py-2.5 border border-border rounded-full focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                   >
                     <option value="">Select Gender</option>
                     <option value="male">Male</option>
@@ -229,7 +229,7 @@ export default function ClientComponent() {
                       value={formData.fatherName}
                       onChange={(e)=>isFromBooking ? null : handleChange(e)}
                       placeholder="Your father name"
-                      className={` w-full  pl-10 pr-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
+                      className={` w-full  pl-10 pr-4 py-2.5 border border-border rounded-full focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
                     />
                   </div>
                 </div>
@@ -242,7 +242,7 @@ export default function ClientComponent() {
                       value={formData.fatherPhone}
                       onChange={(e)=>isFromBooking ? null : handleChange(e)}
                       placeholder="03012345678"
-                      className={` w-full  pl-10 pr-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
+                      className={` w-full  pl-10 pr-4 py-2.5 border border-border rounded-full focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
                     />
                   </div>
                 </div>
@@ -255,7 +255,7 @@ export default function ClientComponent() {
                       value={formData.address}
                       onChange={(e)=>isFromBooking ? null : handleChange(e)}
                       placeholder="Your full address"
-                      className={` w-full  pl-10 pr-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
+                      className={` w-full  pl-10 pr-4 py-2.5 border border-border rounded-full focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
                     />
                   </div>
                 </div>
@@ -273,7 +273,7 @@ export default function ClientComponent() {
                     value={formData.password}
                     onChange={handleChange}
                     placeholder="••••••••"
-                    className="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                    className="w-full px-4 py-2.5 border border-border rounded-full focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                   />
                 </div>
 
@@ -285,7 +285,7 @@ export default function ClientComponent() {
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     placeholder="••••••••"
-                    className="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                    className="w-full px-4 py-2.5 border border-border rounded-full focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                   />
                 </div>
                 </div>
@@ -294,7 +294,7 @@ export default function ClientComponent() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-accent hover:bg-accent/90 text-primary font-semibold py-2.5 rounded-lg transition-colors"
+                className="w-full bg-accent hover:bg-accent/90 text-primary font-semibold py-2.5 rounded-full transition-colors"
               >
                 {loading ? "Creating Account..." : "Create Account"}
               </Button>

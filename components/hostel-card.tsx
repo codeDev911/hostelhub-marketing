@@ -7,7 +7,7 @@ export default function HostelCard({ hostel }:any) {
   
   return (
     <Link href={`/hostel/${hostel.id}`}>
-      <div className="bg-primary-foreground border group border-border rounded-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer h-full  grid grid-cols-5">
+      <div className="bg-card  group rounded-2xl overflow-hidden   transition-shadow cursor-pointer h-full  grid grid-cols-5">
         {/* Image */}
         <div className="relative h-48 bg-muted overflow-hidden col-span-2">
           <img

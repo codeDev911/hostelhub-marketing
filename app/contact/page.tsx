@@ -44,7 +44,7 @@ export default function Contact() {
                   <input
                     type="text"
                     placeholder="Your name"
-                    className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-accent"
+                    className="w-full px-4 py-2 border border-border rounded-full focus:outline-none focus:ring-2 focus:ring-accent"
                   />
                 </div>
                 <div>
@@ -52,7 +52,7 @@ export default function Contact() {
                   <input
                     type="email"
                     placeholder="your@email.com"
-                    className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-accent"
+                    className="w-full px-4 py-2 border border-border rounded-full focus:outline-none focus:ring-2 focus:ring-accent"
                   />
                 </div>
                 <div>
@@ -60,7 +60,7 @@ export default function Contact() {
                   <input
                     type="text"
                     placeholder="How can we help?"
-                    className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-accent"
+                    className="w-full px-4 py-2 border border-border rounded-full focus:outline-none focus:ring-2 focus:ring-accent"
                   />
                 </div>
                 <div>
@@ -68,18 +68,19 @@ export default function Contact() {
                   <textarea
                     placeholder="Your message..."
                     rows={5}
-                    className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-accent resize-none"
+                    className="w-full px-4 py-2 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-accent resize-none"
                   />
                 </div>
                 <div className="cf-turnstile" data-sitekey="0x4AAAAAACHAfcfd1SkCbnim"></div>
-                <button className="w-full bg-accent text-primary font-semibold py-3 rounded-sm hover:bg-accent/90 transition-colors">
+                <button className="w-full bg-accent text-primary font-semibold py-3 rounded-full hover:bg-accent/90 transition-colors">
                   Send Message
                 </button>
               </form>
             </div>
 
             {/* Contact Info */}
-            <div>
+           <div>
+             <div className="md:p-6 p-4 rounded-2xl bg-card">
               <h2 className="text-2xl font-bold text-primary mb-6">Get in Touch</h2>
               <div className="space-y-6">
                 <div className="flex gap-4">
@@ -108,13 +109,14 @@ export default function Contact() {
               </div>
 
               {/* Response Time */}
-              <div className="mt-8 p-6 bg-accent/10 border border-accent/20 rounded-sm">
+              <div className="mt-8 p-4 border border-border rounded-2xl">
                 <h3 className="font-semibold text-foreground mb-2">Response Time</h3>
                 <p className="text-foreground/70 text-sm">
                   We typically respond to all inquiries within 24 hours during business days.
                 </p>
               </div>
             </div>
+           </div>
           </div>
         </div>
       </main>

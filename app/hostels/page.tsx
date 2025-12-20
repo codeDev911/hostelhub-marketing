@@ -1,8 +1,8 @@
 // app/hostels/page.tsx
-import { getSeoMeta } from "@/lib/mock-data";
+import { getSeoMeta,cities } from "@/lib/mock-data";
 import { Metadata } from "next";
 import HostelsPage from "./HostelPage";
-import { cities } from "../cities/page";
+
  
 // Dynamic metadata generation
 export async function generateMetadata({ searchParams }:any): Promise<Metadata> {
@@ -13,7 +13,7 @@ export async function generateMetadata({ searchParams }:any): Promise<Metadata> 
   const meta = getSeoMeta(city, area,gender);
  const canonicalUrl = `https://www.hostelhub.pk/hostels${city ? `?city=${city}` : ""}${area ? `&area=${area}` : ""}${gender ? `&gender=${gender}`:""}`;
  
- const getImage = cities.find(c=>c.name.toLowerCase() === city?.toLowerCase())?.image ||"https://hostelhub.pk/og-image.jpg";
+ const getImage = cities.find((c:any)=>c.name.toLowerCase() === city?.toLowerCase())?.image ||"https://hostelhub.pk/og-image.jpg";
 
   return {
     title: meta?.title || "Find best hostels everywhere in Pakistan | Hostelhub",

@@ -3,11 +3,10 @@
 import { useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { CogIcon, Filter, Loader2, SearchIcon, SlidersHorizontal } from "lucide-react";
+import {  Filter, Loader2, SearchIcon,  } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import HostelCard from "@/components/hostel-card";
 import { fetchApi } from "@/lib/api";
-import HeroSearch from "@/components/hero-search";
 import {
   Card,
   CardContent,
@@ -15,14 +14,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectSeparator,
   SelectTrigger,
-  SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { mockCities } from "@/lib/mock-data";
@@ -98,7 +95,7 @@ export default function HostelsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-background flex flex-col">
+    <main className="min-h-screen  flex flex-col">
       <div className="md:max-w-7xl w-full p-4 mx-auto  md:py-8 py-4 grow">
         {/* Filters Section */}
         <div className="w-full">
@@ -130,8 +127,8 @@ export default function HostelsPage() {
                   Search hostels/ accomodation / appartments
                 </CardDescription>
               </CardHeader>
-              <CardContent className="grid md:grid-cols-5 gap-4">
-                <div className="space-y-2 w-full md:col-span-3">
+              <CardContent className="grid md:grid-cols-4 gap-4">
+                <div className="space-y-2 w-full md:col-span-2">
                   <Label htmlFor="search">Search </Label>
                   <form
                     onSubmit={(e) => {
@@ -144,36 +141,37 @@ export default function HostelsPage() {
                     }}
                     className="flex space-x-1"
                   >
-                    <Input
+                    <input
                       required
                       value={name}
                       onChange={(e) => {
                         setName(e.currentTarget.value);
                       }}
+                      className="p-2 w-full rounded-full indent-3  border-border border"
                       type="text"
                       placeholder="Search hostels by name"
                     />
                     <Button
                       type="submit"
-                      className="bg-accent hover:bg-accent/80 cursor-pointer"
+                      className="bg-accent rounded-full p hover:bg-accent/80 cursor-pointer"
                     >
-                      <SearchIcon className="w-5" />
+                      <SearchIcon className="w-6" />
                     </Button>
                   </form>
-                </div>
-                <div className="flex space-x-4">
+                </div> 
+                <div className="grid grid-cols-3 md:ml-4 space-x-4 md:col-span-2">
                   <div className="space-y-2 w-full">
                     <Label htmlFor="city">City </Label>
                     <Select onValueChange={(e) => setCity(e)}>
                       <SelectTrigger>{city || "select city"}</SelectTrigger>
-                      <SelectContent className="w-full">
+                      <SelectContent className="">
                         <h4 className="text-sm font-bold p-1">
                           Verified cities
                         </h4>
                         <SelectSeparator />
                         {mockCities.map((cty: any, indx: any) => (
                           <SelectItem value={cty.name} key={indx}>
-                            {cty.name}
+                            {cty.name}{"             "}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -183,7 +181,7 @@ export default function HostelsPage() {
                     <Label htmlFor="area">Area </Label>
                     <Select onValueChange={(e) => setArea(e)}>
                       <SelectTrigger>{area || "select area"}</SelectTrigger>
-                      <SelectContent className="w-full">
+                      <SelectContent className="">
                         <h4 className="text-sm font-bold p-1">
                           Verified areas
                         </h4>
@@ -218,7 +216,7 @@ export default function HostelsPage() {
                 </div>
               </CardContent>
             </Card>
-            {!filterHide && <div className=" my-4 bg-primary-foreground sticky  border border-border rounded-sm p-4">
+            {!filterHide && <div className=" my-4 bg-card sticky  rounded-2xl p-6">
              <div className="w-full flex items-center justify-between">
                <h3 className="text-lg font-bold text-primary mb-6 flex items-center gap-2">
                 <Filter className="w-5 h-5" />
@@ -326,12 +324,12 @@ export default function HostelsPage() {
                     ))}
                   </div>
                 ) : (
-                  <div className="bg-primary-foreground border border-border rounded-sm p-8 sm:p-12 text-center">
+                  <div className="bg-card rounded-2xl p-8 sm:p-12 text-center">
                     <p className="text-base sm:text-lg text-muted-foreground mb-4">
                       No hostels found matching your criteria
                     </p>
                     <Link href="/">
-                      <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                      <Button className="bg-accent hover:bg-accent/90 rounded-full text-accent-foreground">
                         Back to Home
                       </Button>
                     </Link>

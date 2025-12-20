@@ -60,7 +60,7 @@ export default function About() {
                 information, and real reviews to help you make the best choice.
               </p>
             </div>
-            <div className="bg-accent/10 p-6 sm:p-8 rounded-sm border border-accent/20">
+            <div className="bg-accent/10 p-6 sm:p-8 rounded-2xl ">
               <h3 className="text-xl font-bold text-primary mb-4">Why Choose HostelHub?</h3>
               <ul className="space-y-3 text-foreground/70">
                 <li className="flex gap-3">
@@ -89,19 +89,19 @@ export default function About() {
 
           {/* Stats Section */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16">
-            <div className="bg-primary-foreground border border-border p-6 sm:p-8 rounded-sm text-center">
+            <div className="bg-primary-foreground  p-6 sm:p-8 rounded-2xl text-center">
               <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">500+</div>
               <p className="text-foreground/70 text-sm">Hostels Listed</p>
             </div>
-            <div className="bg-primary-foreground border border-border p-6 sm:p-8 rounded-sm text-center">
+            <div className="bg-primary-foreground  p-6 sm:p-8 rounded-2xl text-center">
               <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">50K+</div>
               <p className="text-foreground/70 text-sm">Happy Students</p>
             </div>
-            <div className="bg-primary-foreground border border-border p-6 sm:p-8 rounded-sm text-center">
+            <div className="bg-primary-foreground  p-6 sm:p-8 rounded-2xl text-center">
               <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">20+</div>
               <p className="text-foreground/70 text-sm">Cities Covered</p>
             </div>
-            <div className="bg-primary-foreground border border-border p-6 sm:p-8 rounded-sm text-center">
+            <div className="bg-primary-foreground  p-6 sm:p-8 rounded-2xl text-center">
               <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">4.8★</div>
               <p className="text-foreground/70 text-sm">Average Rating</p>
             </div>
@@ -118,10 +118,10 @@ export default function About() {
 
             <div className="grid md:grid-cols-4 gap-4">
               {team.map((member:any)=>(
-              <div className="p-2 bg-accent/10 flex flex-col text-center rounded-md border border-accent/30">
-                  <h3 className="text-base text-primary font-bold">{member.name}</h3>
+              <div className="p-4 bg-card flex flex-col text-center rounded-2xl">
+                  <h3 className="text-lg text-primary font-bold">{member.name}</h3>
                   <p className="text-sm  text-secondray">{member.role}</p>
-                  <p className="text-xs mt-2 text-secondray">{member.bio}</p>
+                  <p className="text-sm mt-2 text-secondray">{member.bio}</p>
               </div>
             ))}
             </div>

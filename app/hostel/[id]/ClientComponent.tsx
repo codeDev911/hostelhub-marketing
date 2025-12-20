@@ -57,7 +57,7 @@ export default function HostelDetailPage() {
   const [selectedRoom, setSelectedRoom] = useState(null); 
   const [loading, setLoading] = useState(true);
   const [image,setImage] = useState("")
-
+  const [rating,setRating] = useState("")
   useEffect(() => {
     const fetchHostel = async () => {
       try {
@@ -68,7 +68,12 @@ export default function HostelDetailPage() {
         let data = await res.json();
         if(res.ok){
           setHostel(data);
-          
+          const averageRating =
+  data.feedback.reduce((sum:any, item:any) => {
+    return sum + Number(item.priority);
+  }, 0) / data.feedback.length;
+  setRating(averageRating.toFixed(1));
+  
           setImage(getImageUrl(data?.images[0]))
 
         }else{
@@ -135,7 +140,7 @@ export default function HostelDetailPage() {
           <div className="lg:col-span-2">
             {/* Image Gallery */}
             <div className="mb-6 sm:mb-8">
-              <div className="relative h-64 sm:h-96 bg-muted rounded-lg overflow-hidden mb-4">
+              <div className="relative h-64 sm:h-96 bg-muted rounded-2xl overflow-hidden mb-4">
                 <img
                   src={image}
                   alt={hostel.name + "-main-image"}
@@ -143,7 +148,7 @@ export default function HostelDetailPage() {
                 />
                 <div className="absolute top-4 right-4 bg-accent text-accent-foreground px-3 sm:px-4 py-2 rounded-lg font-semibold flex items-center gap-1 text-sm sm:text-base">
                   <Star className="w-4 sm:w-5 h-4 sm:h-5" />
-                  {hostel.rating}
+                  {rating}
                 </div>
               </div>
               <div className="grid lg:grid-cols-5 max-md:grid-cols-3 gap-2">
@@ -164,7 +169,7 @@ export default function HostelDetailPage() {
             </div>
 
             {/* Hostel Info */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6 mb-6 sm:mb-8">
+            <div className="bg-card rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
               <h1 className="text-2xl sm:text-3xl font-bold text-primary mb-2">
                 {hostel.name}
               </h1>
@@ -176,10 +181,10 @@ export default function HostelDetailPage() {
                 <div className="flex items-center gap-1">
                   <Star className="w-4 sm:w-5 h-4 sm:h-5 text-accent" />
                   <span className="font-semibold text-foreground">
-                    {hostel.rating}
+                    {rating}
                   </span>
                   <span className="text-muted-foreground text-sm">
-                    ({hostel?.feedback?.length} reviews)
+                    ({hostel?.feedback?.length || 0} reviews)
                   </span>
                 </div>
               </div>
@@ -192,7 +197,7 @@ export default function HostelDetailPage() {
             </div>
 
             {/* Amenities */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6 mb-6 sm:mb-8">
+            <div className="bg-primary-foreground rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
               <h2 className="text-xl sm:text-2xl font-bold text-primary mb-4 sm:mb-6">
                 Facilities
               </h2>
@@ -212,7 +217,7 @@ export default function HostelDetailPage() {
             </div>
 
             {/* Availabe rooms */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6 mb-6 sm:mb-8">
+            <div className="bg-primary-foreground rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
               <h3 className="text-xl sm:text-2xl font-bold text-primary">
                 Available Rooms
               </h3>
@@ -357,7 +362,7 @@ export default function HostelDetailPage() {
               </div>
 <br />
               {/* 7-Day Meal Plan - Complimentary */}
-              <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6 mb-6 sm:mb-8">
+              <div className="bg-primary-foreground rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
                 <h3 className="text-xl sm:text-2xl font-bold text-primary mb-4 sm:mb-6 flex items-center gap-2">
                   <UtensilsCrossed className="w-5 sm:w-6 h-5 sm:h-6 text-accent" />
                   7-Day Meal Plan 
@@ -416,7 +421,7 @@ export default function HostelDetailPage() {
               {/* Check-in/Check-out & Rules */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
                 {/* Check-in/Check-out */}
-                <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6">
+                <div className="bg-primary-foreground rounded-2xl p-4 sm:p-6">
                   <h3 className="text-lg sm:text-xl font-bold text-primary mb-4 flex items-center gap-2">
                     <Clock className="w-5 h-5" />
                     Check-in & Check-out
@@ -442,7 +447,7 @@ export default function HostelDetailPage() {
                 </div>
 
                 {/* Rules */}
-                <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6">
+                <div className="bg-primary-foreground rounded-2xl p-4 sm:p-6">
                   <h3 className="text-lg sm:text-xl font-bold text-primary mb-4 flex items-center gap-2">
                     <AlertCircle className="w-5 h-5" />
                     House Rules
@@ -462,7 +467,7 @@ export default function HostelDetailPage() {
               </div>
 
               {/* Google Map */}
-              <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6 mb-6 sm:mb-8">
+              <div className="bg-primary-foreground rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
                 <h3 className="text-lg sm:text-xl font-bold text-primary mb-4">
                   Location on Map
                 </h3>
@@ -487,10 +492,14 @@ export default function HostelDetailPage() {
               </div>
 
               {/* Reviews Section */}
-              <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6">
-                <h3 className="text-xl sm:text-2xl font-bold text-primary mb-4 sm:mb-6">
-                  Reviews
+              <div className="bg-primary-foreground rounded-2xl p-4 sm:p-6">
+                <h3 className="text-xl sm:text-2xl font-bold text-primarysm:mb-6">
+                  Reviews ({hostel.feedback.length||0})
                 </h3>
+                <h3 className="text-base flex   font-bold text-primarysm:mb-6">
+                  <Star className="w-4 mr-2"/> {" "}{rating}
+                </h3>
+                <p className="text-base  mb-4 ">Verified reviews from students </p>
                 {hostel?.feedback?.length > 0 ? (
                   <div className="space-y-4">
                     {hostel?.feedback?.map((review: any, i: any) => (
@@ -543,8 +552,17 @@ export default function HostelDetailPage() {
             </div>
           {/* Sidebar */}
           <div className="lg:col-span-1">
+             {/* Gender Info */}
+            <div className="bg-primary-foreground mb-4 rounded-2xl p-4 sm:p-6">
+              <h3 className="text-lg font-bold text-primary mb-3">
+                Hostel Type
+              </h3>
+              <div className="inline-block bg-accent text-accent-foreground px-3 py-1 rounded-lg text-sm font-semibold capitalize">
+                For {hostel.gender}
+              </div>
+            </div>
             {/* Quick Info Card */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6 mb-4 sm:mb-6 lg:sticky lg:top-24">
+            <div className="bg-primary-foreground rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 lg:sticky lg:top-24">
               <h3 className="text-lg sm:text-xl font-bold text-primary mb-4 sm:mb-6">
                 Quick Info
               </h3>
@@ -623,15 +641,7 @@ export default function HostelDetailPage() {
               
             </div>
 
-            {/* Gender Info */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-4 sm:p-6">
-              <h3 className="text-lg font-bold text-primary mb-3">
-                Hostel Type
-              </h3>
-              <div className="inline-block bg-accent text-accent-foreground px-3 py-1 rounded-lg text-sm font-semibold capitalize">
-                For {hostel.gender}
-              </div>
-            </div>
+           
           </div>
           </div>
       </div>

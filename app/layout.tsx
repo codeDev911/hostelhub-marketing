@@ -1,17 +1,19 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { ThemeProvider } from "next-themes"
 import { getSession } from "@/lib/auth"
 import { Toaster } from "sonner"
+import { Poppins } from "next/font/google";
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
-
+// Configure Rubik
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-poppins", // Define the CSS variable
+});
 export const metadata: Metadata = {
   title: "Find Your Perfect Hostel in Pakistan - HostelHub",
   description:
@@ -28,7 +30,7 @@ export default async function RootLayout({
   
   
   return (
-    <html lang="en"> 
+    <html lang="en" className={poppins.variable}> 
         <body className={`font-sans antialiased`}>
 
       {/* <ThemeProvider attribute={"class"}> */}

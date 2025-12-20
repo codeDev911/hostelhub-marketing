@@ -31,7 +31,7 @@ export default function HostelOwnersPage() {
             <Image src={"payments.PNG"} width={60} height={60} className="absolute md:left-70 left-35 border-2 border-border top-20 w-[60%]  flex cover shadow-xl rounded-2xl"  alt="img"/>
           </div>
           <Link href="/hostel-registration">
-            <button className="bg-accent hover:bg-accent/90 text-accent-foreground px-6 sm:px-8 py-3 rounded-sm font-bold text-base sm:text-lg transition-all">
+            <button className="bg-accent hover:bg-accent/90 text-accent-foreground px-6 sm:px-8 py-3 rounded-full font-bold text-base sm:text-lg transition-all">
               Register Your Hostel
             </button>
           </Link>
@@ -47,7 +47,7 @@ export default function HostelOwnersPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {/* Feature 1 */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-6 sm:p-8 hover:shadow-lg transition-shadow">
+            <div className="bg-card  rounded-2xl p-6 sm:p-8  transition-shadow">
               <Users className="w-12 h-12 text-accent mb-4" />
               <h3 className="text-xl sm:text-2xl font-bold text-primary mb-3">Complete Student Management</h3>
               <p className="text-foreground text-sm sm:text-base leading-relaxed">
@@ -58,7 +58,7 @@ export default function HostelOwnersPage() {
             </div>
 
             {/* Feature 2 */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-6 sm:p-8 hover:shadow-lg transition-shadow">
+            <div className="bg-card  rounded-2xl p-6 sm:p-8  transition-shadow">
               <BarChart3 className="w-12 h-12 text-accent mb-4" />
               <h3 className="text-xl sm:text-2xl font-bold text-primary mb-3">Advanced Analytics & Insights</h3>
               <p className="text-foreground text-sm sm:text-base leading-relaxed">
@@ -68,7 +68,7 @@ export default function HostelOwnersPage() {
             </div>
 
             {/* Feature 3 */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-6 sm:p-8 hover:shadow-lg transition-shadow">
+            <div className="bg-card  rounded-2xl p-6 sm:p-8  transition-shadow">
               <Building2 className="w-12 h-12 text-accent mb-4" />
               <h3 className="text-xl sm:text-2xl font-bold text-primary mb-3">Smart Room Management</h3>
               <p className="text-foreground text-sm sm:text-base leading-relaxed">
@@ -78,7 +78,7 @@ export default function HostelOwnersPage() {
             </div>
 
             {/* Feature 4 */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-6 sm:p-8 hover:shadow-lg transition-shadow">
+            <div className="bg-card  rounded-2xl p-6 sm:p-8  transition-shadow">
               <TrendingUp className="w-12 h-12 text-accent mb-4" />
               <h3 className="text-xl sm:text-2xl font-bold text-primary mb-3">Maximum Online Visibility</h3>
               <p className="text-foreground text-sm sm:text-base leading-relaxed">
@@ -90,7 +90,7 @@ export default function HostelOwnersPage() {
              
 
             {/* Feature 6 */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-6 sm:p-8 hover:shadow-lg transition-shadow">
+            <div className="bg-card  rounded-2xl p-6 sm:p-8  transition-shadow">
               <Zap className="w-12 h-12 text-accent mb-4" />
               <h3 className="text-xl sm:text-2xl font-bold text-primary mb-3">Quick & Easy Setup</h3>
               <p className="text-foreground text-sm sm:text-base leading-relaxed">
@@ -103,7 +103,7 @@ export default function HostelOwnersPage() {
       </section>
 
 {/* HostelHub Panel overview */}
-      <section className="py-12 sm:py-16 md:py-20 bg-secondary">
+      <section className="py-12 sm:py-16 md:py-20 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 text-center">
             See HostelHub in Action
@@ -137,7 +137,7 @@ export default function HostelOwnersPage() {
                   </li>
                 </ul>
               </div>
-              <div className="rounded-lg overflow-hidden shadow-lg border border-border">
+              <div className="rounded-2xl overflow-hidden shadow-lg ">
                 <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dashboard.PNG-ZGNMOviiRQLz6KLf4eaAt2QU9soH03.png"
                   alt="Dashboard Overview"
@@ -152,7 +152,7 @@ export default function HostelOwnersPage() {
           {/* Mockup 2: Student Management */}
           <div className="mb-16 sm:mb-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <div className="rounded-lg overflow-hidden shadow-lg border border-border order-2 lg:order-1">
+              <div className="rounded-2xl overflow-hidden shadow-lg  order-2 lg:order-1">
                 <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/students.PNG-6Lz4jQyNcJRWRCXTKdUaGOQNk6tYF3.png"
                   alt="Student Management"
@@ -211,7 +211,7 @@ export default function HostelOwnersPage() {
                   </li>
                 </ul>
               </div>
-              <div className="rounded-lg overflow-hidden shadow-lg border border-border">
+              <div className="rounded-2xl overflow-hidden shadow-lg ">
                 <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/room%20managnment.PNG-o9tRGQVkZD4ORMUqF032Ms748V8adP.png"
                   alt="Room Management"
@@ -226,7 +226,7 @@ export default function HostelOwnersPage() {
           {/* Mockup 4: Payments & Invoices */}
           <div className="mb-16 sm:mb-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <div className="rounded-lg overflow-hidden shadow-lg border border-border order-2 lg:order-1">
+              <div className="rounded-2xl overflow-hidden shadow-lg  order-2 lg:order-1">
                 <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/payments.PNG-XaqgseQhBYjG7XgvfGq8IEieLbs7hw.png"
                   alt="Payments and Invoices"
@@ -285,7 +285,7 @@ export default function HostelOwnersPage() {
                   </li>
                 </ul>
               </div>
-              <div className="rounded-lg overflow-hidden shadow-lg border border-border">
+              <div className="rounded-2xl overflow-hidden shadow-lg ">
                 <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/feedbacks-complaint.PNG-B90h4k0XTooQowT5p0KkfCRz5zxudS.png"
                   alt="Complaint Management"
@@ -300,7 +300,7 @@ export default function HostelOwnersPage() {
           {/* Mockup 6: Feedback Analytics */}
           <div className="mb-16 sm:mb-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <div className="rounded-lg overflow-hidden shadow-lg border border-border order-2 lg:order-1">
+              <div className="rounded-2xl overflow-hidden shadow-lg  order-2 lg:order-1">
                 <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/feedbacks.PNG-PxJMH2RZc6TksZnKHJtoIueWTN5PNg.png"
                   alt="Feedback Analytics"
@@ -358,7 +358,7 @@ export default function HostelOwnersPage() {
                   </li>
                 </ul>
               </div>
-              <div className="rounded-lg overflow-hidden shadow-lg border border-border">
+              <div className="rounded-2xl overflow-hidden shadow-lg ">
                 <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/invoice-details.PNG-q2aHgYhrfemL7AlF8IZ5dLULVJHylp.png"
                   alt="Invoice Details"
@@ -380,7 +380,7 @@ export default function HostelOwnersPage() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            <div className="bg-primary-foreground/10 backdrop-blur border border-white/20 rounded-lg p-6 sm:p-8">
+            <div className="bg-card/10 backdrop-blur border border-white/20 rounded-2xl p-6 sm:p-8">
               <div className="text-3xl mb-3">📈</div>
               <h3 className="text-lg sm:text-xl font-bold mb-2">Increase Revenue</h3>
               <p className="text-sm sm:text-base text-white/90">
@@ -389,7 +389,7 @@ export default function HostelOwnersPage() {
               </p>
             </div>
 
-            <div className="bg-primary-foreground/10 backdrop-blur border border-white/20 rounded-lg p-6 sm:p-8">
+            <div className="bg-card/10 backdrop-blur border border-white/20 rounded-2xl p-6 sm:p-8">
               <div className="text-3xl mb-3">⏱️</div>
               <h3 className="text-lg sm:text-xl font-bold mb-2">Save Time</h3>
               <p className="text-sm sm:text-base text-white/90">
@@ -398,7 +398,7 @@ export default function HostelOwnersPage() {
               </p>
             </div>
 
-            <div className="bg-primary-foreground/10 backdrop-blur border border-white/20 rounded-lg p-6 sm:p-8">
+            <div className="bg-card/10 backdrop-blur border border-white/20 rounded-2xl p-6 sm:p-8">
               <div className="text-3xl mb-3">🌐</div>
               <h3 className="text-lg sm:text-xl font-bold mb-2">Go Digital</h3>
               <p className="text-sm sm:text-base text-white/90">
@@ -407,7 +407,7 @@ export default function HostelOwnersPage() {
               </p>
             </div>
 
-            <div className="bg-primary-foreground/10 backdrop-blur border border-white/20 rounded-lg p-6 sm:p-8">
+            <div className="bg-card/10 backdrop-blur border border-white/20 rounded-2xl p-6 sm:p-8">
               <div className="text-3xl mb-3">🔒</div>
               <h3 className="text-lg sm:text-xl font-bold mb-2">Full Control</h3>
               <p className="text-sm sm:text-base text-white/90">
@@ -420,7 +420,7 @@ export default function HostelOwnersPage() {
       </section>
 
       {/* How to Register Section */}
-      <section className="bg-secondary py-12 sm:py-16 md:py-20">
+      <section className=" py-12 sm:py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-12 sm:mb-16 text-center">
             How to Register Your Hostel
@@ -428,7 +428,7 @@ export default function HostelOwnersPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8">
             {/* Step 1 */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-6 text-center">
+            <div className="bg-card  rounded-2xl p-6 text-center">
               <div className="w-12 h-12 bg-accent text-accent-foreground rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                 1
               </div>
@@ -439,7 +439,7 @@ export default function HostelOwnersPage() {
             </div>
 
             {/* Step 2 */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-6 text-center">
+            <div className="bg-card  rounded-2xl p-6 text-center">
               <div className="w-12 h-12 bg-accent text-accent-foreground rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                 2
               </div>
@@ -450,7 +450,7 @@ export default function HostelOwnersPage() {
             </div>
 
             {/* Step 3 */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-6 text-center">
+            <div className="bg-card  rounded-2xl p-6 text-center">
               <div className="w-12 h-12 bg-accent text-accent-foreground rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                 3
               </div>
@@ -461,7 +461,7 @@ export default function HostelOwnersPage() {
             </div>
 
             {/* Step 4 */}
-            <div className="bg-primary-foreground border border-border rounded-lg p-6 text-center">
+            <div className="bg-card  rounded-2xl p-6 text-center">
               <div className="w-12 h-12 bg-accent text-accent-foreground rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                 4
               </div>
@@ -474,7 +474,7 @@ export default function HostelOwnersPage() {
 
           <div className="text-center mt-12">
             <Link href="/hostel-registration">
-              <button className="bg-accent hover:bg-accent/90 text-accent-foreground px-6 sm:px-8 py-3 rounded-sm font-bold text-base sm:text-lg transition-all">
+              <button className="bg-accent hover:bg-accent/90 text-accent-foreground px-6 sm:px-8 py-3 rounded-full font-bold text-base sm:text-lg transition-all">
                 Start Registration Now
               </button>
             </Link>

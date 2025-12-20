@@ -60,12 +60,12 @@ export default function StudentLogin() {
 ></Script>
       <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md">
-          <div className="bg-white rounded-lg shadow-lg p-8">
+          <div className="bg-card rounded-2xl   p-8">
             <h1 className="text-3xl font-bold text-primary mb-2">Student Login</h1>
             <p className="text-foreground/60 mb-8">Sign in to your account to manage your hostel booking</p>
 
             {error && (
-              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-full flex items-start gap-3">
                 <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
                 <p className="text-red-700 text-sm">{error}</p>
               </div>
@@ -75,13 +75,14 @@ export default function StudentLogin() {
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Email Address</label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-3.5 w-5 h-5 text-foreground/40" />
+                  <Mail className="absolute left-4 top-3.5 w-5 h-5 text-foreground/40" />
                   <input
                     type="email"
                     value={email}
+                    required
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="student@example.com"
-                    className="w-full pl-10 pr-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-2.5 border border-border rounded-full focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                   />
                 </div>
               </div>
@@ -89,13 +90,14 @@ export default function StudentLogin() {
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Password</label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3.5 w-5 h-5 text-foreground/40" />
+                  <Lock className="absolute left-4 top-3.5 w-5 h-5 text-foreground/40" />
                   <input
                     type="password"
                     value={password}
+                    required
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full pl-10 pr-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-2.5 border border-border rounded-full focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                   />
                 </div>
               </div>
@@ -104,7 +106,7 @@ export default function StudentLogin() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-accent hover:bg-accent/90 text-primary font-semibold py-2.5 rounded-lg transition-colors"
+                className="w-full bg-accent hover:bg-accent/90 text-primary font-semibold py-3 rounded-full transition-colors"
               >
                 {loading ? "Signing in..." : "Sign In"}
               </Button>

@@ -73,10 +73,10 @@ export default function FAQ() {
             {faqs.map((faq, index) => (
               <details
                 key={index}
-                className="group border border-border rounded-sm p-4 sm:p-6 cursor-pointer hover:bg-secondary/50 transition-colors"
+                className="group rounded-2xl bg-card p-4 sm:p-6 cursor-pointer  group transition-colors"
               >
                 <summary className="flex items-center justify-between font-semibold text-foreground">
-                  <span>{faq.question}</span>
+                  <span className="group-hover:text-accent ">{faq.question}</span>
                   <span className="text-accent group-open:rotate-180 transition-transform">▼</span>
                 </summary>
                 <p className="text-foreground/70 mt-4 leading-relaxed">{faq.answer}</p>
@@ -85,14 +85,14 @@ export default function FAQ() {
           </div>
 
           {/* Still Have Questions */}
-          <div className="mt-12 sm:mt-16 p-6 sm:p-8 bg-accent/10 border border-accent/20 rounded-sm text-center">
+          <div className="mt-12 sm:mt-16 p-6 sm:p-8 bg-card rounded-2xl text-center">
             <h2 className="text-2xl font-bold text-primary mb-3">Still have questions?</h2>
             <p className="text-foreground/70 mb-6">
               Can't find the answer you're looking for? Please contact our support team.
             </p>
             <a
               href="/contact"
-              className="inline-block bg-accent text-primary font-semibold px-6 py-3 rounded-sm hover:bg-accent/90 transition-colors"
+              className="inline-block bg-accent text-primary font-semibold px-6 py-3 rounded-full hover:bg-accent/90 transition-colors"
             >
               Contact Support
             </a>
