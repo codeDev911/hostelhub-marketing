@@ -35,6 +35,11 @@ function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/find-roommate" className="hover:opacity-100 hover:text-foreground hover:underline transition-opacity">
+                  Find roommate
+                </Link>
+              </li>
+              <li>
                 <Link href="/faq" className="hover:opacity-100 hover:text-foreground hover:underline transition-opacity">
                   FAQ
                 </Link>

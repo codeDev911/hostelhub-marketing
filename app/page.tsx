@@ -4,6 +4,8 @@ import Link from "next/link"
 import { MapPin, Users, Star,CheckCircle, ChevronRight, Quote } from "lucide-react"
 import HeroSearch from "@/components/hero-search" 
 import { cities } from "@/lib/mock-data"
+import FindRoommateFeature from "@/components/find-roomate"
+import CommunityComingSoon from "@/components/communityFeature"
 
 export default function Home() {
  
@@ -51,36 +53,41 @@ export default function Home() {
           </div>
         </div>
       </section>
-{/* Popular Cities Section */}
-<section className="py-12 sm:py-16 ">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="flex flex-wrap justify-between items-end mb-8">
-      <div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-primary">Explore by City</h2>
-        <p className="text-muted-foreground mt-2">Find the best hostels in major educational hubs</p>
-      </div>
-      <Link href="/cities" className="text-accent font-semibold flex items-center gap-1 hover:underline">
-        View all <ChevronRight className="w-4 h-4" />
-      </Link>
-    </div>
 
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-      {cities.slice(0, 4).map((city) => (
-        <Link key={city.name} href={`/hostels?city=${city.name.toLowerCase()}`} className="group relative h-48 sm:h-64 overflow-hidden rounded-2xl">
-          <img 
-            src={city.image} 
-            alt={city.name} 
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-          <div className="absolute bottom-4 left-4 text-white">
-            <h3 className="text-lg sm:text-xl font-bold">{city.name}</h3>
+
+<FindRoommateFeature/>
+
+      {/* Popular Cities Section */}
+      <section className="py-12 sm:py-16 ">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap justify-between items-end mb-8">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-primary">Explore by City</h2>
+              <p className="text-muted-foreground mt-2">Find the best hostels in major educational hubs</p>
+            </div>
+            <Link href="/cities" className="text-accent font-semibold flex items-center gap-1 hover:underline">
+              View all <ChevronRight className="w-4 h-4" />
+            </Link>
           </div>
-        </Link>
-      ))}
-    </div>
-  </div>
-</section>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {cities.slice(0, 4).map((city) => (
+              <Link key={city.name} href={`/hostels?city=${city.name.toLowerCase()}`} className="group relative h-48 sm:h-64 overflow-hidden rounded-2xl">
+                <img 
+                  src={city.image} 
+                  alt={city.name} 
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 text-white">
+                  <h3 className="text-lg sm:text-xl font-bold">{city.name}</h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+<CommunityComingSoon/>
 
 {/* Motivation & Success Section */}
 <section className="py-16 bg-card border-y border-accent/10">
