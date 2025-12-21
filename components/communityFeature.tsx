@@ -22,11 +22,11 @@ export default function CommunityFeatureShowcase() {
           <div>
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
               <Sparkles className="w-4 h-4" />
-              Community · Coming Soon
+              Community · Live now
             </div>
 
             <h2 className="text-4xl md:text-5xl font-bold text-primary leading-tight mb-6">
-              A Community Built<br />Around Student Life
+              A <span className="undercurve">Community</span> Built<br />Around Student Life
             </h2>
 
             <p className="text-lg text-muted-foreground leading-relaxed mb-8">

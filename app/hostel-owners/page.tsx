@@ -16,27 +16,62 @@ export function generateMetadata(){
 
 export default function HostelOwnersPage() {
   return (
-    <main className="min-h-screen bg-background flex flex-col">
+    <main className="min-h-screen  flex flex-col">
       
 
-      {/* Hero Section */}
-      <section className="bg-linear-to-r from-primary to-primary/80 text-white py-12 sm:py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Grow Your Hostel Business</h1>
-          <p className="text-lg sm:text-xl text-white/90 mb-8">
-            Connect with thousands of students online. Manage your hostel effortlessly.
-          </p>
-          <div className="relative md:h-[90vh] mx-auto  h-[47vh]">
-            <Image src={"dashboard.PNG"} width={60} height={60} className="absolute w-[60%] border-2 border-border  flex cover shadow-xl rounded-2xl"  alt="img"/>
-            <Image src={"payments.PNG"} width={60} height={60} className="absolute md:left-70 left-35 border-2 border-border top-20 w-[60%]  flex cover shadow-xl rounded-2xl"  alt="img"/>
-          </div>
-          <Link href="/hostel-registration">
-            <button className="bg-accent hover:bg-accent/90 text-accent-foreground px-6 sm:px-8 py-3 rounded-full font-bold text-base sm:text-lg transition-all">
-              Register Your Hostel
-            </button>
-          </Link>
-        </div>
-      </section>
+ <section className=" overflow-x-hidden py-20">
+  <div className="absolute top-0 -z-10 inset-0 bg-gradient-to-br from-primary/20 via-background to-background" />
+
+  <div className="relative max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    
+    {/* Left Content */}
+    <div>
+      <span className="inline-flex items-center rounded-full bg-accent px-4 py-1 text-sm font-medium text-accent-foreground mb-4">
+        For Hostel & Apartment Owners
+      </span>
+
+      <h1 className="text-4xl md:text-6xl font-bold text-primary mb-6 text-balance">
+        Grow your hostel
+        <br />
+        business with HostelHub
+      </h1>
+
+      <p className="max-w-xl text-lg text-foreground/70 mb-8">
+        Bring your hostel online, reach more students, manage rooms, payments,
+        and operations — all from one powerful dashboard.
+      </p>
+
+      <div className="flex flex-wrap gap-4">
+        <Link
+          href="/hostel-registration"
+          className="rounded-full bg-accent px-8 py-3 font-semibold text-accent-foreground hover:bg-accent/90 transition"
+        >
+          Register Your Hostel
+        </Link>
+
+        <Link
+          href="#features"
+          className="rounded-full border border-border px-8 py-3 font-semibold hover:bg-secondary transition"
+        >
+          Explore Features
+        </Link>
+      </div>
+    </div>
+
+    {/* Right Visual */}
+    <div className="relative">
+      <div className="absolute -inset-4 rounded-3xl bg-accent/20 blur-3xl -z-10" />
+      <img
+        src="/dashboard.PNG"
+        alt="HostelHub Dashboard"
+        className="w-full rounded-3xl border border-border shadow-2xl"
+      />
+    </div>
+
+  </div>
+</section>
+
+
 
       {/* Features Section */}
       <section className="py-12 sm:py-16 md:py-20">
@@ -373,14 +408,14 @@ export default function HostelOwnersPage() {
       </section>
 
 {/* Why choose hostelhub */}
-      <section className="bg-primary text-white py-12 sm:py-16 md:py-20">
+      <section className="bg-secondary text-primary py-12 sm:py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-12 sm:mb-16 text-center">
             Why Hostel Owners Choose HostelHub
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            <div className="bg-card/10 backdrop-blur border border-white/20 rounded-2xl p-6 sm:p-8">
+            <div className="bg-card rounded-2xl p-6 sm:p-8">
               <div className="text-3xl mb-3">📈</div>
               <h3 className="text-lg sm:text-xl font-bold mb-2">Increase Revenue</h3>
               <p className="text-sm sm:text-base text-white/90">
@@ -389,7 +424,7 @@ export default function HostelOwnersPage() {
               </p>
             </div>
 
-            <div className="bg-card/10 backdrop-blur border border-white/20 rounded-2xl p-6 sm:p-8">
+            <div className="bg-card rounded-2xl p-6 sm:p-8">
               <div className="text-3xl mb-3">⏱️</div>
               <h3 className="text-lg sm:text-xl font-bold mb-2">Save Time</h3>
               <p className="text-sm sm:text-base text-white/90">
@@ -398,7 +433,7 @@ export default function HostelOwnersPage() {
               </p>
             </div>
 
-            <div className="bg-card/10 backdrop-blur border border-white/20 rounded-2xl p-6 sm:p-8">
+            <div className="bg-card rounded-2xl p-6 sm:p-8">
               <div className="text-3xl mb-3">🌐</div>
               <h3 className="text-lg sm:text-xl font-bold mb-2">Go Digital</h3>
               <p className="text-sm sm:text-base text-white/90">
@@ -407,7 +442,7 @@ export default function HostelOwnersPage() {
               </p>
             </div>
 
-            <div className="bg-card/10 backdrop-blur border border-white/20 rounded-2xl p-6 sm:p-8">
+            <div className="bg-card rounded-2xl p-6 sm:p-8">
               <div className="text-3xl mb-3">🔒</div>
               <h3 className="text-lg sm:text-xl font-bold mb-2">Full Control</h3>
               <p className="text-sm sm:text-base text-white/90">

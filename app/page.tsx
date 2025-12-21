@@ -2,24 +2,88 @@
 
 import Link from "next/link"
 import { MapPin, Users, Star,CheckCircle, ChevronRight, Quote } from "lucide-react"
-import HeroSearch from "@/components/hero-search" 
 import { cities } from "@/lib/mock-data"
 import FindRoommateFeature from "@/components/find-roomate"
 import CommunityComingSoon from "@/components/communityFeature"
 
 export default function Home() {
+
  
   return (
-    <main className="min-h-screen bg-background flex flex-col">
+    <main className="min-h-screen overflow-hidden  flex flex-col">
 
       {/* Hero Section with Search */}
-      <HeroSearch  />
+      <section className="overflow-x-hidden py-24">
+  {/* Background */}
+  <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 via-background to-background" />
+  <div className="absolute right-0 top-0   h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
+  <div className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-secondary/20 blur-3xl" />
+
+  <div className="relative max-w-7xl mx-auto px-6 flex-col sm:text-center sm:justify-center sm:items-center">
+    
+    {/* Left Content */}
+      <span className="inline-flex items-center rounded-full bg-accent/10 px-4 py-1 text-sm font-medium text-muted-foreground mb-5">
+        Student-first ecosystem
+      </span>
+
+      <h1 className="text-4xl md:text-6xl font-bold text-primary mb-6 leading-tight text-balance">
+        Providing the best <span className="undercurve">environment</span>
+        <br />
+        <span className="text-accent">for Students</span>
+      </h1>
+
+      <p className="max-w-4xl sm:mx-auto text-lg text-foreground/70 mb-10">
+        HostelHub is more than just hostels. We connect students with safe accommodation,
+        supportive communities, scholarships, and a truly student-friendly ecosystem
+        designed to help you grow, learn, and succeed.
+      </p>
+
+      <div className="flex flex-wrap w-full justify-center gap-4">
+        <a
+          href="/find-hostels"
+          className="rounded-full bg-accent px-8 py-3 font-semibold text-accent-foreground hover:bg-accent/90 transition"
+        >
+          Find a Hostel
+        </a>
+
+        <a
+          href="/community"
+          className="rounded-full border border-border px-8 py-3 font-semibold hover:bg-secondary transition"
+        >
+          Join the Community
+        </a>
+      </div>
+
+      {/* Highlights */}
+      <div className="mt-16  w-full grid grid-cols-2 sm:grid-cols-4 gap-6 text-sm">
+        <div>
+          <p className="font-semibold text-primary">Accommodation</p>
+          <p className="text-foreground/60">Verified hostels & apartments</p>
+        </div>
+        <div>
+          <p className="font-semibold text-primary">Community</p>
+          <p className="text-foreground/60">Connect with students</p>
+        </div>
+        <div>
+          <p className="font-semibold text-primary">Scholarships</p>
+          <p className="text-foreground/60">Support for your education</p>
+        </div>
+        <div>
+          <p className="font-semibold text-primary">Growth</p>
+          <p className="text-foreground/60">Tools for student success</p>
+        </div>
+      </div>
+
+  
+  </div>
+</section>
+
  
       {/* Why Choose Us Section */}
       <section className="py-12 sm:py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-8 sm:mb-12 text-center">
-            Why Choose HostelHub?
+            Why <span className="undercurve">Choose</span> HostelHub?
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8">
@@ -94,7 +158,7 @@ export default function Home() {
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="text-center mb-12">
       <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-        More Than Just a Room
+        More than <span className="undercurve">just a room</span> 
       </h2>
       <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
         Join 10,000+ students who found their home away from home through HostelHub.
@@ -167,7 +231,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-6">
-                Are You a Hostel Owner?
+                Are you a <span className="undercurve">hostel owner</span>?
               </h2>
               <p className="text-base sm:text-lg text-muted-foreground mb-4 sm:mb-6 leading-relaxed">
                 Join thousands of hostel owners who are growing their business on HostelHub. Get access to thousands of

@@ -40,7 +40,7 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
           {/* Hero Section */}
           <div className="mb-12 sm:mb-16">
-            <h1 className="text-4xl sm:text-5xl font-bold text-primary mb-4 text-balance">About HostelHub</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold text-primary mb-4 text-balance">About <span className="undercurve">HostelHub</span></h1>
             <p className="text-lg text-foreground/70 max-w-2xl">
               Connecting Pakistani students with safe, affordable, and comfortable hostel accommodations across the
               country.

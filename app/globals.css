@@ -3,6 +3,26 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* globals.css */
+.undercurve {
+  position: relative;
+  display: inline-block; 
+}
+
+.undercurve::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 85%;
+  width: 100%;
+  height: 3rem;
+  border-bottom: 7px solid var(--color-accent);
+  border-radius:  0 0 40% 40%;  
+  transform: rotate(182deg);
+  
+}
+ 
+
 :root {
   --background: rgb(244, 244, 239);
   --foreground: oklch(0.15 0 0);
@@ -43,13 +63,13 @@
 .dark {
   --background: oklch(13.441% 0.00002 271.152);
   --foreground: oklch(0.95 0 0);
-  --card: oklch(0.18 0 0);
-  --card-foreground: oklch(0.95 0 0);
+  --card: oklch(19.939% 0.00389 106.844);
+  --card-foreground: oklch(0.95 0 0) ;
   --popover: oklch(0.18 0 0);
   --popover-foreground: oklch(0.95 0 0);
   --primary: oklch(0.95 0 0);
   --primary-foreground: oklch(27.274% 0.00003 271.152);
-  --secondary: oklch(0.25 0 0);
+  --secondary: oklch(24.246% 0.01111 99.395);
   --secondary-foreground: oklch(0.95 0 0);
   --muted: oklch(0.3 0 0);
   --muted-foreground: oklch(0.7 0 0);
@@ -57,7 +77,7 @@
   --accent-foreground: oklch(0.15 0 0);
   --destructive: oklch(63.566% 0.2498 27.842);
   --destructive-foreground: oklch(0.85 0.2 100);
-  --border: oklch(0.25 0 0);
+  --border: oklch(42.761% 0.00005 271.152);
   --input: oklch(0.25 0 0);
   --ring: oklch(0.85 0.2 100);
   --chart-1: oklch(0.85 0.2 100);

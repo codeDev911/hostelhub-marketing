@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation"
 import { Search, MapPin, Home, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { mockCities } from "@/lib/mock-data"
-import { Label } from "./ui/label"
 
 export default function HeroSearch() {
   const router = useRouter()
@@ -25,7 +24,7 @@ export default function HeroSearch() {
   }
 
   return (
-    <section className="relative z-40   py-16 md:py-28 lg:py-36 ">
+    <section className="relative z-40   py-16 md:py-28 lg:py-26 ">
       <div className="absolute inset-0 opacity-20">
         <div className="absolute animate-pulse top-10 right-10 w-72 h-72 bg-accent rounded-full blur-3xl"></div>
         <div className="absolute animate-pulse bottom-10 left-10 w-96 h-96 bg-accent/50 rounded-full blur-3xl"></div>
@@ -33,14 +32,14 @@ export default function HeroSearch() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Content */}
-        <div className="text-center mb-12 md:mb-16">
-          <div className="inline-flex items-center gap-2  bg-accent/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-accent/20">
+        <div className="sm:text-center mb-12 md:mb-16">
+          <div className="inline-flex sm:items-center gap-2  bg-accent/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-accent/20">
             <Home className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-primary">Find Your Perfect Student Hostel</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-primary mb-3 leading-tight">
-            Find Your Perfect <span className="text-accent">Hostel</span>
+            Find Your <span className="undercurve ">Perfect</span> Hostel
           </h1>
 
           <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto mb-8">
@@ -51,12 +50,12 @@ export default function HeroSearch() {
         </div>
 
         {/* Search Box */}
-        <div className="bg-primary-foreground rounded-3xl   p-4 md:p-5 lg:p-7">
+        <div className="bg-card rounded-3xl     p-6 lg:p-7">
           <div className="flex space-x-2">
             <Sparkles className="w-4 text-accent"/>
             <h2 className="text-primary text-base font-bold">Smart Search</h2>
           </div>
-          <p className="text-secondray text-sm mb-4">Our smart and intellegnce search to brings best accomodation for you</p>
+          <p className="text-muted-foreground mt-1 text-sm mb-4">Our smart and intellegnce search to brings best accomodation for you</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {/* City Select */}
             <div className="relative">

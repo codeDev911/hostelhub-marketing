@@ -15,7 +15,7 @@ export default function FindRoommateFeature() {
 
             {/* Left Content */}
             <div>
-              <div className="inline-flex items-center gap-2 bg-accent/15 text-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
+              <div className="inline-flex items-center gap-2 text-accent-foreground bg-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
                 <Users className="w-4 h-4" />
                 New Feature
               </div>
@@ -26,7 +26,7 @@ export default function FindRoommateFeature() {
 
               <p className="text-muted-foreground text-base sm:text-lg mb-6 leading-relaxed">
                 Moving to a new city or sharing a room? Connect with verified students
-                who match your budget, location, and preferences — safely and easily.
+                who match your budget, location, and preferences safely and easily.
               </p>
 
               {/* Feature Points */}

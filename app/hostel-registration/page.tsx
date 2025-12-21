@@ -121,7 +121,7 @@ export default function HostelRegistrationPage() {
 
         <form
           onSubmit={handleSubmit}
-          className="bg-primary-foreground border border-border rounded-lg p-6 sm:p-8 space-y-6 sm:space-y-8"
+          className="bg-card rounded-2xl p-6 sm:p-8 space-y-6 sm:space-y-8"
         >
           {/* Section: Hostel Information */}
           <div>
@@ -136,7 +136,7 @@ export default function HostelRegistrationPage() {
                   onChange={handleChange}
                   placeholder="e.g., Student Haven Lahore"
                   required
-                  className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:border-accent transition-colors"
+                  className="w-full px-4 py-2 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                 />
               </div>
 
@@ -147,7 +147,7 @@ export default function HostelRegistrationPage() {
                   name="businessType"
                   value={formData.businessType}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:border-accent transition-colors"
+                  className="w-full px-4 py-2 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                 >
                   <option value="hostel">Hostel</option>
                   {/* <option value="shared">Shared Housing</option>
@@ -160,7 +160,7 @@ export default function HostelRegistrationPage() {
                   name="gender"
                   value={formData.gender}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:border-accent transition-colors"
+                  className="w-full px-4 py-2 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                 >
                   <option value="boys">Boys</option>
                   <option value="grils">Girls</option>
@@ -176,7 +176,7 @@ export default function HostelRegistrationPage() {
                   placeholder="Describe your hostel features and amenities"
                   required
                   rows={2}
-                  className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:border-accent transition-colors resize-none"
+                  className="w-full px-4 py-2 border border-border rounded-2xl focus:outline-none focus:border-accent transition-colors resize-none"
                 />
               </div>
             </div>
@@ -195,7 +195,7 @@ export default function HostelRegistrationPage() {
                   onChange={handleChange}
                   placeholder="Your full name"
                   required
-                  className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:border-accent transition-colors"
+                  className="w-full px-4 py-2 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                 />
               </div>
 
@@ -208,7 +208,7 @@ export default function HostelRegistrationPage() {
                   onChange={handleChange}
                   placeholder="your.email@example.com"
                   required
-                  className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:border-accent transition-colors"
+                  className="w-full px-4 py-2 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                 />
               </div>
 
@@ -221,7 +221,7 @@ export default function HostelRegistrationPage() {
                   onChange={handleChange}
                   placeholder="+92-300-1234567"
                   required
-                  className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:border-accent transition-colors"
+                  className="w-full px-4 py-2 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                 />
               </div>
 
@@ -234,7 +234,7 @@ export default function HostelRegistrationPage() {
                   onChange={handleChange}
                   placeholder="xxxxx-xxxxxxx-x"
                   required
-                  className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:border-accent transition-colors"
+                  className="w-full px-4 py-2 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                 />
               </div>
             </div>
@@ -251,7 +251,7 @@ export default function HostelRegistrationPage() {
                   value={formData.city}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:border-accent transition-colors"
+                  className="w-full px-4 py-2 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                 >
                   <option value="">Select City</option>
                   {cities.map((city) => (
@@ -290,7 +290,7 @@ export default function HostelRegistrationPage() {
                   onChange={handleChange}
                   placeholder="e.g., Punjab"
                   required
-                  className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:border-accent transition-colors"
+                  className="w-full px-4 py-2 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                 />
               </div>
 
@@ -303,7 +303,7 @@ export default function HostelRegistrationPage() {
                   onChange={handleChange}
                   placeholder="e.g., 54000"
                   required
-                  className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:border-accent transition-colors"
+                  className="w-full px-4 py-2 border border-border rounded-full focus:outline-none focus:border-accent transition-colors"
                 />
               </div>
 
@@ -316,7 +316,7 @@ export default function HostelRegistrationPage() {
                   placeholder="Enter complete hostel address"
                   required
                   rows={2}
-                  className="w-full px-4 py-2 border border-border rounded-sm focus:outline-none focus:border-accent transition-colors resize-none"
+                  className="w-full px-4 py-2 border border-border rounded-2xl focus:outline-none focus:border-accent transition-colors resize-none"
                 />
               </div>
             </div>
@@ -329,7 +329,7 @@ export default function HostelRegistrationPage() {
             <Link href="/hostel-owners" className="flex-1">
               <button
                 type="button"
-                className="w-full border border-border hover:bg-secondary px-6 py-3 rounded-sm font-bold transition-all"
+                className="w-full border border-border hover:bg-secondary px-6 py-3 rounded-full font-bold transition-all"
               >
                 Cancel
               </button>
@@ -337,7 +337,7 @@ export default function HostelRegistrationPage() {
               <button
               type="submit"
               disabled={isLoading}
-              className="flex-1 bg-accent cursor-pointer hover:bg-accent/70 text-accent-foreground px-6 py-3 rounded-sm font-bold transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+              className="flex-1 bg-accent cursor-pointer hover:bg-accent/70 text-accent-foreground px-6 py-3 rounded-full font-bold transition-all disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {isLoading ? (
                 <>

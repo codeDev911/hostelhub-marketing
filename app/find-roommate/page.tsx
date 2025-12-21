@@ -45,31 +45,31 @@ export default function FindRoommatePage() {
             <div className="absolute -top-24 -right-24 w-72 h-72 bg-accent/20 rounded-full blur-3xl" />
             <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
 
-            <div className="relative z-10 text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-2 bg-accent/15 text-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
+            <div className="relative z-10 sm:text-center max-w-3xl mx-auto">
+              <div className="inline-flex items-center gap-2 text-accent-foreground bg-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
                 <Sparkles className="w-4 h-4" />
                 New • Safe • Student-Focused
               </div>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4 leading-tight">
-                Find the Right Roommate,
+                Find the Right <span className="undercurve">Roommate</span>,
                 <br className="hidden sm:block" /> Without the Stress
               </h1>
 
               <p className="text-muted-foreground text-base sm:text-lg mb-8">
                 Connect with verified students looking to share rooms near your university
-                or hostel — safely and easily.
+                or hostel safely and easily.
               </p>
 
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <Link href="#roommates">
-                  <button className="bg-primary text-primary-foreground px-8 py-3 rounded-full font-bold text-base hover:bg-primary/90 transition">
+                  <button className="bg-primary cursor-pointer text-primary-foreground px-8 py-3 rounded-full font-bold text-base hover:bg-primary/70 transition">
                     Find Roommates
                   </button>
                 </Link>
 
                 <Link href="/find-roommate/create">
-                  <button className="bg-accent text-accent-foreground px-8 py-3 rounded-full font-bold text-base hover:bg-accent/90 transition flex items-center justify-center gap-2">
+                  <button className="bg-accent cursor-pointer text-accent-foreground px-8 py-3 rounded-full font-bold text-base hover:bg-accent/70 transition flex items-center justify-center gap-2">
                     <Plus className="w-5 h-5" />
                     Post Roommate Request
                   </button>
@@ -89,11 +89,15 @@ export default function FindRoommatePage() {
       {/* ===== FILTER SECTION ===== */}
       <section className="pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-card rounded-2xl p-6 sm:p-8 grid grid-cols-1 md:grid-cols-5 gap-4">
-
+          <div className="bg-card rounded-2xl p-6 sm:p-8 ">
+            <h2 className="text-base font-bold text-primary">
+              Smart search
+            </h2>
+            <p className="text-sm text-muted-foreground">Find a best roommate using our smart search feature</p>
+          <div className="mt-4  grid grid-cols-1 md:grid-cols-5 gap-4">
             <div className="flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-muted-foreground" />
-              <select className="w-full bg-background border rounded-xl px-3 py-2">
+              <MapPin className="w-6 h-6 text-muted-foreground" />
+              <select className="w-full bg-background border rounded-full p-2">
                 <option>City</option>
                 <option>Peshawar</option>
                 <option>Lahore</option>
@@ -102,8 +106,8 @@ export default function FindRoommatePage() {
             </div>
 
             <div className="flex items-center gap-2">
-              <Users className="w-5 h-5 text-muted-foreground" />
-              <select className="w-full bg-background border rounded-xl px-3 py-2">
+              <Users className="w-6 h-6 text-muted-foreground" />
+              <select className="w-full bg-background border rounded-full p-2">
                 <option>Gender</option>
                 <option>Male</option>
                 <option>Female</option>
@@ -111,8 +115,8 @@ export default function FindRoommatePage() {
             </div>
 
             <div className="flex items-center gap-2">
-              <Wallet className="w-5 h-5 text-muted-foreground" />
-              <select className="w-full bg-background border rounded-xl px-3 py-2">
+              <Wallet className="w-6 h-6 text-muted-foreground" />
+              <select className="w-full bg-background border rounded-full p-2">
                 <option>Budget</option>
                 <option>Below 10k</option>
                 <option>10k – 15k</option>
@@ -121,16 +125,17 @@ export default function FindRoommatePage() {
             </div>
 
             <div className="flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-muted-foreground" />
+              <Calendar className="w-6 h-6 text-muted-foreground" />
               <input
                 type="date"
-                className="w-full bg-background border rounded-xl px-3 py-2"
+                className="w-full bg-background border rounded-full p-2"
               />
             </div>
 
-            <button className="bg-primary text-primary-foreground rounded-xl font-bold hover:bg-primary/90 transition">
+            <button className="bg-primary p-2 text-primary-foreground rounded-full font-bold hover:bg-primary/90 transition">
               Search
             </button>
+          </div>
           </div>
         </div>
       </section>

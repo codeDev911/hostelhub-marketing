@@ -7,6 +7,7 @@ import Footer from "@/components/footer"
 import { getSession } from "@/lib/auth"
 import { Toaster } from "sonner"
 import { Poppins } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider"
 
 // Configure Rubik
 const poppins = Poppins({
@@ -33,13 +34,13 @@ export default async function RootLayout({
     <html lang="en" className={poppins.variable}> 
         <body className={`font-sans antialiased`}>
 
-      {/* <ThemeProvider attribute={"class"}> */}
+      <ThemeProvider attribute={"class"} defaultTheme="system">
         <Header session={session}/>
         {children}
         <Toaster  position="top-center" closeButton/>
         <Analytics />
         <Footer/>
-      {/* </ThemeProvider> */}
+      </ThemeProvider>
       </body>
     </html>
   )

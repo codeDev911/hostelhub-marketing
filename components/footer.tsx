@@ -15,8 +15,7 @@ function Footer() {
               <h4 className="font-bold  text-lg text-primary ">HostelHub</h4>
             </div>
             <p className="text-sm mt-2 opacity-80  text-primary leading-relaxed">
-              Your trusted platform for finding affordable student hostels across Pakistan. Safe, secure, and
-              student-friendly.
+             Building a student-friendly ecosystem from accommodation to success.
             </p>
           </div>
 
@@ -58,8 +57,13 @@ function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/help" className="hover:opacity-100 hover:text-foreground hover:underline transition-opacity">
+                <Link href="https://discuss.hostelhub.pk/t/help-support" target="__blank" className="hover:opacity-100 hover:text-foreground hover:underline transition-opacity">
                   Help Center
+                </Link>
+              </li>
+              <li>
+                <Link href="https://discuss.hostelhub.pk" target="__blank" className="hover:opacity-100 hover:text-foreground hover:underline transition-opacity">
+                  Community
                 </Link>
               </li>
               <li>
