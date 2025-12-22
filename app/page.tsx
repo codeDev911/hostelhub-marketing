@@ -5,6 +5,7 @@ import { MapPin, Users, Star,CheckCircle, ChevronRight, Quote } from "lucide-rea
 import { cities } from "@/lib/mock-data"
 import FindRoommateFeature from "@/components/find-roomate"
 import CommunityComingSoon from "@/components/communityFeature"
+import DonationHomeSection from "@/components/donateFeature"
 
 export default function Home() {
 
@@ -120,6 +121,8 @@ export default function Home() {
 
 
 <FindRoommateFeature/>
+
+<DonationHomeSection/>
 
       {/* Popular Cities Section */}
       <section className="py-12 sm:py-16 ">
