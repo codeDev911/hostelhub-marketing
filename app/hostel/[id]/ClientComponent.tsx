@@ -64,6 +64,7 @@ export default function HostelDetailPage() {
         let res = await fetchApi({
           method: "GET",
           url: `/api/hostels/${id}`,
+          revalidate:60
         });
         let data = await res.json();
         if(res.ok){

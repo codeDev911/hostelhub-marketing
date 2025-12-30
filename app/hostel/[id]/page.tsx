@@ -26,7 +26,7 @@ type PageProps = {
 
 // Server fetch function
 async function getHostelMeta(id: string): Promise<HostelMeta> {
-  const res = await fetchApi({url:`/api/hostels/meta-details?id=${id}`,method:"GET"})
+  const res = await fetchApi({url:`/api/hostels/meta-details?id=${id}`,method:"GET", revalidate:120})
 
   if (!res.ok) throw new Error("Hostel not found");
 

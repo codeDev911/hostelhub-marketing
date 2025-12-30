@@ -44,6 +44,7 @@ export default function HostelsPage() {
       url: "/api/hostels",
       method: "GET",
       headers: {},
+      revalidate:300
     }).finally(() => {
       setLoading(false);
     });

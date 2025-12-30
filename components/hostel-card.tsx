@@ -3,7 +3,6 @@ import { MapPin, Users, DoorOpen } from "lucide-react"
 import { getImageUrl } from "@/lib/getImage"
 
 export default function HostelCard({ hostel }:any) {
-  console.log(hostel);
   
   return (
     <Link href={`/hostel/${hostel.id}`}>

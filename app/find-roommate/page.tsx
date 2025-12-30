@@ -48,7 +48,8 @@ export default function FindRoommatePage() {
             <div className="relative z-10 sm:text-center max-w-3xl mx-auto">
               <div className="inline-flex items-center gap-2 text-accent-foreground bg-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
                 <Sparkles className="w-4 h-4" />
-                New • Safe • Student-Focused
+                {/* New • Safe • Student-Focused */}
+                Comming soon
               </div>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4 leading-tight">
@@ -141,7 +142,7 @@ export default function FindRoommatePage() {
       </section>
 
       {/* ===== ROOMMATE LISTINGS ===== */}
-      <section id="roommates" className="pb-16">
+      {/* <section id="roommates" className="pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-8">
             Available Roommates
@@ -183,7 +184,7 @@ export default function FindRoommatePage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
     </main>
   )

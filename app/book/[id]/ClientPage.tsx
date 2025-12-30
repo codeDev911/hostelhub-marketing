@@ -6,9 +6,7 @@ import { JSX, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import {
   MapPin,
-  Phone,
-  Calendar,
-  Users,
+  Phone, 
   ArrowLeft,
   Check,
   Users2,
