@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Users, ShieldCheck, MapPin, ArrowRight, Clock11 } from "lucide-react"
+import { Users, ShieldCheck, MapPin, ArrowRight,  Clock3 } from "lucide-react"
 
 export default function FindRoommateFeature() {
   return (
@@ -16,8 +16,8 @@ export default function FindRoommateFeature() {
             {/* Left Content */}
             <div>
               <div className="inline-flex items-center gap-2 text-accent-foreground bg-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
-                <Clock11 className="w-4 h-4" />
-                Comming soon
+                <Clock3 className="w-4 h-4" />
+                Coming soon
               </div>
 
               <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-4">

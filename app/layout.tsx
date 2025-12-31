@@ -16,9 +16,9 @@ const poppins = Poppins({
   variable: "--font-poppins", // Define the CSS variable
 });
 export const metadata: Metadata = {
-  title: "Find Your Perfect Hostel in Pakistan - HostelHub",
+  title: " Pakistan’s #1 Student Housing, Community & Growth Platform",
   description:
-    "Book affordable hostels for students across Pakistan. Find the best accommodation near your university.",
+    "From verified hostels and roommates to student communities, scholarships, and support. HostelHub is building Pakistan’s most trusted student-friendly ecosystem."
 }
 
 export default async function RootLayout({

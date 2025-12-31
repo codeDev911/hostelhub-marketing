@@ -35,7 +35,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"; 
 import { getImageUrl } from "@/lib/getImage";
-import Head from "next/head";
 
 interface Room {
   id: string;
@@ -64,7 +63,6 @@ export default function HostelDetailPage() {
         let res = await fetchApi({
           method: "GET",
           url: `/api/hostels/${id}`,
-          revalidate:60
         });
         let data = await res.json();
         if(res.ok){
@@ -198,7 +196,7 @@ export default function HostelDetailPage() {
             </div>
 
             {/* Amenities */}
-            <div className="bg-primary-foreground rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+            <div className="bg-card rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
               <h2 className="text-xl sm:text-2xl font-bold text-primary mb-4 sm:mb-6">
                 Facilities
               </h2>
@@ -218,7 +216,7 @@ export default function HostelDetailPage() {
             </div>
 
             {/* Availabe rooms */}
-            <div className="bg-primary-foreground rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+            <div className="bg-card rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
               <h3 className="text-xl sm:text-2xl font-bold text-primary">
                 Available Rooms
               </h3>
@@ -363,7 +361,7 @@ export default function HostelDetailPage() {
               </div>
 <br />
               {/* 7-Day Meal Plan - Complimentary */}
-              <div className="bg-primary-foreground rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+              <div className="bg-card rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
                 <h3 className="text-xl sm:text-2xl font-bold text-primary mb-4 sm:mb-6 flex items-center gap-2">
                   <UtensilsCrossed className="w-5 sm:w-6 h-5 sm:h-6 text-accent" />
                   7-Day Meal Plan 
@@ -395,7 +393,7 @@ export default function HostelDetailPage() {
                           key={idx}
                           className={
                             idx % 2 === 0
-                              ? "bg-primary-foreground"
+                              ? "bg-card"
                               : "bg-secondary/30"
                           }
                         >
@@ -422,7 +420,7 @@ export default function HostelDetailPage() {
               {/* Check-in/Check-out & Rules */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
                 {/* Check-in/Check-out */}
-                <div className="bg-primary-foreground rounded-2xl p-4 sm:p-6">
+                <div className="bg-card rounded-2xl p-4 sm:p-6">
                   <h3 className="text-lg sm:text-xl font-bold text-primary mb-4 flex items-center gap-2">
                     <Clock className="w-5 h-5" />
                     Check-in & Check-out
@@ -448,7 +446,7 @@ export default function HostelDetailPage() {
                 </div>
 
                 {/* Rules */}
-                <div className="bg-primary-foreground rounded-2xl p-4 sm:p-6">
+                <div className="bg-card rounded-2xl p-4 sm:p-6">
                   <h3 className="text-lg sm:text-xl font-bold text-primary mb-4 flex items-center gap-2">
                     <AlertCircle className="w-5 h-5" />
                     House Rules
@@ -468,7 +466,7 @@ export default function HostelDetailPage() {
               </div>
 
               {/* Google Map */}
-              <div className="bg-primary-foreground rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+              <div className="bg-card rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
                 <h3 className="text-lg sm:text-xl font-bold text-primary mb-4">
                   Location on Map
                 </h3>
@@ -493,7 +491,7 @@ export default function HostelDetailPage() {
               </div>
 
               {/* Reviews Section */}
-              <div className="bg-primary-foreground rounded-2xl p-4 sm:p-6">
+              <div className="bg-card rounded-2xl p-4 sm:p-6">
                 <h3 className="text-xl sm:text-2xl font-bold text-primarysm:mb-6">
                   Reviews ({hostel.feedback.length||0})
                 </h3>
@@ -554,7 +552,7 @@ export default function HostelDetailPage() {
           {/* Sidebar */}
           <div className="lg:col-span-1">
              {/* Gender Info */}
-            <div className="bg-primary-foreground mb-4 rounded-2xl p-4 sm:p-6">
+            <div className="bg-card mb-4 rounded-2xl p-4 sm:p-6">
               <h3 className="text-lg font-bold text-primary mb-3">
                 Hostel Type
               </h3>
@@ -563,7 +561,7 @@ export default function HostelDetailPage() {
               </div>
             </div>
             {/* Quick Info Card */}
-            <div className="bg-primary-foreground rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 lg:sticky lg:top-24">
+            <div className="bg-card rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 lg:sticky lg:top-24">
               <h3 className="text-lg sm:text-xl font-bold text-primary mb-4 sm:mb-6">
                 Quick Info
               </h3>

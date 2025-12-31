@@ -263,6 +263,70 @@ export const getSeoMeta = (city?: string, area?: string, gender?:string) => {
     keywords: `hostels in ${cityData?.name}, ${cityData?.name} accommodation, affordable hostels ${cityData?.name}, Hostelhub ${cityData?.name}, best hostels ${cityData?.name}, ${cityData?.name} apartments,pakistan, hostelhub, ai, startup, students, mdcat, entry test, etea test, best university in pakistan, university, UET, KMU, KMC, school, best school in pakistan, best university in pakistan,hostelhub, best hostels in pakitsan`,
   };
 };
+
+
+export const getRoommateSeoMeta = (
+  city?: string,
+  area?: string,
+  gender?: string
+) => {
+  const cityData = mockCities.find(
+    c => c.name.toLowerCase() === city?.toLowerCase()
+  );
+
+  if (area) {
+    const matchedArea = cityData
+      ? cityData.areas.find(a => a.toLowerCase() === area.toLowerCase())
+      : area;
+
+    if (matchedArea) {
+      return {
+        city: cityData?.name,
+        area: matchedArea,
+
+        title: `Find ${gender ? ` ${gender}` : ""} roommates in ${matchedArea}, ${cityData?.name}`,
+
+        desc: `Looking for a trusted roommate in ${matchedArea}, ${cityData?.name}? Discover verified students, safe shared rooms, and compatible ${gender ? ` for ${gender}` : ""} roommates. Build your student life with HostelHub.`,
+
+        keywords: [
+          `roommates in ${matchedArea} ${cityData?.name}`,
+          `find roommate ${matchedArea}`,
+          `shared rooms ${matchedArea} ${cityData?.name}`,
+          `student roommate ${cityData?.name}`,
+          gender ? `roommate for ${gender}` : "",
+          "student housing Pakistan",
+          "HostelHub roommates",
+          "shared accommodation Pakistan",
+          "verified roommates",
+        ].join(", "),
+      };
+    }
+  }
+
+  
+  
+  
+  return {
+    city: cityData?.name,
+
+    title: `${cityData?.name ? `Find ${gender ? ` ${gender}` : ""} roommates in ${cityData?.name}` : "Find"+`${gender ? ` ${gender}` : ""}`+  " roommate in Pakistan"}`,
+
+    desc: `Find compatible and verified ${gender ? ` ${gender}` : ""} roommates in ${cityData?.name ?? "Pakistan"}. HostelHub helps students connect for shared rooms, affordable living, and a safe student-friendly environment.`,
+
+    keywords: [
+      `roommates in ${cityData?.name ?? "Pakistan"}`,
+      `find roommate ${cityData?.name ?? "Pakistan"}`,
+      "student roommates",
+      "shared accommodation",
+      "find roommate new me",
+      "HostelHub",
+      gender ? `roommate for ${gender}` : "",
+      "student housing platform",
+      "affordable shared living",
+    ].join(", "),
+  };
+};
+
  
 
 

@@ -12,17 +12,30 @@ import {
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Find Roommate Near Your University | HostelHub",
+  title: "Find the best roommate in pakistan",
   description:
     "Find verified student roommates near your university. Search by city, budget, and preferences. Safe, simple, and trusted by students.",
   alternates: {
-    canonical: "https://hostelhub.pk/find-roommate",
+    canonical: "https://www.hostelhub.pk/find-roommate",
   },
+    keywords: [
+      "find roommate pakistan",
+      "student roommate search",
+      "roommate near university",
+      "verified student roommates",
+      "safe roommate matching",
+      "find roommate near me",
+      "hostelhub roommate",
+      "student housing roommate",
+      "affordable roommate options",
+      "shared student accommodation",
+      "best roommate",
+    ].join(", "),
   openGraph: {
-    title: "Find Roommate Near Your University | HostelHub",
+    title: "Find Roommate Near Your University",
     description:
       "Connect with verified students looking to share rooms safely and easily.",
-    url: "https://hostelhub.pk/find-roommate",
+    url: "https://www.hostelhub.pk/find-roommate",
     siteName: "HostelHub",
     type: "website",
   },
@@ -49,7 +62,7 @@ export default function FindRoommatePage() {
               <div className="inline-flex items-center gap-2 text-accent-foreground bg-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
                 <Sparkles className="w-4 h-4" />
                 {/* New • Safe • Student-Focused */}
-                Comming soon
+                Coming soon
               </div>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4 leading-tight">

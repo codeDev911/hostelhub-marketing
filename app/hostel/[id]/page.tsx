@@ -76,7 +76,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 
   return {
-    title: `${hostel.title} | HostelHub`,
+    title: `${hostel.title} `,
     description: hostel.description,
     keywords: hostel.keywords,
     openGraph: {

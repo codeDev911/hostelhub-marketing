@@ -3,9 +3,9 @@ import ClientComponent from "./ClientComponent"
 export function generateMetadata() {
   return {
     title:
-      "Donate for Students Education & Safe Living in Pakistan | HostelHub",
+      "Donate for Students Education & Safe Living ",
     description:
-      "Support students across Pakistan by donating to HostelHub. Your donation funds safe accommodation, student communities, scholarships, and a trusted student-friendly ecosystem. This support is not for us — it’s for your children’s future.",
+      "Support students across Pakistan by donating to HostelHub. Your donation funds safe accommodation, student communities, scholarships, and a trusted student-friendly ecosystem",
     keywords: [
       "donate for students pakistan",
       "education donation pakistan",
@@ -22,10 +22,10 @@ export function generateMetadata() {
     ],
     openGraph: {
       title:
-        "Donate for Students Education & Safe Living in Pakistan | HostelHub",
+        "Donate for Students Education & Safe Living ",
       description:
         "Your donation supports student accommodation, communities, scholarships, and guidance. Help build a safer future for students in Pakistan.",
-      url: "https://hostelhub.pk/donate",
+      url: "https://www.hostelhub.pk/donate",
       siteName: "HostelHub",
       locale: "en_PK",
       type: "website",
@@ -33,7 +33,7 @@ export function generateMetadata() {
     twitter: {
       card: "summary_large_image",
       title:
-        "Donate for Students Education & Safe Living in Pakistan | HostelHub",
+        "Donate for Students Education & Safe Living ",
       description:
         "This donation is not for us. It’s for students and their future. Support safe living, education, and student communities across Pakistan.",
     },
@@ -42,7 +42,7 @@ export function generateMetadata() {
       follow: true,
     },
     alternates: {
-      canonical: "https://hostelhub.pk/donate",
+      canonical: "https://www.hostelhub.pk/donate",
     },
   }
 }

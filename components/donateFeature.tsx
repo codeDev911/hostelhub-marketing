@@ -17,9 +17,9 @@ export default function DonationHomeSection() {
             </span>
 
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-5 leading-tight">
-              You're donation
+              Your donation
               <br />
-              make <span className="undercurve">students </span> feel better
+              makes <span className="undercurve">students </span> feel better
             </h2>
 
             <p className="text-foreground/70 text-base sm:text-lg max-w-xl">

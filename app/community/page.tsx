@@ -22,7 +22,7 @@ export function generateMetadata(): Metadata {
         keywords:
       "hostelhub community, roommate , student housing data pakistan,online scholarships,scholarships for pakistani students,Bs scholarships,Ms scholarships, students in pakistan, students home, students hub , find new students, find roommates,",
     alternates: {
-      canonical: "https://hostelhub.pk/community",
+      canonical: "https://www.hostelhub.pk/community",
     },
     robots: {
       index: true,
@@ -70,10 +70,10 @@ export default function CommunityPage() {
       <section className="py-14 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {[
-            { label: "Active Students", value: "12,000+" },
-            { label: "Discussions Created", value: "35,000+" },
-            { label: "Cities Covered", value: "50+" },
-            { label: "Helpful Replies", value: "90,000+" },
+            { label: "Active Students", value: "0" },
+            { label: "Discussions Created", value: "0" },
+            { label: "Cities Covered", value: "0" },
+            { label: "Helpful Replies", value: "0" },
           ].map((stat, i) => (
             <div key={i}>
               <div className="text-3xl sm:text-4xl font-bold text-primary">
