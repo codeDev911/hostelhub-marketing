@@ -15,6 +15,6 @@
 ### Update Ux 20/12/2025 (after mids 3rd sem)
 #### added find-roomamte feature (front-end only)
 ### updated UI/UX added dark mode 22/12/2025
-### added donation page and feature 22/12/2025
+### added donation page and feature 22/12/2025 
 ## added some cache revalidation 30/12/2025
 ## Added roommates Seo details 31/12/2025
