@@ -20,9 +20,9 @@ export async function generateMetadata({
   const slug = (await params).slug || [];
 
   const city = slug[0];
-  const area = slug[1];
+  const area = slug[1].replace("%20", " ") || undefined;
   const gender = (await searchParams).gender;
-
+  
   const seo = getRoommateSeoMeta(city, area, gender);
     
   return {
