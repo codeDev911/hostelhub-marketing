@@ -18,7 +18,7 @@ function generateSitemap() {
     `;
 
     // ---------------- City level (gender)
-    ["boys", "girls"].forEach((gender) => {
+    ["male", "female"].forEach((gender) => {
       const cityGenderUrl = `${SITE_URL}/roommates/${encodeURIComponent(
         city.name
       )}?gender=${gender}`;
@@ -45,7 +45,7 @@ function generateSitemap() {
 
     // ---------------- Area level (gender)
     city.areas.forEach((area) => {
-      ["boys", "girls"].forEach((gender) => {
+      ["male", "female"].forEach((gender) => {
         const areaGenderUrl = `${SITE_URL}/roommates/${encodeURIComponent(city.name)}/${encodeURIComponent(
           area
         )}?gender=${gender}`;
