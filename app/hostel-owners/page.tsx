@@ -62,10 +62,10 @@ export default function HostelOwnersPage() {
         </Link>
 
         <Link
-          href="#features"
+          href="/pricing"
           className="rounded-full border border-border px-8 py-3 font-semibold hover:bg-secondary transition"
         >
-          Explore Features
+          See pricing
         </Link>
       </div>
     </div>
