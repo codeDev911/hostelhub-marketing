@@ -101,6 +101,9 @@ export default function StudentLogin() {
                   />
                 </div>
               </div>
+              <Link href="/student/reset-password" className="text-accent text-sm float-right underline">
+                  Reset password
+                </Link>
           <div className="cf-turnstile" data-sitekey="0x4AAAAAACHAfcfd1SkCbnim"></div>
 
               <Button
