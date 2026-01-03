@@ -18,3 +18,4 @@
 ### added donation page and feature 22/12/2025 
 ## added some cache revalidation 30/12/2025
 ## Added roommates Seo details 31/12/2025
+## Added pricing page 3/1/2026
