@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {  Filter, Loader2, SearchIcon,  } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -26,10 +26,13 @@ import { mockCities } from "@/lib/mock-data";
 
 export default function HostelsPage() {
   const searchParams = useSearchParams();
-  const [city, setCity] = useState(searchParams.get("city") || "");
-  const [name, setName] = useState(searchParams.get("name") || "");
-  const [area, setArea] = useState(searchParams.get("area") || "");
-  const [gender, setGender] = useState(searchParams.get("gender") || "all");
+  const {slug} = useParams();
+
+  const slugArea = slug && slug[1]?.replaceAll("%20", " ") || undefined;
+  const [city, setCity] = useState(searchParams.get("city") ||slug && slug[0]|| "" );
+  const [name, setName] = useState(searchParams.get("name") || "" );
+  const [area, setArea] = useState(searchParams.get("area") || (slugArea == "boys" || slugArea == "girls" ? "" : slugArea) || "" );
+  const [gender, setGender] = useState(searchParams.get("gender") ||slug && ( area == "" ? slug[1] : slug[2]) ||  "all");
   const [loading, setLoading] = useState(true);
   const [priceRange, setPriceRange] = useState([0, 50000]);
   const [selectedGender, setSelectedGender] = useState(gender);
@@ -106,14 +109,14 @@ export default function HostelsPage() {
           <div className="lg:col-span-3">
             {/* Results Header */}
             <div className="mb-6 sm:mb-8">
-              <h2 className="text-xl sm:text-2xl font-bold text-primary mb-2">
+              <h1 className="text-xl sm:text-2xl font-bold text-primary mb-2">
                 {area && `Best hostels in ${area}, `}
                 {city && !area
                   ? `Best hostels in ${city}`
                   : city && area
                   ? `${city}`
                   : "All Hostels"}
-              </h2>
+              </h1>
               <p className="text-sm sm:text-base text-muted-foreground">
                 Founded {filteredHostels?.length || 0} hostel
                 {filteredHostels.length > 1 ? "s" : ""}
@@ -237,6 +240,7 @@ export default function HostelsPage() {
                           type="radio"
                           name="gender"
                           value={g}
+                          
                           checked={selectedGender === g}
                           onChange={(e) => setSelectedGender(e.target.value)}
                           className="w-4 h-4 accent-accent"

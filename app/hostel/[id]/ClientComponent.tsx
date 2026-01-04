@@ -169,7 +169,7 @@ export default function HostelDetailPage() {
 
             {/* Hostel Info */}
             <div className="bg-card rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
-              <h1 className="text-2xl sm:text-3xl font-bold text-primary mb-2">
+              <h1 className="text-2xl h1 sm:text-3xl font-bold text-primary mb-2">
                 {hostel.name}
               </h1>
               <div className="flex items-center text-muted-foreground mb-4 text-sm sm:text-base">
