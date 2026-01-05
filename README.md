@@ -20,3 +20,4 @@
 ## Added roommates Seo details 31/12/2025
 ## Added pricing page 3/1/2026
 ## Added reset password 3/1/2026    
+### added seo optimized sitemap-hs.xml for hostels
