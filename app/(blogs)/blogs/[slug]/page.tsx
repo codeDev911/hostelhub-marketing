@@ -12,6 +12,12 @@ async function getPost(slug: string) {
   return sanityClient.fetch(POST_BY_SLUG_QUERY, { slug })
 }
 
+export function trimMetaDescription(text: string, max = 155) {
+  if (!text) return ""
+  return text.length > max
+    ? text.slice(0, max - 1).trim() + "…"
+    : text
+}
 
 export async function generateMetadata({
   params,
@@ -24,10 +30,10 @@ export async function generateMetadata({
   if (!post) return {}
  return {
   title: `${post.title}`,
-  description: post.excerpt,
+  description: trimMetaDescription(post.excerpt),
 
   alternates: {
-    canonical: `https://www.hostelhub.pk/blogs/${post.slug}`,
+    canonical: `https://www.hostelhub.pk/blogs/${slug}`,
   },
 
   keywords: post.excerpt.split(" ").slice(0, 20),
@@ -35,7 +41,7 @@ export async function generateMetadata({
   openGraph: {
     title: `${post.title}`,
     description: post.excerpt,
-    url: `https://www.hostelhub.pk/blogs/${post.slug}`,
+    url: `https://www.hostelhub.pk/blogs/${slug}`,
     siteName: "HostelHub",
     images: [
       {
