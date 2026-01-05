@@ -9,6 +9,7 @@
 
 # production
 /build
+/sanity
 
 # debug
 npm-debug.log*

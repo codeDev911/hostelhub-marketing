@@ -47,7 +47,7 @@ function Header({ session }: any) {
 
           {/* Desktop Navigation & Search */}
           <div className="hidden md:flex bg-card/70 backdrop-blur-2xl p-4 rounded-full px-8 items-center gap-8">
-            <Link href="/" className="nav-link">Home</Link>
+            <Link href="/blogs" className="nav-link">Blogs</Link>
             <Link href="/hostels" className="nav-link">Hostels</Link>
 
 
@@ -153,11 +153,11 @@ function Header({ session }: any) {
             <nav className="md:hidden mt-4 pb-4 bg-card/70 backdrop-blur-2xl space-y-2 shadow-2xl z-30 rounded-2xl m-4 p-4">
 
               <Link
-                href="/"
+                href="/blogs"
                 className="block px-4 py-2 text-foreground hover:bg-secondary rounded-sm transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Home
+                Blogs
               </Link>
               <Link
                 href="/hostels"
