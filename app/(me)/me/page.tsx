@@ -9,12 +9,15 @@ export default async function DashboardPage() {
     const token = cookieStore.get("token")?.value
      
     if(!token){
+      console.log("no token");
       redirect("/student/login")
+      
     }
 
     if(token){
       let session = await getSession()
-      if(!session?.email){
+      
+      if(session?.phone == ""){        
         redirect("/student/login")
       }
     }

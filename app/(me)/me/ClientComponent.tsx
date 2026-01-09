@@ -70,6 +70,8 @@ export default function ClientComponent({ token }: any) {
   const [form, setForm] = React.useState({
     dateOfBirth: "",
     bloodGroup: "",
+    email:"",
+    cnnic:"",
     city: "",
     state: "",
     fatherCnic:"",
@@ -173,22 +175,15 @@ export default function ClientComponent({ token }: any) {
   const handleChange = (e: any) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  let locked :any = {}
+  const fieldsToCheck:any = ['email', 'cnnic', 'fatherCnic', 'gender'];
 
-  if(!user.fatherCnic){
-    locked = {
-      email: true,
-      cnic: true,
-      gender: true,
-  };
-  }else{
-    locked = {
-      email: true,
-      cnic: true,
-      fatherCnic: true,
-      gender: true,
-  };
-  }
+  const locked = fieldsToCheck.reduce((acc:any, field:any) => {
+    // Checks if the field exists and is not an empty string
+    if (user[field] && user[field] !== "") {
+      acc[field] = true;
+    }
+    return acc;
+  }, {});
 
   function RatingStars({ rating }: { rating: number }) {
     return (
@@ -341,21 +336,18 @@ export default function ClientComponent({ token }: any) {
                   <div className="grid gap-4 py-4 max-h-[70vh] overflow-y-auto">
                     {Object.keys(form).map((key) => (
                       <div className="grid gap-2" key={key}>
-                        {
-                            key == "fatherCnic" && user.fatherCnic ?"":
-                          <Label className="capitalize" htmlFor={key}>
-                          {key}
-                        </Label>
-
-                        }
+                      
 
                         {
                         
                         key == "fatherCnic" && user.fatherCnic ?"":
                         key === "dateOfBirth" ? (
                           // ✅ Shadcn DatePicker for DOB
-                        
-                              <input
+                              <>
+                               <Label className="capitalize" htmlFor={key}>
+                          {key}
+                        </Label>
+                        <input
                                 type="date"
                                 className="rounded-md border border-border p-2"
                                 value={new Date(form.dateOfBirth).toLocaleDateString('en-US',{
@@ -373,10 +365,24 @@ export default function ClientComponent({ token }: any) {
                                 }}
                                 disabled={(locked as any)[key]}
                               />
+                              </>
+                              
                            
                         ) : (
                           // ✅ Default Input
-                          <Input
+                          <>
+                          {
+                             (locked as any)[key] ? "":
+                             <>
+                               {
+                            key == "fatherCnic" && user.fatherCnic?"" :
+                          <Label className="capitalize" htmlFor={key}>
+                          {key}
+                        </Label>
+
+                        }
+                             
+                             <Input
                             id={key}
                             name={key}
                             required
@@ -384,6 +390,10 @@ export default function ClientComponent({ token }: any) {
                             onChange={handleChange}
                             disabled={(locked as any)[key]}
                           />
+                          </>
+                          }
+                          </>
+                          
                         )}
                       </div>
                     ))}
@@ -415,6 +425,9 @@ export default function ClientComponent({ token }: any) {
                     postalCode: user?.postalCode,
                     fatherPhone: user?.fatherPhone,
                     fatherOccupation: user?.fatherOccupation,
+                    email: user?.email,
+                    cnnic: user?.cnnic,
+
                   });
                   setIsDialogOpen(true);
                 }}

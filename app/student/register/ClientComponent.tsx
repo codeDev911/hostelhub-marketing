@@ -33,11 +33,16 @@ export default function ClientComponent() {
   const [loading, setLoading] = useState(false)
   const [isFromBooking,setIsFromBooking] = useState(false)
 
+
+  const removeTrimItems = (str: string) => {
+    return ["phone", "cnnic","fatherPhone","email"].includes(str);
+  }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: removeTrimItems(name) ? value.trimEnd() : value,
     }))
   }
 
@@ -49,9 +54,7 @@ export default function ClientComponent() {
 
     if (
       !formData.name ||
-      !formData.email ||
       !formData.address ||
-      !formData.cnnic ||
       !formData.phone ||
       !formData.fatherName || 
       !formData.gender ||
@@ -146,6 +149,7 @@ export default function ClientComponent() {
                       name="name"
                       value={formData.name}
                       disabled={isFromBooking}
+                      required
                       placeholder="John Doe"
                       onChange={(e)=>isFromBooking ? null : handleChange(e)}
                       className={`${isFromBooking?"bg-muted text-muted-foreground":""} w-full  pl-10 pr-4 py-2.5 border border-border rounded-full focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
@@ -154,7 +158,7 @@ export default function ClientComponent() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">Email Address *</label>
+                  <label className="block text-sm font-medium text-foreground mb-2">Email Address </label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3.5 w-5 h-5 text-foreground/40" />
                     <input
@@ -176,7 +180,7 @@ export default function ClientComponent() {
                     <input
                       type="tel"
                       name="phone"
-                      
+                      required
                       value={formData.phone}
                       onChange={(e)=>isFromBooking ? null : handleChange(e)}
                       disabled={isFromBooking}
@@ -186,7 +190,7 @@ export default function ClientComponent() {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">Cnic *</label>
+                  <label className="block text-sm font-medium text-foreground mb-2">Cnic </label>
                   <div className="relative">
                     <IdCard className="absolute left-3 top-3.5 w-5 h-5 text-foreground/40" />
                     <input
@@ -226,6 +230,7 @@ export default function ClientComponent() {
                     <input
                       type="text"
                       name="fatherName"
+                      required
                       value={formData.fatherName}
                       onChange={(e)=>isFromBooking ? null : handleChange(e)}
                       placeholder="Your father name"
@@ -252,6 +257,7 @@ export default function ClientComponent() {
                     <input
                       type="text"
                       name="address"
+                      required
                       value={formData.address}
                       onChange={(e)=>isFromBooking ? null : handleChange(e)}
                       placeholder="Your full address"
