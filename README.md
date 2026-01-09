@@ -23,3 +23,4 @@
 ### added seo optimized sitemap-hs.xml for hostels
 ## added Blogs 
 ### make some changes in student login/registrations
+### nothing
