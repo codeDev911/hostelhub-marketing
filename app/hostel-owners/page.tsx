@@ -62,10 +62,10 @@ export default function HostelOwnersPage() {
         </Link>
 
         <Link
-          href="/pricing"
+          href="https://admin.hostelhub.pk"
           className="rounded-full border border-border px-8 py-3 font-semibold hover:bg-secondary transition"
         >
-          See pricing
+          Admin login
         </Link>
       </div>
     </div>
