@@ -1,57 +1,31 @@
-'use client'; 
+'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-// --- THE ISOLATION COMPONENT ---
-function IsolatedHtml({ html }: { html: string }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (containerRef.current) {
-      // Create shadow root if it doesn't exist
-      const shadowRoot = containerRef.current.shadowRoot || containerRef.current.attachShadow({ mode: 'open' });
-      
-      // Inject the HTML directly into the shadow boundary
-      shadowRoot.innerHTML = html;
-    }
-  }, [html]);
-
-  return <div ref={containerRef} />;
-}
-
-// --- THE MAIN PAGE COMPONENT ---
 export default function Page({ params }: { params: any }) {
-  const [htmlContent, setHtmlContent] = useState<string>('');
-  const [loading, setLoading] = useState(true);
+  const [htmlContent, setHtmlContent] = useState('');
 
   useEffect(() => {
     async function fetchData() {
-      try {
-        const slug  = (await params).slug;
-        const url = `https://raw.githubusercontent.com/hostel-hub/htm-pages/main/${slug}.html`;
-        
-        const res = await fetch(url);
-        if (!res.ok) throw new Error('Failed to fetch');
-        
-        const text = await res.text();
-        setHtmlContent(text);
-      } catch (err) {
-        console.error("Error loading HTML:", err);
-      } finally {
-        setLoading(false);
-      }
+      const slug = (await params).slug;
+      const res = await fetch(
+        `https://raw.githubusercontent.com/hostel-hub/htm-pages/main/${slug}.html`
+      );
+      const text = await res.text();
+
+      setHtmlContent(`
+        <script src="https://cdn.tailwindcss.com"></script>
+        ${text}
+      `);
     }
+
     fetchData();
   }, [params]);
 
-  if (loading) return <div className="p-10">Loading design...</div>;
-
   return (
-    <main className="min-h-screen">
-      {/* The Shadow DOM ensures the GitHub HTML ignores your 
-          app's Tailwind and uses its own internal styles.
-      */}
-      <IsolatedHtml html={htmlContent} />
-    </main>
+    <iframe
+      className="w-full h-screen border-none"
+      srcDoc={htmlContent}
+    />
   );
 }
