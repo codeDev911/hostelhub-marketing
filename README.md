@@ -24,3 +24,4 @@
 ## added Blogs 
 ### make some changes in student login/registrations
 ### nothing
+### added dynamic html renderer
